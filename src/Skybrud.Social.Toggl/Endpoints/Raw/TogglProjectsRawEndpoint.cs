@@ -1,53 +1,72 @@
 ﻿using System;
-using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.Toggl.Http;
+using Skybrud.Social.Toggl.Options.Projects;
 
 namespace Skybrud.Social.Toggl.Endpoints.Raw {
 
+    /// <summary>
+    /// Raw implementation of the <strong>Projects</strong> endpoint.
+    /// </summary>
+    /// <see>
+    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md</cref>
+    /// </see>
     public class TogglProjectsRawEndpoint {
 
         #region Properties
 
+        /// <summary>
+        /// Gets a reference to the HTTP client.
+        /// </summary>
         public TogglHttpClient Client { get; }
 
         #endregion
 
         #region Constructors
 
-        public TogglProjectsRawEndpoint(TogglHttpClient client) {
+        internal TogglProjectsRawEndpoint(TogglHttpClient client) {
             Client = client;
         }
 
         #endregion
 
         #region Member methods
-        
+
+        /// <summary>
+        /// Creates a new project with the specified <paramref name="name"/>.
+        /// </summary>
+        /// <param name="name">The name of the project to be created</param>
+        /// <param name="workspaceId">The ID of the workspace to which the project should be added.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+        /// <see>
+        ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md#create-project</cref>
+        /// </see>
         public IHttpResponse CreateProject(string name, int workspaceId) {
-            return CreateProject(name, workspaceId, 0);
+            return Client.Post(new TogglCreateProjectsOptions(name, workspaceId));
         }
 
+        /// <summary>
+        /// Creates a new project with the specified <paramref name="name"/>.
+        /// </summary>
+        /// <param name="name">The name of the project to be created</param>
+        /// <param name="workspaceId">The ID of the workspace to which the project should be added.</param>
+        /// <param name="clientId">The ID of the parent client.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+        /// <see>
+        ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md#create-project</cref>
+        /// </see>
         public IHttpResponse CreateProject(string name, int workspaceId, int clientId) {
-
-            if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
-
-            JObject project = new JObject {
-                {"name", name},
-                {"wid", workspaceId}
-            };
-
-            if (clientId > 0) project.Add("cid", clientId);
-
-            JObject body = new JObject {
-                {"project", project}
-            };
-
-            return Client.DoHttpPostRequest("/api/v8/projects", body);
-
+            return Client.Post(new TogglCreateProjectsOptions(name, workspaceId, clientId));
         }
 
-        public IHttpResponse GetProjects(int workspaceId) {
-            return Client.DoHttpGetRequest("/api/v8/workspaces/" + workspaceId + "/projects");
+        /// <summary>
+        /// Creates a new project based on the specified <paramref name="options"/>.
+        /// </summary>
+        /// <param name="options">The options for the request to the API.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+        public IHttpResponse CreateProject(TogglCreateProjectsOptions options) {
+            if (options == null) throw new ArgumentNullException(nameof(options));
+            return Client.Post(options);
         }
 
         #endregion

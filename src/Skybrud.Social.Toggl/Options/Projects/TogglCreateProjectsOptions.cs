@@ -4,57 +4,57 @@ using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Social.Toggl.Http;
 
-namespace Skybrud.Social.Toggl.Options.Clients {
+namespace Skybrud.Social.Toggl.Options.Projects {
 
     /// <summary>
-    /// Options for request to create a new Toggl client.
+    /// Options for request to create a new Toggl project.
     /// </summary>
-    public class TogglCreateClientOptions : IHttpPostOptions<JObject> {
+    public class TogglCreateProjectsOptions : IHttpPostOptions<JObject> {
 
         #region Properties
 
         /// <summary>
-        /// Gets or sets the name of the client to be created.
+        /// Gets or sets the name of the project to be created.
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; }
 
         /// <summary>
-        /// Gets or sets the ID of the workspace to which the client should be added.
+        /// Gets or sets the ID of the workspace to which the project should be added.
         /// </summary>
         [JsonProperty("wid")]
         public int WorkspaceId { get; }
 
         /// <summary>
-        /// Gets or sets the notes of the client.
+        /// Gets or sets the ID of the client to which the project should be added. If <c>0</c> (default), the project will not be added to a client.
         /// </summary>
-        [JsonProperty("notes", NullValueHandling = NullValueHandling.Ignore)]
-        public string Notes { get; }
+        [JsonProperty("cid", DefaultValueHandling = DefaultValueHandling.Ignore)]
+        public int ClientId { get; }
 
         #endregion
 
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance of <see cref="TogglCreateClientOptions"/> based on the specified <paramref name="name"/> and <paramref name="workspaceId"/>.
+        /// Initializes a new instance of <see cref="TogglCreateProjectsOptions"/> based on the specified <paramref name="name"/> and <paramref name="workspaceId"/>.
         /// </summary>
-        /// <param name="name">The name of the client.</param>
+        /// <param name="name">The name of the project.</param>
         /// <param name="workspaceId">The ID of the parent workspace.</param>
-        public TogglCreateClientOptions(string name, int workspaceId) {
+        public TogglCreateProjectsOptions(string name, int workspaceId) {
             Name = name;
             WorkspaceId = workspaceId;
         }
 
         /// <summary>
-        /// Initializes a new instance of <see cref="TogglCreateClientOptions"/> based on the specified <paramref name="name"/> and <paramref name="workspaceId"/>.
+        /// Initializes a new instance of <see cref="TogglCreateProjectsOptions"/> based on the specified <paramref name="name"/> and <paramref name="workspaceId"/>.
         /// </summary>
-        /// <param name="name">The name of the client.</param>
+        /// <param name="name">The name of the project.</param>
         /// <param name="workspaceId">The ID of the parent workspace.</param>
-        /// <param name="notes">Notes for the client.</param>
-        public TogglCreateClientOptions(string name, int workspaceId, string notes) {
+        /// <param name="clientId">The ID of the parent client.</param>
+        public TogglCreateProjectsOptions(string name, int workspaceId, int clientId) {
             Name = name;
             WorkspaceId = workspaceId;
-            Notes = notes;
+            ClientId = clientId;
         }
 
         #endregion
@@ -63,7 +63,7 @@ namespace Skybrud.Social.Toggl.Options.Clients {
 
         /// <inheritdoc />
         public string GetUrl() {
-            return "/api/v8/clients";
+            return "/api/v8/projects";
         }
 
         /// <inheritdoc />
@@ -75,7 +75,7 @@ namespace Skybrud.Social.Toggl.Options.Clients {
         public JObject GetBody() {
             if (string.IsNullOrWhiteSpace(Name)) throw new PropertyNotSetException(nameof(Name));
             if (WorkspaceId == 0) throw new PropertyNotSetException(nameof(WorkspaceId));
-            return JObject.FromObject(this);
+            return new JObject {{"project", JObject.FromObject(this)}};
         }
 
         #endregion

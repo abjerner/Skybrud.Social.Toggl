@@ -6,7 +6,12 @@ using Skybrud.Essentials.Time;
 
 namespace Skybrud.Social.Toggl.Models.Entries {
 
+    /// <summary>
+    /// Class representing a Toggl entry.
+    /// </summary>
     public class TogglEntry : JsonObjectBase {
+
+        #region Properties
 
         public int Id { get; }
 
@@ -34,6 +39,14 @@ namespace Skybrud.Social.Toggl.Models.Entries {
 
         public string[] Tags { get; }
 
+        #endregion
+
+        #region Constructors
+
+        /// <summary>
+        /// Initializes a new instance based on the specified <paramref name="obj"/>.
+        /// </summary>
+        /// <param name="obj">An instance of <see cref="JObject"/> representing the entry.</param>
         protected TogglEntry(JObject obj) : base(obj) {
             Id = obj.GetInt32("id");
             Guid = obj.GetGuid("guid");
@@ -50,9 +63,20 @@ namespace Skybrud.Social.Toggl.Models.Entries {
             Tags = obj.GetStringArray("tags");
         }
 
+        #endregion
+
+        #region Static methods
+
+        /// <summary>
+        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="TogglEntry"/>.
+        /// </summary>
+        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
+        /// <returns>An instance of <see cref="TogglEntry"/>.</returns>
         public static TogglEntry Parse(JObject obj) {
             return obj == null ? null : new TogglEntry(obj);
         }
+
+        #endregion
 
     }
 

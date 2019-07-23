@@ -4,6 +4,9 @@ using Skybrud.Essentials.Http;
 
 namespace Skybrud.Social.Toggl.Exceptions {
 
+    /// <summary>
+    /// Class representing an exception/error returned by the Toggl API.
+    /// </summary>
     public class TogglHttpException : Exception {
 
         #region Properties
@@ -22,8 +25,12 @@ namespace Skybrud.Social.Toggl.Exceptions {
 
         #region Constructors
 
-        public TogglHttpException(IHttpResponse responses) : base("Invalid response received from the Toggl API (Status: " + (int) responses.StatusCode + ")") {
-            Response = responses;
+        /// <summary>
+        /// Initializes a new exception based on the specified <paramref name="response"/>.
+        /// </summary>
+        /// <param name="response">The instance of <see cref="IHttpResponse"/> representing the raw response.</param>
+        public TogglHttpException(IHttpResponse response) : base("Invalid response received from the Toggl API (Status: " + (int) response.StatusCode + ")") {
+            Response = response;
         }
 
         #endregion
