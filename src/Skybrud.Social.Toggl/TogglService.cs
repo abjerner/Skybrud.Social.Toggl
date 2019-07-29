@@ -22,6 +22,11 @@ namespace Skybrud.Social.Toggl {
         public TogglClientsEndpoint Clients { get; }
 
         /// <summary>
+        /// Gets a reference to the <strong>Entries</strong> endpoint.
+        /// </summary>
+        public TogglClientsEndpoint Entries { get; }
+
+        /// <summary>
         /// Gets a reference to the <strong>Projects</strong> endpoint.
         /// </summary>
         public TogglProjectsEndpoint Projects { get; }
@@ -38,6 +43,7 @@ namespace Skybrud.Social.Toggl {
         private TogglService(TogglHttpClient client) {
             Client = client;
             Clients = new TogglClientsEndpoint(this);
+            Entries = new TogglClientsEndpoint(this);
             Projects = new TogglProjectsEndpoint(this);
             Workspaces = new TogglWorkspacesEndpoint(this);
         }
