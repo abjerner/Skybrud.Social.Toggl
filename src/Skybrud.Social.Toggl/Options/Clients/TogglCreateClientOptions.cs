@@ -73,9 +73,16 @@ namespace Skybrud.Social.Toggl.Options.Clients {
 
         /// <inheritdoc />
         public JObject GetBody() {
+
             if (string.IsNullOrWhiteSpace(Name)) throw new PropertyNotSetException(nameof(Name));
             if (WorkspaceId == 0) throw new PropertyNotSetException(nameof(WorkspaceId));
-            return JObject.FromObject(this);
+
+            JObject body = new JObject {
+                {"client",  JObject.FromObject(this)}
+            };
+
+            return body;
+
         }
 
         #endregion
