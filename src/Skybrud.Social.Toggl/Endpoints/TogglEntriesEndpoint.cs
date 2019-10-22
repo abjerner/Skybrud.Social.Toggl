@@ -67,12 +67,12 @@ namespace Skybrud.Social.Toggl.Endpoints {
         /// </summary>
         /// <param name="startDate">Only time entries after this date are returned.</param>
         /// <param name="endDate">Only time entries before this date are returned.</param>
-        /// <returns>An instance of <see cref="TogglEntriesResponse"/> representing the response.</returns>
+        /// <returns>An instance of <see cref="TogglEntryListResponse"/> representing the response.</returns>
         /// <see>
         ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md#get-time-entries-started-in-a-specific-time-range</cref>
         /// </see>
-        public TogglEntriesResponse GetEntries(EssentialsTime startDate, EssentialsTime endDate) {
-            return TogglEntriesResponse.Parse(Raw.GetEntries(startDate, endDate));
+        public TogglEntryListResponse GetEntries(EssentialsTime startDate, EssentialsTime endDate) {
+            return TogglEntryListResponse.Parse(Raw.GetEntries(startDate, endDate));
         }
 
         #endregion

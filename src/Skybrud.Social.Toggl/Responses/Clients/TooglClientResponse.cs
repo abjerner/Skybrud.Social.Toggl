@@ -1,13 +1,13 @@
 ﻿using System;
 using Skybrud.Essentials.Http;
-using Skybrud.Social.Toggl.Models.Entries;
+using Skybrud.Social.Toggl.Models.Clients;
 
-namespace Skybrud.Social.Toggl.Responses.Entries {
+namespace Skybrud.Social.Toggl.Responses.Clients {
 
     /// <summary>
-    /// Class representing a response with a single <see cref="TogglEntry"/>.
+    /// Class representing a response with a single <see cref="TogglClient"/>.
     /// </summary>
-    public class TogglEntryResponse : TogglResponse<TogglEntryResponseBody> {
+    public class TooglClientResponse : TogglResponse<TogglClientResponseBody> {
 
         #region Constructors
 
@@ -15,8 +15,8 @@ namespace Skybrud.Social.Toggl.Responses.Entries {
         /// Initializes a new instance from the specified <paramref name="response"/>.
         /// </summary>
         /// <param name="response">The raw response received from the Toggl API.</param>
-        public TogglEntryResponse(IHttpResponse response) : base(response) {
-            Body = ParseJsonObject(response.Body, TogglEntryResponseBody.Parse);
+        public TooglClientResponse(IHttpResponse response) : base(response) {
+            Body = ParseJsonObject(response.Body, TogglClientResponseBody.Parse);
         }
 
         #endregion
@@ -27,10 +27,10 @@ namespace Skybrud.Social.Toggl.Responses.Entries {
         /// Initializes a new instance from the specified <paramref name="response"/>.
         /// </summary>
         /// <param name="response">The raw response received from the Toggl API.</param>
-        /// <returns>An instance of <see cref="TogglEntryResponse"/> representing the response.</returns>
-        public static TogglEntryResponse Parse(IHttpResponse response) {
+        /// <returns>An instance of <see cref="TooglClientResponse"/> representing the response.</returns>
+        public static TooglClientResponse Parse(IHttpResponse response) {
             if (response == null) throw new ArgumentNullException(nameof(response));
-            return new TogglEntryResponse(response);
+            return new TooglClientResponse(response);
         }
 
         #endregion

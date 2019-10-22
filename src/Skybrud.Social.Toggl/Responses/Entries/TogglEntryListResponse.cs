@@ -5,9 +5,9 @@ using Skybrud.Social.Toggl.Models.Entries;
 namespace Skybrud.Social.Toggl.Responses.Entries {
 
     /// <summary>
-    /// Class representing a response with a single <see cref="TogglEntry"/>.
+    /// Class representing a response with a list of <see cref="TogglEntry"/>.
     /// </summary>
-    public class TogglEntryResponse : TogglResponse<TogglEntryResponseBody> {
+    public class TogglEntryListResponse : TogglResponse<TogglEntry[]> {
 
         #region Constructors
 
@@ -15,8 +15,8 @@ namespace Skybrud.Social.Toggl.Responses.Entries {
         /// Initializes a new instance from the specified <paramref name="response"/>.
         /// </summary>
         /// <param name="response">The raw response received from the Toggl API.</param>
-        public TogglEntryResponse(IHttpResponse response) : base(response) {
-            Body = ParseJsonObject(response.Body, TogglEntryResponseBody.Parse);
+        public TogglEntryListResponse(IHttpResponse response) : base(response) {
+            Body = ParseJsonArray(response.Body, TogglEntry.Parse);
         }
 
         #endregion
@@ -27,10 +27,10 @@ namespace Skybrud.Social.Toggl.Responses.Entries {
         /// Initializes a new instance from the specified <paramref name="response"/>.
         /// </summary>
         /// <param name="response">The raw response received from the Toggl API.</param>
-        /// <returns>An instance of <see cref="TogglEntryResponse"/> representing the response.</returns>
-        public static TogglEntryResponse Parse(IHttpResponse response) {
+        /// <returns>An instance of <see cref="TogglEntryListResponse"/> representing the response.</returns>
+        public static TogglEntryListResponse Parse(IHttpResponse response) {
             if (response == null) throw new ArgumentNullException(nameof(response));
-            return new TogglEntryResponse(response);
+            return new TogglEntryListResponse(response);
         }
 
         #endregion

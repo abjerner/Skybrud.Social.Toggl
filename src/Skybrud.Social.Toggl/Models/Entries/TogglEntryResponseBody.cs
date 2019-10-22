@@ -25,7 +25,7 @@ namespace Skybrud.Social.Toggl.Models.Entries {
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="obj"/>.
         /// </summary>
-        /// <param name="obj">An instance of <see cref="JObject"/> representing the entry.</param>
+        /// <param name="obj">An instance of <see cref="JObject"/> representing the object.</param>
         protected TogglEntryResponseBody(JObject obj) : base(obj) {
             Data = obj.GetObject("data", TogglEntry.Parse);
         }
