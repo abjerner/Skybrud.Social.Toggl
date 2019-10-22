@@ -79,7 +79,7 @@ namespace Skybrud.Social.Toggl.Models.Entries {
         public bool DurationOnly { get; }
         
         /// <summary>
-        /// Gets a timestamp for when the time entry was added.
+        /// Gets a timestamp for when the time entry was last updated.
         /// </summary>
         public EssentialsTime At { get; }
 

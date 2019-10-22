@@ -28,7 +28,7 @@ namespace Skybrud.Social.Toggl.Models.Clients {
         public string Name { get; }
 
         /// <summary>
-        /// Gets a timestamp for when the client was added.
+        /// Gets a timestamp for when the client was last updated.
         /// </summary>
         public EssentialsTime At { get; }
 
