@@ -72,7 +72,7 @@ namespace Skybrud.Social.Toggl.Http {
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public virtual IHttpResponse Get(IHttpGetOptions options) {
             if (options == null) throw new ArgumentNullException(nameof(options));
-            return DoHttpGetRequest(options.GetUrl(), options.GetQueryString());
+            return Get(options.GetUrl(), options.GetQueryString());
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Skybrud.Social.Toggl.Http {
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
         public virtual IHttpResponse Post<T>(IHttpPostOptions<T> options) where T : JToken {
             if (options == null) throw new ArgumentNullException(nameof(options));
-            return DoHttpPostRequest(options.GetUrl(), options.GetQueryString(), options.GetBody());
+            return Post(options.GetUrl(), options.GetQueryString(), options.GetBody());
         }
 
         /// <inheritdoc />

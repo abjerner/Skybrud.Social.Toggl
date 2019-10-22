@@ -43,7 +43,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Raw {
         ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md#create-a-time-entry</cref>
         /// </see>
         public IHttpResponse CreateEntry(TogglCreateTimeEntryOptions options) {
-            return Client.DoHttpPostRequest(options.GetUrl(), options.GetQueryString(), options.GetBody());
+            return Client.Post(options.GetUrl(), options.GetQueryString(), options.GetBody());
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Raw {
         ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md#get-time-entry-details</cref>
         /// </see>
         public IHttpResponse GetEntry(int entryId) {
-            return Client.DoHttpGetRequest($"/api/v8/time_entries/{entryId}");
+            return Client.Get($"/api/v8/time_entries/{entryId}");
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Raw {
         ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md#get-time-entries-started-in-a-specific-time-range</cref>
         /// </see>
         public IHttpResponse GetEntries() {
-            return Client.DoHttpGetRequest("/api/v8/time_entries");
+            return Client.Get("/api/v8/time_entries");
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Raw {
         public IHttpResponse GetEntries(EssentialsTime startDate, EssentialsTime endDate) {
             if (startDate == null) throw new ArgumentNullException(nameof(startDate));
             if (endDate == null) throw new ArgumentNullException(nameof(endDate));
-            return Client.DoHttpGetRequest("/api/v8/time_entries", new HttpQueryString {
+            return Client.Get("/api/v8/time_entries", new HttpQueryString {
                 {"start_date", startDate.ToString(TimeUtils.Iso8601DateFormat)},
                 {"end_date", endDate.ToString(TimeUtils.Iso8601DateFormat)}
             });

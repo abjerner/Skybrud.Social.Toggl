@@ -82,7 +82,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Raw {
         ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#get-clients-visible-to-user</cref>
         /// </see>
         public IHttpResponse GetClients() {
-            return Client.DoHttpGetRequest("/api/v8/clients");
+            return Client.Get("/api/v8/clients");
         }
 
         #endregion
