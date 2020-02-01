@@ -38,19 +38,14 @@ namespace Skybrud.Social.Toggl.Endpoints {
         #region Member methods
 
         /// <summary>
-        /// Gets a list of all clients visible to the user.
-        /// </summary>
-        /// <returns>An instance of <see cref="TogglClientListResponse"/> representing the response from the Toggl API.</returns>
-        public TogglClientListResponse GetClients() {
-            return TogglClientListResponse.Parse(Raw.GetClients());
-        }
-
-        /// <summary>
         /// Creates a new client with the specified <paramref name="name"/>.
         /// </summary>
         /// <param name="name">The name of the client.</param>
         /// <param name="workspaceId">The ID of the parent workspace.</param>
         /// <returns>An instance of <see cref="TogglClientResponse"/> representing the response from the Toggl API.</returns>
+        /// <see>
+        ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#create-a-client</cref>
+        /// </see>
         public TogglClientResponse CreateClient(string name, int workspaceId) {
             return TogglClientResponse.Parse(Raw.CreateClient(name, workspaceId));
         }
@@ -62,6 +57,9 @@ namespace Skybrud.Social.Toggl.Endpoints {
         /// <param name="workspaceId">The ID of the parent workspace.</param>
         /// <param name="notes">Notes for the client.</param>
         /// <returns>An instance of <see cref="TogglClientResponse"/> representing the response from the Toggl API.</returns>
+        /// <see>
+        ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#create-a-client</cref>
+        /// </see>
         public TogglClientResponse CreateClient(string name, int workspaceId, string notes) {
             return TogglClientResponse.Parse(Raw.CreateClient(name, workspaceId, notes));
         }
@@ -71,8 +69,22 @@ namespace Skybrud.Social.Toggl.Endpoints {
         /// </summary>
         /// <param name="options">The options for the request to the API.</param>
         /// <returns>An instance of <see cref="TogglClientResponse"/> representing the response from the Toggl API.</returns>
+        /// <see>
+        ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#create-a-client</cref>
+        /// </see>
         public TogglClientResponse CreateClient(TogglCreateClientOptions options) {
             return TogglClientResponse.Parse(Raw.CreateClient(options));
+        }
+
+        /// <summary>
+        /// Gets a list of all clients visible to the user.
+        /// </summary>
+        /// <returns>An instance of <see cref="TogglClientListResponse"/> representing the response from the Toggl API.</returns>
+        /// <see>
+        ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#get-clients-visible-to-user</cref>
+        /// </see>
+        public TogglClientListResponse GetClients() {
+            return TogglClientListResponse.Parse(Raw.GetClients());
         }
 
         #endregion
