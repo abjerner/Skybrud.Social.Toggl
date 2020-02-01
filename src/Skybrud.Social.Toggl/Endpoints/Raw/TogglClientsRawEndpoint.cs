@@ -43,7 +43,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Raw {
         /// </see>
         public IHttpResponse CreateClient(string name, int workspaceId) {
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
-            return Client.Post(new TogglCreateClientOptions(name, workspaceId));
+            return Client.GetResponse(new TogglCreateClientOptions(name, workspaceId));
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Raw {
         /// </see>
         public IHttpResponse CreateClient(string name, int workspaceId, string notes) {
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
-            return Client.Post(new TogglCreateClientOptions(name, workspaceId, notes));
+            return Client.GetResponse(new TogglCreateClientOptions(name, workspaceId, notes));
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Raw {
         /// </see>
         public IHttpResponse CreateClient(TogglCreateClientOptions options) {
             if (options == null) throw new ArgumentNullException(nameof(options));
-            return Client.Post(options);
+            return Client.GetResponse(options);
         }
 
         /// <summary>

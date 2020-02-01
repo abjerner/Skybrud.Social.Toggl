@@ -42,7 +42,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Raw {
         ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md#get-workspace-projects</cref>
         /// </see>
         public IHttpResponse GetProjects(int workspaceId) {
-            return Client.Get(new TogglGetProjectsOptions(workspaceId));
+            return Client.GetResponse(new TogglGetProjectsOptions(workspaceId));
         }
 
         /// <summary>
@@ -55,7 +55,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Raw {
         ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md#get-workspace-projects</cref>
         /// </see>
         public IHttpResponse GetProjects(int workspaceId, TogglProjectActiveState active) {
-            return Client.Get(new TogglGetProjectsOptions(workspaceId, active));
+            return Client.GetResponse(new TogglGetProjectsOptions(workspaceId, active));
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Raw {
         /// </see>
         public IHttpResponse GetProjects(TogglGetProjectsOptions options) {
             if (options == null) throw new ArgumentNullException(nameof(options));
-            return Client.Get(options);
+            return Client.GetResponse(options);
         }
 
         #endregion

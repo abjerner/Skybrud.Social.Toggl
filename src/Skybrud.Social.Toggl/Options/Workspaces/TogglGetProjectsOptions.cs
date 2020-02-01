@@ -1,6 +1,8 @@
-﻿using Skybrud.Essentials.Http.Collections;
+﻿using Skybrud.Essentials.Common;
+using Skybrud.Essentials.Http;
+using Skybrud.Essentials.Http.Collections;
+using Skybrud.Essentials.Http.Options;
 using Skybrud.Essentials.Strings.Extensions;
-using Skybrud.Social.Toggl.Http;
 using Skybrud.Social.Toggl.Options.Projects;
 
 namespace Skybrud.Social.Toggl.Options.Workspaces {
@@ -11,7 +13,7 @@ namespace Skybrud.Social.Toggl.Options.Workspaces {
     /// <see>
     ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md#get-workspace-projects</cref>
     /// </see>
-    public class TogglGetProjectsOptions : IHttpGetOptions {
+    public class TogglGetProjectsOptions : IHttpRequestOptions {
 
         #region Properties
 
@@ -57,15 +59,14 @@ namespace Skybrud.Social.Toggl.Options.Workspaces {
         #region Member methods
 
         /// <inheritdoc />
-        public string GetUrl() {
-            return $"/api/v8/workspaces/{WorkspaceId}/projects";
-        }
+        public IHttpRequest GetRequest() {
 
-        /// <inheritdoc />
-        public IHttpQueryString GetQueryString() {
-            return new HttpQueryString {
+            if (WorkspaceId == 0) throw new PropertyNotSetException(nameof(WorkspaceId));
+            
+            return HttpRequest.Get($"/api/v8/workspaces/{WorkspaceId}/projects", new HttpQueryString {
                 {"active", Active.ToLower()}
-            };
+            });
+
         }
 
         #endregion

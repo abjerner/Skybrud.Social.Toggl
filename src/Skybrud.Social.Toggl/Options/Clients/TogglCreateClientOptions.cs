@@ -1,15 +1,18 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Common;
-using Skybrud.Essentials.Http.Collections;
-using Skybrud.Social.Toggl.Http;
+using Skybrud.Essentials.Http;
+using Skybrud.Essentials.Http.Options;
 
 namespace Skybrud.Social.Toggl.Options.Clients {
-
+    
     /// <summary>
     /// Options for request to create a new Toggl client.
     /// </summary>
-    public class TogglCreateClientOptions : IHttpPostOptions<JObject> {
+    /// <see>
+    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#create-a-client</cref>
+    /// </see>
+    public class TogglCreateClientOptions : IHttpRequestOptions {
 
         #region Properties
 
@@ -62,17 +65,7 @@ namespace Skybrud.Social.Toggl.Options.Clients {
         #region Member methods
 
         /// <inheritdoc />
-        public string GetUrl() {
-            return "/api/v8/clients";
-        }
-
-        /// <inheritdoc />
-        public IHttpQueryString GetQueryString() {
-            return null;
-        }
-
-        /// <inheritdoc />
-        public JObject GetBody() {
+        public IHttpRequest GetRequest() {
 
             if (string.IsNullOrWhiteSpace(Name)) throw new PropertyNotSetException(nameof(Name));
             if (WorkspaceId == 0) throw new PropertyNotSetException(nameof(WorkspaceId));
@@ -80,8 +73,8 @@ namespace Skybrud.Social.Toggl.Options.Clients {
             JObject body = new JObject {
                 {"client",  JObject.FromObject(this)}
             };
-
-            return body;
+            
+            return HttpRequest.Post("/api/v8/clients", body);
 
         }
 

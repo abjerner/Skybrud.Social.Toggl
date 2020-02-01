@@ -44,7 +44,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Raw {
         ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md#create-project</cref>
         /// </see>
         public IHttpResponse CreateProject(string name, int workspaceId) {
-            return Client.Post(new TogglCreateProjectsOptions(name, workspaceId));
+            return Client.GetResponse(new TogglCreateProjectsOptions(name, workspaceId));
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Raw {
         ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md#create-project</cref>
         /// </see>
         public IHttpResponse CreateProject(string name, int workspaceId, int clientId) {
-            return Client.Post(new TogglCreateProjectsOptions(name, workspaceId, clientId));
+            return Client.GetResponse(new TogglCreateProjectsOptions(name, workspaceId, clientId));
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Raw {
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
         public IHttpResponse CreateProject(TogglCreateProjectsOptions options) {
             if (options == null) throw new ArgumentNullException(nameof(options));
-            return Client.Post(options);
+            return Client.GetResponse(options);
         }
 
         /// <summary>

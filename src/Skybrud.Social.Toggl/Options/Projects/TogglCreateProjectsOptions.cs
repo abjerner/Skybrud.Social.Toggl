@@ -1,15 +1,15 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Common;
-using Skybrud.Essentials.Http.Collections;
-using Skybrud.Social.Toggl.Http;
+using Skybrud.Essentials.Http;
+using Skybrud.Essentials.Http.Options;
 
 namespace Skybrud.Social.Toggl.Options.Projects {
 
     /// <summary>
     /// Options for request to create a new Toggl project.
     /// </summary>
-    public class TogglCreateProjectsOptions : IHttpPostOptions<JObject> {
+    public class TogglCreateProjectsOptions : IHttpRequestOptions {
 
         #region Properties
 
@@ -62,20 +62,17 @@ namespace Skybrud.Social.Toggl.Options.Projects {
         #region Member methods
 
         /// <inheritdoc />
-        public string GetUrl() {
-            return "/api/v8/projects";
-        }
+        public IHttpRequest GetRequest() {
 
-        /// <inheritdoc />
-        public IHttpQueryString GetQueryString() {
-            return null;
-        }
-
-        /// <inheritdoc />
-        public JObject GetBody() {
             if (string.IsNullOrWhiteSpace(Name)) throw new PropertyNotSetException(nameof(Name));
             if (WorkspaceId == 0) throw new PropertyNotSetException(nameof(WorkspaceId));
-            return new JObject {{"project", JObject.FromObject(this)}};
+
+            JObject body = new JObject {
+                { "project", JObject.FromObject(this) }
+            };
+
+            return HttpRequest.Post("/api/v8/projects", body);
+
         }
 
         #endregion

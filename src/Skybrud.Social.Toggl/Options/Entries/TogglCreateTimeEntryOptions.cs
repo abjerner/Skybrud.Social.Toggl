@@ -1,11 +1,11 @@
 ﻿using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Skybrud.Essentials.Http.Collections;
+using Skybrud.Essentials.Http;
+using Skybrud.Essentials.Http.Options;
 using Skybrud.Essentials.Json.Converters.Time;
 using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Essentials.Time;
-using Skybrud.Social.Toggl.Http;
 
 namespace Skybrud.Social.Toggl.Options.Entries {
 
@@ -15,7 +15,7 @@ namespace Skybrud.Social.Toggl.Options.Entries {
     /// <see>
     ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md#create-a-time-entry</cref>
     /// </see>
-    public class TogglCreateTimeEntryOptions : IHttpPostOptions<JObject> {
+    public class TogglCreateTimeEntryOptions : IHttpRequestOptions {
 
         #region Properties
 
@@ -69,30 +69,20 @@ namespace Skybrud.Social.Toggl.Options.Entries {
         public string[] Tags { get; set; }
 
         #endregion
-        
+
         #region Member methods
 
         /// <inheritdoc />
-        public string GetUrl() {
-            return "/api/v8/time_entries";
-        }
-
-        /// <inheritdoc />
-        public IHttpQueryString GetQueryString() {
-            return null;
-        }
-
-        /// <inheritdoc />
-        public JObject GetBody() {
+        public IHttpRequest GetRequest() {
 
             JObject entry = JObject.FromObject(this);
-            if (entry.HasValue("created_with") == false) entry["created_with"] = "Skybrud.Social"; 
+            if (entry.HasValue("created_with") == false) entry["created_with"] = "Skybrud.Social";
 
             JObject body = new JObject {
                 {"time_entry",  entry}
             };
 
-            return body;
+            return HttpRequest.Post("/api/v8/time_entries", body);
 
         }
 

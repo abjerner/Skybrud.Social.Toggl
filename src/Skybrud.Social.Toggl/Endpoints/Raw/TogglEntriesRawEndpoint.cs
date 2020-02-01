@@ -43,7 +43,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Raw {
         ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md#create-a-time-entry</cref>
         /// </see>
         public IHttpResponse CreateEntry(TogglCreateTimeEntryOptions options) {
-            return Client.Post(options.GetUrl(), options.GetQueryString(), options.GetBody());
+            return Client.GetResponse(options);
         }
 
         /// <summary>
