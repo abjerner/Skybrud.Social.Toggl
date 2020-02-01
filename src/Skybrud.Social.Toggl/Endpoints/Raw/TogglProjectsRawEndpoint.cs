@@ -69,6 +69,16 @@ namespace Skybrud.Social.Toggl.Endpoints.Raw {
             return Client.Post(options);
         }
 
+        /// <summary>
+        /// Updates the project matching the specified <paramref name="options"/>.
+        /// </summary>
+        /// <param name="options">The options for the request to the API.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+        public IHttpResponse UpdateProject(TogglUpdateProjectOptions options) {
+            if (options == null) throw new ArgumentNullException(nameof(options));
+            return Client.GetResponse(options);
+        }
+
         #endregion
 
     }

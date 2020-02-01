@@ -73,6 +73,15 @@ namespace Skybrud.Social.Toggl.Endpoints {
             return TogglProjectResponse.Parse(Raw.CreateProject(options));
         }
 
+        /// <summary>
+        /// Updates the project matching the specified <paramref name="options"/>.
+        /// </summary>
+        /// <param name="options">The options for the request to the API.</param>
+        /// <returns>An instance of <see cref="TogglProjectResponse"/> representing the response from the Toggl API.</returns>
+        public TogglProjectResponse UpdateProject(TogglUpdateProjectOptions options) {
+            return TogglProjectResponse.Parse(Raw.UpdateProject(options));
+        }
+
         #endregion
 
     }
