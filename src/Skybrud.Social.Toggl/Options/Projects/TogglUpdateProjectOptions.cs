@@ -9,6 +9,9 @@ namespace Skybrud.Social.Toggl.Options.Projects {
     /// <summary>
     /// Options for a request to update an existing Toggl project.
     /// </summary>
+    /// <see>
+    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md#update-project-data</cref>
+    /// </see>
     public class TogglUpdateProjectOptions : IHttpRequestOptions {
 
         #region Properties
