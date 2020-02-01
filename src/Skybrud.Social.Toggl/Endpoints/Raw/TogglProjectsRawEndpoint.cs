@@ -72,10 +72,38 @@ namespace Skybrud.Social.Toggl.Endpoints.Raw {
         }
 
         /// <summary>
+        /// Gets information about the project with the specified <paramref name="projectId"/>.
+        /// </summary>
+        /// <param name="projectId">The ID of the project.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+        /// <see>
+        ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md#get-project-data</cref>
+        /// </see>
+        public IHttpResponse GetProject(int projectId) {
+            return Client.GetResponse(new TogglGetProjectOptions(projectId));
+        }
+
+        /// <summary>
+        /// Gets information about the project matching the specified <paramref name="options"/>.
+        /// </summary>
+        /// <param name="options">The options for the request to the API.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+        /// <see>
+        ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md#get-project-data</cref>
+        /// </see>
+        public IHttpResponse GetProject(TogglGetProjectOptions options) {
+            if (options == null) throw new ArgumentNullException(nameof(options));
+            return Client.GetResponse(options);
+        }
+
+        /// <summary>
         /// Updates the project matching the specified <paramref name="options"/>.
         /// </summary>
         /// <param name="options">The options for the request to the API.</param>
         /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+        /// <see>
+        ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md#update-project-data</cref>
+        /// </see>
         public IHttpResponse UpdateProject(TogglUpdateProjectOptions options) {
             if (options == null) throw new ArgumentNullException(nameof(options));
             return Client.GetResponse(options);

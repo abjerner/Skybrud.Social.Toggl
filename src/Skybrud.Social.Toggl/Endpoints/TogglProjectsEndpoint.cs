@@ -78,10 +78,37 @@ namespace Skybrud.Social.Toggl.Endpoints {
         }
 
         /// <summary>
+        /// Gets information about the project with the specified <paramref name="projectId"/>.
+        /// </summary>
+        /// <param name="projectId">The ID of the project.</param>
+        /// <returns>An instance of <see cref="TogglProjectResponse"/> representing the response from the Toggl API.</returns>
+        /// <see>
+        ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md#get-project-data</cref>
+        /// </see>
+        public TogglProjectResponse GetProject(int projectId) {
+            return new TogglProjectResponse(Raw.GetProject(projectId));
+        }
+
+        /// <summary>
+        /// Gets information about the project matching the specified <paramref name="options"/>.
+        /// </summary>
+        /// <param name="options">The options for the request to the API.</param>
+        /// <returns>An instance of <see cref="TogglProjectResponse"/> representing the response from the Toggl API.</returns>
+        /// <see>
+        ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md#get-project-data</cref>
+        /// </see>
+        public TogglProjectResponse GetProject(TogglGetProjectOptions options) {
+            return new TogglProjectResponse(Raw.GetProject(options));
+        }
+
+        /// <summary>
         /// Updates the project matching the specified <paramref name="options"/>.
         /// </summary>
         /// <param name="options">The options for the request to the API.</param>
         /// <returns>An instance of <see cref="TogglProjectResponse"/> representing the response from the Toggl API.</returns>
+        /// <see>
+        ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md#update-project-data</cref>
+        /// </see>
         public TogglProjectResponse UpdateProject(TogglUpdateProjectOptions options) {
             return TogglProjectResponse.Parse(Raw.UpdateProject(options));
         }
