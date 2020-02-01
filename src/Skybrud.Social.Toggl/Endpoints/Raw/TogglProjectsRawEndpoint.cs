@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.Toggl.Http;
+using Skybrud.Social.Toggl.Models.Projects;
 using Skybrud.Social.Toggl.Options.Projects;
 
 namespace Skybrud.Social.Toggl.Endpoints.Raw {
@@ -77,6 +79,94 @@ namespace Skybrud.Social.Toggl.Endpoints.Raw {
         public IHttpResponse UpdateProject(TogglUpdateProjectOptions options) {
             if (options == null) throw new ArgumentNullException(nameof(options));
             return Client.GetResponse(options);
+        }
+
+        /// <summary>
+        /// Deletes the project with the specified <paramref name="projectId"/>.
+        /// </summary>
+        /// <param name="projectId">The ID of the project to be deleted.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+        /// <see>
+        ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md#delete-a-project</cref>
+        /// </see>
+        public IHttpResponse DeleteProject(int projectId) {
+            return Client.GetResponse(new TogglDeleteProjectOptions(projectId));
+        }
+
+        /// <summary>
+        /// Deletes the specified <paramref name="project"/>.
+        /// </summary>
+        /// <param name="project">The project to be deleted.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+        /// <see>
+        ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md#delete-a-project</cref>
+        /// </see>
+        public IHttpResponse DeleteProject(TogglProject project) {
+            if (project == null) throw new ArgumentNullException(nameof(project));
+            return Client.GetResponse(new TogglDeleteProjectOptions(project));
+        }
+
+        /// <summary>
+        /// Deletes the project matching the specified <paramref name="options"/>.
+        /// </summary>
+        /// <param name="options">The options for the request to the API.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+        /// <see>
+        ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md#delete-a-project</cref>
+        /// </see>
+        public IHttpResponse DeleteProject(TogglDeleteProjectOptions options) {
+            if (options == null) throw new ArgumentNullException(nameof(options));
+            return Client.GetResponse(options);
+        }
+
+        /// <summary>
+        /// Deletes the projects with the specified <paramref name="projectIds"/>.
+        /// </summary>
+        /// <param name="projectIds">The IDs of the projects to be deleted.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+        /// <see>
+        ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md#delete-multiple-projects</cref>
+        /// </see>
+        public IHttpResponse DeleteProjects(params int[] projectIds) {
+            return Client.GetResponse(new TogglDeleteProjectsOptions(projectIds));
+        }
+
+        /// <summary>
+        /// Deletes the projects with the specified <paramref name="projectIds"/>.
+        /// </summary>
+        /// <param name="projectIds">The IDs of the projects to be deleted.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+        /// <see>
+        ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md#delete-multiple-projects</cref>
+        /// </see>
+        public IHttpResponse DeleteProjects(IEnumerable<int> projectIds) {
+            return Client.GetResponse(new TogglDeleteProjectsOptions(projectIds));
+        }
+
+        /// <summary>
+        /// Deletes the specified <paramref name="projects"/>.
+        /// </summary>
+        /// <param name="projects">The projects to be deleted.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+        /// <see>
+        ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md#delete-multiple-projects</cref>
+        /// </see>
+        public IHttpResponse DeleteProjects(params TogglProject[] projects) {
+            if (projects == null) throw new ArgumentNullException(nameof(projects));
+            return Client.GetResponse(new TogglDeleteProjectsOptions(projects));
+        }
+
+        /// <summary>
+        /// Deletes the specified <paramref name="projects"/>.
+        /// </summary>
+        /// <param name="projects">The projects to be deleted.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+        /// <see>
+        ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md#delete-multiple-projects</cref>
+        /// </see>
+        public IHttpResponse DeleteProjects(IEnumerable<TogglProject> projects) {
+            if (projects == null) throw new ArgumentNullException(nameof(projects));
+            return Client.GetResponse(new TogglDeleteProjectsOptions(projects));
         }
 
         #endregion
