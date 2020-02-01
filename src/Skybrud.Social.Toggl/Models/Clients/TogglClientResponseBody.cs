@@ -9,7 +9,7 @@ namespace Skybrud.Social.Toggl.Models.Clients {
     /// <see>
     ///     <cref>hhttps://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#get-client-details</cref>
     /// </see>
-    public class TogglClientResponseBody : ToggleResponseBody {
+    public class TogglClientResponseBody : TogglResponseBody {
 
         #region Properties
 
