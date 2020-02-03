@@ -1,5 +1,8 @@
-﻿using Skybrud.Social.Toggl.Endpoints.Raw;
+﻿using System;
+using Skybrud.Social.Toggl.Endpoints.Raw;
+using Skybrud.Social.Toggl.Models.Clients;
 using Skybrud.Social.Toggl.Options.Clients;
+using Skybrud.Social.Toggl.Responses;
 using Skybrud.Social.Toggl.Responses.Clients;
 
 namespace Skybrud.Social.Toggl.Endpoints {
@@ -74,6 +77,42 @@ namespace Skybrud.Social.Toggl.Endpoints {
         /// </see>
         public TogglClientResponse CreateClient(TogglCreateClientOptions options) {
             return TogglClientResponse.Parse(Raw.CreateClient(options));
+        }
+
+        /// <summary>
+        /// Gets information about the client with the specified <paramref name="clientId"/>.
+        /// </summary>
+        /// <param name="clientId">The ID of the client.</param>
+        /// <returns>An instance of <see cref="TogglClientResponse"/> representing the response from the Toggl API.</returns>
+        /// <see>
+        ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#get-client-details</cref>
+        /// </see>
+        public TogglClientResponse GetClient(int clientId) {
+            return new TogglClientResponse(Raw.GetClient(clientId));
+        }
+
+        /// <summary>
+        /// Deletes the client with the specified <paramref name="clientId"/>.
+        /// </summary>
+        /// <param name="clientId">The ID of the client.</param>
+        /// <returns>An instance of <see cref="TogglResponse"/> representing the response from the Toggl API.</returns>
+        /// <see>
+        ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#delete-a-client</cref>
+        /// </see>
+        public TogglResponse DeleteClient(int clientId) {
+            return new TogglResponse(Raw.DeleteClient(clientId));
+        }
+
+        /// <summary>
+        /// Deletes the specified <paramref name="client"/>.
+        /// </summary>
+        /// <param name="client">The client to be deleted.</param>
+        /// <returns>An instance of <see cref="TogglResponse"/> representing the response from the Toggl API.</returns>
+        /// <see>
+        ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#delete-a-client</cref>
+        /// </see>
+        public TogglResponse DeleteClient(TogglClient client) {
+            return new TogglResponse(Raw.DeleteClient(client));
         }
 
         /// <summary>

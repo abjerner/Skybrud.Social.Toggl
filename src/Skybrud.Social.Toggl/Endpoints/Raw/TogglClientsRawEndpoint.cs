@@ -1,6 +1,7 @@
 ﻿using System;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.Toggl.Http;
+using Skybrud.Social.Toggl.Models.Clients;
 using Skybrud.Social.Toggl.Options.Clients;
 
 namespace Skybrud.Social.Toggl.Endpoints.Raw {
@@ -72,6 +73,43 @@ namespace Skybrud.Social.Toggl.Endpoints.Raw {
         public IHttpResponse CreateClient(TogglCreateClientOptions options) {
             if (options == null) throw new ArgumentNullException(nameof(options));
             return Client.GetResponse(options);
+        }
+
+        /// <summary>
+        /// Gets information about the client with the specified <paramref name="clientId"/>.
+        /// </summary>
+        /// <param name="clientId">The ID of the client.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+        /// <see>
+        ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#get-client-details</cref>
+        /// </see>
+        public IHttpResponse GetClient(int clientId) {
+            return Client.Get($"/api/v8/clients/{clientId}");
+        }
+
+        /// <summary>
+        /// Deletes the client with the specified <paramref name="clientId"/>.
+        /// </summary>
+        /// <param name="clientId">The ID of the client.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+        /// <see>
+        ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#delete-a-client</cref>
+        /// </see>
+        public IHttpResponse DeleteClient(int clientId) {
+            return Client.Delete($"/api/v8/clients/{clientId}");
+        }
+
+        /// <summary>
+        /// Deletes the specified <paramref name="client"/>.
+        /// </summary>
+        /// <param name="client">The client to be deleted.</param>
+        /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+        /// <see>
+        ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#delete-a-client</cref>
+        /// </see>
+        public IHttpResponse DeleteClient(TogglClient client) {
+            if (client == null) throw new ArgumentNullException(nameof(client));
+            return Client.Delete($"/api/v8/clients/{client.Id}");
         }
 
         /// <summary>
