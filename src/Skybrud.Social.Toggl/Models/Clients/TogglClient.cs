@@ -32,6 +32,11 @@ namespace Skybrud.Social.Toggl.Models.Clients {
         /// </summary>
         public EssentialsTime At { get; }
 
+        /// <summary>
+        /// Gets the notes of the client.
+        /// </summary>
+        public string Notes { get; }
+
         #endregion
 
         #region Constructors
@@ -45,6 +50,7 @@ namespace Skybrud.Social.Toggl.Models.Clients {
             WorkspaceId = obj.GetInt32("wid");
             Name = obj.GetString("name");
             At = obj.GetString("at", EssentialsTime.Parse);
+            Notes = obj.GetString("notes");
         }
 
         #endregion
