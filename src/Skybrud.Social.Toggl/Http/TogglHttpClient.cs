@@ -1,7 +1,7 @@
 ﻿using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Client;
 using Skybrud.Essentials.Security;
-using Skybrud.Social.Toggl.Endpoints.Raw;
+using Skybrud.Social.Toggl.Endpoints.Track;
 
 namespace Skybrud.Social.Toggl.Http {
 
@@ -65,7 +65,6 @@ namespace Skybrud.Social.Toggl.Http {
         /// <inheritdoc />
         protected override void PrepareHttpRequest(IHttpRequest request) {
             if (string.IsNullOrWhiteSpace(AccessToken) == false) request.Authorization = "Basic " + SecurityUtils.Base64Encode(AccessToken + ":api_token");
-            if (request.Url.StartsWith("/api/")) request.Url = "https://www.toggl.com" + request.Url;
         }
 
         #endregion
