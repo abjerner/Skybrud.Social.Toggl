@@ -2,6 +2,7 @@
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Essentials.Time;
+using Skybrud.Essentials.Time.Iso8601;
 using Skybrud.Social.Toggl.Http;
 using Skybrud.Social.Toggl.Options.Track.Entries;
 
@@ -82,8 +83,8 @@ namespace Skybrud.Social.Toggl.Endpoints.Track {
             if (startDate == null) throw new ArgumentNullException(nameof(startDate));
             if (endDate == null) throw new ArgumentNullException(nameof(endDate));
             return Client.Get("/api/v8/time_entries", new HttpQueryString {
-                {"start_date", startDate.ToString(TimeUtils.Iso8601DateFormat)},
-                {"end_date", endDate.ToString(TimeUtils.Iso8601DateFormat)}
+                {"start_date", startDate.ToString(Iso8601Constants.DateTimeFormat)},
+                {"end_date", endDate.ToString(Iso8601Constants.DateTimeFormat)}
             });
         }
 
