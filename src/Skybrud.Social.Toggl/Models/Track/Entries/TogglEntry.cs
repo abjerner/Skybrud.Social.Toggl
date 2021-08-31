@@ -16,7 +16,7 @@ namespace Skybrud.Social.Toggl.Models.Track.Entries {
         /// <summary>
         /// Gets the ID of the time entry.
         /// </summary>
-        public int Id { get; }
+        public long Id { get; }
 
         /// <summary>
         /// Gets the <see cref="System.Guid"/> ID of the time entry.
@@ -102,7 +102,7 @@ namespace Skybrud.Social.Toggl.Models.Track.Entries {
         /// </summary>
         /// <param name="obj">An instance of <see cref="JObject"/> representing the entry.</param>
         protected TogglEntry(JObject obj) : base(obj) {
-            Id = obj.GetInt32("id");
+            Id = obj.GetInt64("id");
             Guid = obj.GetGuid("guid");
             WorkspaceId = obj.GetInt32("wid");
             ProjectId = obj.GetInt32("pid");
