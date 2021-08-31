@@ -20,10 +20,6 @@
             ]
           }
         ]
-      },
-      {
-        "alias": "documentation",
-        "destination": "releases/documentation/{packageName}.v{version}.{targetFramework}.zip"
       }
     ]
   }
