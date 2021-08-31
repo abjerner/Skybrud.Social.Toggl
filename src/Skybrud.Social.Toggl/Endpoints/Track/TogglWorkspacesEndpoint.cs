@@ -24,7 +24,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track {
         /// <summary>
         /// Gets a reference to the raw endpoint.
         /// </summary>
-        public TogglWorkspacesRawEndpoint Raw => Service.Client.Workspaces;
+        public TogglWorkspacesRawEndpoint Raw => Service.Client.Track.Workspaces;
 
         #endregion
 

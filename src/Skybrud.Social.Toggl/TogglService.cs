@@ -1,4 +1,5 @@
 ﻿using System;
+using Skybrud.Social.Toggl.Apis;
 using Skybrud.Social.Toggl.Endpoints.Track;
 using Skybrud.Social.Toggl.Http;
 
@@ -17,24 +18,9 @@ namespace Skybrud.Social.Toggl {
         public TogglHttpClient Client { get; set; }
 
         /// <summary>
-        /// Gets a reference to the <strong>Clients</strong> endpoint.
+        /// Gets a reference to the <strong>Track</strong> API.
         /// </summary>
-        public TogglClientsEndpoint Clients { get; }
-
-        /// <summary>
-        /// Gets a reference to the <strong>Entries</strong> endpoint.
-        /// </summary>
-        public TogglEntriesEndpoint Entries { get; }
-
-        /// <summary>
-        /// Gets a reference to the <strong>Projects</strong> endpoint.
-        /// </summary>
-        public TogglProjectsEndpoint Projects { get; }
-
-        /// <summary>
-        /// Gets a reference to the <strong>Workspaces</strong> endpoint.
-        /// </summary>
-        public TogglWorkspacesEndpoint Workspaces { get; }
+        public TogglTrackApi Track { get; }
 
         #endregion
 
@@ -42,10 +28,7 @@ namespace Skybrud.Social.Toggl {
 
         private TogglService(TogglHttpClient client) {
             Client = client;
-            Clients = new TogglClientsEndpoint(this);
-            Entries = new TogglEntriesEndpoint(this);
-            Projects = new TogglProjectsEndpoint(this);
-            Workspaces = new TogglWorkspacesEndpoint(this);
+            Track = new TogglTrackApi(this);
         }
 
         #endregion

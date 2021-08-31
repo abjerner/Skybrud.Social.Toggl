@@ -31,7 +31,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track {
 
         internal TogglClientsEndpoint(TogglService service) {
             Service = service;
-            Raw = service.Client.Clients;
+            Raw = service.Client.Track.Clients;
         }
 
         #endregion

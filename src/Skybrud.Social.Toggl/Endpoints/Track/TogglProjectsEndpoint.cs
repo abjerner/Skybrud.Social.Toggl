@@ -33,7 +33,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track {
 
         internal TogglProjectsEndpoint(TogglService service) {
             Service = service;
-            Raw = service.Client.Projects;
+            Raw = service.Client.Track.Projects;
         }
 
         #endregion
