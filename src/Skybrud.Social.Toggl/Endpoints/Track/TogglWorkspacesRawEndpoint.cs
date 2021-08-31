@@ -1,5 +1,6 @@
 ﻿using System;
 using Skybrud.Essentials.Http;
+using Skybrud.Social.Toggl.Contants;
 using Skybrud.Social.Toggl.Http;
 using Skybrud.Social.Toggl.Options.Track.Projects;
 using Skybrud.Social.Toggl.Options.Track.Workspaces;
@@ -41,7 +42,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track {
         ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md#get-workspaces</cref>
         /// </see>
         public IHttpResponse GetWorkspaces() {
-            return Client.Get("/api/v8/workspaces");
+            return Client.Get($"https://{TogglConstants.Track.HostName}/api/v8/workspaces");
         }
 
         /// <summary>
@@ -53,7 +54,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track {
         ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md#get-single-workspace</cref>
         /// </see>
         public IHttpResponse GetWorkspace(int workspaceId) {
-            return Client.Get($"/api/v8/workspaces/{workspaceId}");
+            return Client.Get($"https://{TogglConstants.Track.HostName}/api/v8/workspaces/{workspaceId}");
         }
 
         /// <summary>
@@ -65,7 +66,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track {
         ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md#get-workspace-clients</cref>
         /// </see>
         public IHttpResponse GetClients(int workspaceId) {
-            return Client.Get($"/api/v8/workspaces/{workspaceId}/clients");
+            return Client.Get($"https://{TogglConstants.Track.HostName}/api/v8/workspaces/{workspaceId}/clients");
         }
 
         /// <summary>
@@ -115,7 +116,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track {
         ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md#get-workspace-tags</cref>
         /// </see>
         public IHttpResponse GetTags(int workspaceId) {
-            return Client.Get($"/api/v8/workspaces/{workspaceId}/tags");
+            return Client.Get($"https://{TogglConstants.Track.HostName}/api/v8/workspaces/{workspaceId}/tags");
         }
 
         #endregion

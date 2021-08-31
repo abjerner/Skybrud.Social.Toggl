@@ -3,6 +3,7 @@ using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Essentials.Time;
 using Skybrud.Essentials.Time.Iso8601;
+using Skybrud.Social.Toggl.Contants;
 using Skybrud.Social.Toggl.Http;
 using Skybrud.Social.Toggl.Options.Track.Entries;
 
@@ -56,7 +57,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track {
         ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md#get-time-entry-details</cref>
         /// </see>
         public IHttpResponse GetEntry(int entryId) {
-            return Client.Get($"/api/v8/time_entries/{entryId}");
+            return Client.Get($"https://{TogglConstants.Track.HostName}/api/v8/time_entries/{entryId}");
         }
 
         /// <summary>
@@ -67,7 +68,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track {
         ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md#get-time-entries-started-in-a-specific-time-range</cref>
         /// </see>
         public IHttpResponse GetEntries() {
-            return Client.Get("/api/v8/time_entries");
+            return Client.Get($"https://{TogglConstants.Track.HostName}/api/v8/time_entries");
         }
 
         /// <summary>
@@ -82,7 +83,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track {
         public IHttpResponse GetEntries(EssentialsTime startDate, EssentialsTime endDate) {
             if (startDate == null) throw new ArgumentNullException(nameof(startDate));
             if (endDate == null) throw new ArgumentNullException(nameof(endDate));
-            return Client.Get("/api/v8/time_entries", new HttpQueryString {
+            return Client.Get($"https://{TogglConstants.Track.HostName}/api/v8/time_entries", new HttpQueryString {
                 {"start_date", startDate.ToString(Iso8601Constants.DateTimeFormat)},
                 {"end_date", endDate.ToString(Iso8601Constants.DateTimeFormat)}
             });

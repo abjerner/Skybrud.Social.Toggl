@@ -1,5 +1,6 @@
 ﻿using System;
 using Skybrud.Essentials.Http;
+using Skybrud.Social.Toggl.Contants;
 using Skybrud.Social.Toggl.Http;
 using Skybrud.Social.Toggl.Models.Track.Clients;
 using Skybrud.Social.Toggl.Options.Track.Clients;
@@ -84,7 +85,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track {
         ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#get-client-details</cref>
         /// </see>
         public IHttpResponse GetClient(int clientId) {
-            return Client.Get($"/api/v8/clients/{clientId}");
+            return Client.Get($"https://{TogglConstants.Track.HostName}/api/v8/clients/{clientId}");
         }
 
         /// <summary>
@@ -96,7 +97,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track {
         ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#delete-a-client</cref>
         /// </see>
         public IHttpResponse DeleteClient(int clientId) {
-            return Client.Delete($"/api/v8/clients/{clientId}");
+            return Client.Delete($"https://{TogglConstants.Track.HostName}/api/v8/clients/{clientId}");
         }
 
         /// <summary>
@@ -109,7 +110,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track {
         /// </see>
         public IHttpResponse DeleteClient(TogglClient client) {
             if (client == null) throw new ArgumentNullException(nameof(client));
-            return Client.Delete($"/api/v8/clients/{client.Id}");
+            return Client.Delete($"https://{TogglConstants.Track.HostName}/api/v8/clients/{client.Id}");
         }
 
         /// <summary>
@@ -120,7 +121,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track {
         ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#get-clients-visible-to-user</cref>
         /// </see>
         public IHttpResponse GetClients() {
-            return Client.Get("/api/v8/clients");
+            return Client.Get($"https://{TogglConstants.Track.HostName}/api/v8/clients");
         }
 
         #endregion
