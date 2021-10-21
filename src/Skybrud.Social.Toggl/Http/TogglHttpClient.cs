@@ -46,7 +46,7 @@ namespace Skybrud.Social.Toggl.Http {
 
         /// <inheritdoc />
         protected override void PrepareHttpRequest(IHttpRequest request) {
-            if (string.IsNullOrWhiteSpace(ApiToken) == false) request.Authorization = "Basic " + SecurityUtils.Base64Encode(ApiToken + ":api_token");
+            if (string.IsNullOrWhiteSpace(ApiToken) == false) request.Authorization = $"Basic {SecurityUtils.Base64Encode($"{ApiToken}:api_token")}";
         }
 
         #endregion
