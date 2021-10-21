@@ -12,7 +12,7 @@ namespace Skybrud.Social.Toggl.Apis {
         /// <summary>
         /// Gets a reference to the parent service.
         /// </summary>
-        public TogglService Service { get; }
+        public TogglHttpService Service { get; }
 
         /// <summary>
         /// Gets a reference to the <strong>Clients</strong> endpoint.
@@ -38,7 +38,7 @@ namespace Skybrud.Social.Toggl.Apis {
 
         #region Constructors
 
-        internal TogglTrackApi(TogglService service) {
+        internal TogglTrackApi(TogglHttpService service) {
             Service = service;
             Clients = new TogglClientsEndpoint(service);
             Entries = new TogglEntriesEndpoint(service);

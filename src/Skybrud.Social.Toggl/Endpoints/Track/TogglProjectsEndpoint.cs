@@ -20,7 +20,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track {
         /// <summary>
         /// Gets a reference to the parent service.
         /// </summary>
-        public TogglService Service { get; }
+        public TogglHttpService Service { get; }
 
         /// <summary>
         /// Gets a reference to the raw endpoint.
@@ -31,7 +31,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track {
 
         #region Constructors
 
-        internal TogglProjectsEndpoint(TogglService service) {
+        internal TogglProjectsEndpoint(TogglHttpService service) {
             Service = service;
             Raw = service.Client.Track.Projects;
         }

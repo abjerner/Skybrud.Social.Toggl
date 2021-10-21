@@ -7,7 +7,7 @@ namespace Skybrud.Social.Toggl {
     /// <summary>
     /// Class working as an entry point to making requests to the various endpoints of the Toggl API.
     /// </summary>
-    public class TogglService {
+    public class TogglHttpService {
 
         #region Properties
 
@@ -25,7 +25,7 @@ namespace Skybrud.Social.Toggl {
 
         #region Constructors
 
-        private TogglService(TogglHttpClient client) {
+        private TogglHttpService(TogglHttpClient client) {
             Client = client;
             Track = new TogglTrackApi(this);
         }
@@ -35,23 +35,23 @@ namespace Skybrud.Social.Toggl {
         #region Static methods
 
         /// <summary>
-        /// Returns a new instance of <see cref="TogglService"/> based on the specified <paramref name="client"/>.
+        /// Returns a new instance of <see cref="TogglHttpService"/> based on the specified <paramref name="client"/>.
         /// </summary>
         /// <param name="client">The HTTP/OAuth client that should be used internally.</param>
-        /// <returns>A new instance of <see cref="TogglService"/>.</returns>
-        public static TogglService CreateFromClient(TogglHttpClient client) {
+        /// <returns>A new instance of <see cref="TogglHttpService"/>.</returns>
+        public static TogglHttpService CreateFromClient(TogglHttpClient client) {
             if (client == null) throw new ArgumentNullException(nameof(client));
-            return new TogglService(client);
+            return new TogglHttpService(client);
         }
 
         /// <summary>
-        /// Returns a new instance of <see cref="TogglService"/> based on the specified <paramref name="apiToken"/>.
+        /// Returns a new instance of <see cref="TogglHttpService"/> based on the specified <paramref name="apiToken"/>.
         /// </summary>
         /// <param name="apiToken">The API token to be used.</param>
-        /// <returns>A new instance of <see cref="TogglService"/>.</returns>
-        public static TogglService CreateFromApiToken(string apiToken) {
+        /// <returns>A new instance of <see cref="TogglHttpService"/>.</returns>
+        public static TogglHttpService CreateFromApiToken(string apiToken) {
             if (string.IsNullOrWhiteSpace(apiToken)) throw new ArgumentNullException(nameof(apiToken));
-            return new TogglService(new TogglHttpClient(apiToken));
+            return new TogglHttpService(new TogglHttpClient(apiToken));
         }
 
         #endregion
