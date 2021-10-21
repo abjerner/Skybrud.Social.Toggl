@@ -45,13 +45,13 @@ namespace Skybrud.Social.Toggl {
         }
 
         /// <summary>
-        /// Returns a new instance of <see cref="TogglService"/> based on the specified <paramref name="accessToken"/>.
+        /// Returns a new instance of <see cref="TogglService"/> based on the specified <paramref name="apiToken"/>.
         /// </summary>
-        /// <param name="accessToken">The access token to be used.</param>
+        /// <param name="apiToken">The API token to be used.</param>
         /// <returns>A new instance of <see cref="TogglService"/>.</returns>
-        public static TogglService CreateFromAccessToken(string accessToken) {
-            if (string.IsNullOrWhiteSpace(accessToken)) throw new ArgumentNullException(nameof(accessToken));
-            return new TogglService(new TogglHttpClient(accessToken));
+        public static TogglService CreateFromApiToken(string apiToken) {
+            if (string.IsNullOrWhiteSpace(apiToken)) throw new ArgumentNullException(nameof(apiToken));
+            return new TogglService(new TogglHttpClient(apiToken));
         }
 
         #endregion

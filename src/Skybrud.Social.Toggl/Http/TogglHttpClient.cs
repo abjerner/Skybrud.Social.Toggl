@@ -13,9 +13,9 @@ namespace Skybrud.Social.Toggl.Http {
         #region Properties
 
         /// <summary>
-        /// Gets or sets the access token.
+        /// Gets or sets the API token.
         /// </summary>
-        public string AccessToken { get; set; }
+        public string ApiToken { get; set; }
 
         /// <summary>
         /// Gets a reference to the raw <strong>Track</strong> API.
@@ -32,11 +32,11 @@ namespace Skybrud.Social.Toggl.Http {
         public TogglHttpClient() { }
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="accessToken"/>.
+        /// Initializes a new instance based on the specified <paramref name="apiToken"/>.
         /// </summary>
-        /// <param name="accessToken">The access token to be used.</param>
-        public TogglHttpClient(string accessToken) {
-            AccessToken = accessToken;
+        /// <param name="apiToken">The access token to be used.</param>
+        public TogglHttpClient(string apiToken) {
+            ApiToken = apiToken;
             Track = new TogglTrackRawApi(this);
         }
 
@@ -46,7 +46,7 @@ namespace Skybrud.Social.Toggl.Http {
 
         /// <inheritdoc />
         protected override void PrepareHttpRequest(IHttpRequest request) {
-            if (string.IsNullOrWhiteSpace(AccessToken) == false) request.Authorization = "Basic " + SecurityUtils.Base64Encode(AccessToken + ":api_token");
+            if (string.IsNullOrWhiteSpace(ApiToken) == false) request.Authorization = "Basic " + SecurityUtils.Base64Encode(ApiToken + ":api_token");
         }
 
         #endregion
