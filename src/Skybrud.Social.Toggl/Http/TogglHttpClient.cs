@@ -2,7 +2,6 @@
 using Skybrud.Essentials.Http.Client;
 using Skybrud.Essentials.Security;
 using Skybrud.Social.Toggl.Apis;
-using Skybrud.Social.Toggl.Endpoints.Track;
 
 namespace Skybrud.Social.Toggl.Http {
 

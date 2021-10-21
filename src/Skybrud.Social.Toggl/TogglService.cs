@@ -1,6 +1,5 @@
 ﻿using System;
 using Skybrud.Social.Toggl.Apis;
-using Skybrud.Social.Toggl.Endpoints.Track;
 using Skybrud.Social.Toggl.Http;
 
 namespace Skybrud.Social.Toggl {
