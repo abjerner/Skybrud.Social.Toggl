@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.Toggl.Models.Track.Workspaces;
 
@@ -7,7 +8,7 @@ namespace Skybrud.Social.Toggl.Responses.Track.Workspaces {
     /// <summary>
     /// Class representing a response with a list of <see cref="TogglWorkspace"/>.
     /// </summary>
-    public class TogglWorkspaceListResponse : TogglResponse<TogglWorkspace[]> {
+    public class TogglWorkspaceListResponse : TogglResponse<IReadOnlyList<TogglWorkspace>> {
 
         #region Constructors
 

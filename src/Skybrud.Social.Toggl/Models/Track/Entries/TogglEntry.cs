@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json;
 using Skybrud.Essentials.Json.Extensions;
@@ -91,7 +92,7 @@ namespace Skybrud.Social.Toggl.Models.Track.Entries {
         /// <summary>
         /// Gets an array with the tags added to the time entry.
         /// </summary>
-        public string[] Tags { get; }
+        public IReadOnlyList<string> Tags { get; }
 
         #endregion
 

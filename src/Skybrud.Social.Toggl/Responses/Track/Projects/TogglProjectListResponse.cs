@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.Toggl.Models.Track.Projects;
 
@@ -7,7 +8,7 @@ namespace Skybrud.Social.Toggl.Responses.Track.Projects {
     /// <summary>
     /// Class representing a response with a list of <see cref="TogglProject"/>.
     /// </summary>
-    public class TogglProjectListResponse : TogglResponse<TogglProject[]> {
+    public class TogglProjectListResponse : TogglResponse<IReadOnlyList<TogglProject>> {
 
         #region Constructors
 
