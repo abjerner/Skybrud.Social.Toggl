@@ -84,8 +84,8 @@ namespace Skybrud.Social.Toggl.Endpoints.Track {
             if (startDate == null) throw new ArgumentNullException(nameof(startDate));
             if (endDate == null) throw new ArgumentNullException(nameof(endDate));
             return Client.Get($"https://{TogglConstants.Track.HostName}/api/v8/time_entries", new HttpQueryString {
-                {"start_date", startDate.ToString(Iso8601Constants.DateTimeFormat)},
-                {"end_date", endDate.ToString(Iso8601Constants.DateTimeFormat)}
+                {"start_date", startDate.ToString(Iso8601Constants.DateTimeSeconds)},
+                {"end_date", endDate.ToString(Iso8601Constants.DateTimeSeconds)}
             });
         }
 
