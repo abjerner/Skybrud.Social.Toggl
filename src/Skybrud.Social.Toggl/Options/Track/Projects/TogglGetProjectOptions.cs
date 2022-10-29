@@ -5,7 +5,7 @@ using Skybrud.Essentials.Http.Options;
 using Skybrud.Social.Toggl.Contants;
 
 namespace Skybrud.Social.Toggl.Options.Track.Projects {
-    
+
     /// <summary>
     /// Options for a request to get information about a single Toggl project.
     /// </summary>

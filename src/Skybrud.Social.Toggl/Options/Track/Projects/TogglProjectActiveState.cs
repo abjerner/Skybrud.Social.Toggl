@@ -1,5 +1,5 @@
 ﻿namespace Skybrud.Social.Toggl.Options.Track.Projects {
-    
+
     /// <summary>
     /// Enum class representing the active state of projects that should be returned.
     /// </summary>

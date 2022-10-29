@@ -7,7 +7,7 @@ using Skybrud.Social.Toggl.Contants;
 using Skybrud.Social.Toggl.Options.Track.Projects;
 
 namespace Skybrud.Social.Toggl.Options.Track.Workspaces {
-    
+
     /// <summary>
     /// Options for a request to the projects of a workspace.
     /// </summary>
@@ -68,7 +68,7 @@ namespace Skybrud.Social.Toggl.Options.Track.Workspaces {
             IHttpQueryString query = new HttpQueryString {
                 {"active", Active.ToLower()}
             };
-            
+
             // Initialize a new request
             return HttpRequest.Get($"https://{TogglConstants.Track.HostName}/api/v8/workspaces/{WorkspaceId}/projects", query);
 

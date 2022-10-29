@@ -68,7 +68,7 @@ namespace Skybrud.Social.Toggl.Options.Track.Projects {
             if (string.IsNullOrWhiteSpace(Name)) throw new PropertyNotSetException(nameof(Name));
             if (WorkspaceId == 0) throw new PropertyNotSetException(nameof(WorkspaceId));
 
-            JObject body = new JObject {
+            JObject body = new () {
                 { "project", JObject.FromObject(this) }
             };
 

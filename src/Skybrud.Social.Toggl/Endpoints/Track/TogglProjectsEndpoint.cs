@@ -48,7 +48,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track {
         /// <returns>An instance of <see cref="TogglProjectResponse"/> representing the response from the Toggl API.</returns>
         /// <see>
         ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md#create-project</cref>
-        /// </see> 
+        /// </see>
         public TogglProjectResponse CreateProject(string name, int workspaceId) {
             return TogglProjectResponse.Parse(Raw.CreateProject(name, workspaceId));
         }

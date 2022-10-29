@@ -79,7 +79,7 @@ namespace Skybrud.Social.Toggl.Options.Track.Entries {
             JObject entry = JObject.FromObject(this);
             if (entry.HasValue("created_with") == false) entry["created_with"] = "Skybrud.Social";
 
-            JObject body = new JObject {
+            JObject body = new () {
                 {"time_entry",  entry}
             };
 

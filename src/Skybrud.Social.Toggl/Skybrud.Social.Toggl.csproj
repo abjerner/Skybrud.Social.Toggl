@@ -22,7 +22,7 @@
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/abjerner/Skybrud.Social.Toggl</RepositoryUrl>
   </PropertyGroup>
-  
+
   <PropertyGroup>
     <PackageTags>Toggl, Skybrud, Social, JSON</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

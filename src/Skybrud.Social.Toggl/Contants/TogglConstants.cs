@@ -1,7 +1,7 @@
 ﻿// ReSharper disable InconsistentNaming
 
 namespace Skybrud.Social.Toggl.Contants {
-    
+
     /// <summary>
     /// Class with various constants used throughout the Toggl implementation.
     /// </summary>

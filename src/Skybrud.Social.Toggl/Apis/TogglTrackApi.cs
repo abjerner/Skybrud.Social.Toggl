@@ -1,12 +1,12 @@
 ﻿using Skybrud.Social.Toggl.Endpoints.Track;
 
 namespace Skybrud.Social.Toggl.Apis {
-    
+
     /// <summary>
     /// Implementation of the <strong>Track</strong> API.
     /// </summary>
     public class TogglTrackApi {
-        
+
         #region Properties
 
         /// <summary>

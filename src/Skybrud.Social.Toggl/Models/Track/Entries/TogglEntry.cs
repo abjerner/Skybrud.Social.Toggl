@@ -77,7 +77,7 @@ namespace Skybrud.Social.Toggl.Models.Track.Entries {
         /// Gets whether the time entry only specifies duration.
         /// </summary>
         public bool DurationOnly { get; }
-        
+
         /// <summary>
         /// Gets a timestamp for when the time entry was last updated.
         /// </summary>

@@ -6,7 +6,7 @@ using Skybrud.Essentials.Http.Options;
 using Skybrud.Social.Toggl.Contants;
 
 namespace Skybrud.Social.Toggl.Options.Track.Clients {
-    
+
     /// <summary>
     /// Options for request to create a new Toggl client.
     /// </summary>
@@ -71,10 +71,10 @@ namespace Skybrud.Social.Toggl.Options.Track.Clients {
             if (string.IsNullOrWhiteSpace(Name)) throw new PropertyNotSetException(nameof(Name));
             if (WorkspaceId == 0) throw new PropertyNotSetException(nameof(WorkspaceId));
 
-            JObject body = new JObject {
+            JObject body = new () {
                 {"client",  JObject.FromObject(this)}
             };
-            
+
             return HttpRequest.Post($"https://{TogglConstants.Track.HostName}/api/v8/clients", body);
 
         }

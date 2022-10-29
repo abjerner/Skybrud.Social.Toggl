@@ -4,7 +4,7 @@ using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Essentials.Time;
 
 namespace Skybrud.Social.Toggl.Models.Track.Projects {
-    
+
     /// <summary>
     /// Class representing a Toggl project.
     /// </summary>

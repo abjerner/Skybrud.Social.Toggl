@@ -2,7 +2,7 @@
 using Skybrud.Social.Toggl.Http;
 
 namespace Skybrud.Social.Toggl.Apis {
-    
+
     /// <summary>
     /// Raw implementation of the <strong>Track</strong> API.
     /// </summary>

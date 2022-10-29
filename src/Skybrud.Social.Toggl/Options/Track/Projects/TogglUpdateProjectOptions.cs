@@ -70,7 +70,7 @@ namespace Skybrud.Social.Toggl.Options.Track.Projects {
         /// <inheritdoc />
         public IHttpRequest GetRequest() {
 
-            JObject body = new JObject {
+            JObject body = new () {
                 {"project", JObject.FromObject(this)}
             };
 

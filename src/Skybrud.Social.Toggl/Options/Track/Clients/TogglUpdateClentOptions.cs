@@ -59,7 +59,7 @@ namespace Skybrud.Social.Toggl.Options.Track.Clients {
 
             if (string.IsNullOrWhiteSpace(Name)) throw new PropertyNotSetException(nameof(Name));
 
-            JObject body = new JObject {
+            JObject body = new () {
                 {"client", JObject.FromObject(this)}
             };
 
