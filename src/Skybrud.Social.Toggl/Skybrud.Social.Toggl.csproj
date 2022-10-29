@@ -9,38 +9,40 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <RootNamespace>Skybrud.Social.Toggl</RootNamespace>
-    <Version>1.0.0-beta002</Version>
-    <Company>Skybrud.dk a/s</Company>
+    <VersionPrefix>1.0.0-beta002</VersionPrefix>
+    <VersionSuffix Condition="'$(Configuration)'=='Debug'">build$([System.DateTime]::UtcNow.ToString(`yyyyMMddHHmm`))</VersionSuffix>
+    <Company>Limbo</Company>
     <Product>Skybrud.Social</Product>
     <Authors>Anders Bjerner</Authors>
-    <Copyright>Copyright © 2021</Copyright>
+    <Copyright>Copyright © 2022</Copyright>
     <Description>API service implementation for the Toggl API.</Description>
   </PropertyGroup>
 
+  <!-- Information for the NuGet package -->
   <PropertyGroup>
+    <PackageId>Skybrud.Social.Toggl</PackageId>
+    <PackageTags>Toggl, Skybrud, Social, JSON, Limbo</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/abjerner/Skybrud.Social.Toggl</PackageProjectUrl>
+    <PackageIcon>Limbo.png</PackageIcon>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/abjerner/Skybrud.Social.Toggl</RepositoryUrl>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <PackageTags>Toggl, Skybrud, Social, JSON</PackageTags>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/abjerner/Skybrud.Social.Toggl</PackageProjectUrl>
-    <PackageIconUrl>http://www.skybrud.dk/img/5431sk/icon/favicon.ico</PackageIconUrl>
-  </PropertyGroup>
-
+  <!-- Include NuGet dependencies -->
   <ItemGroup>
     <PackageReference Include="Skybrud.Essentials" Version="1.1.42" />
     <PackageReference Include="Skybrud.Essentials.Http" Version="1.1.0" />
   </ItemGroup>
 
+  <!-- Include package icon for NuGet -->
+  <ItemGroup>
+    <Content Include="../build/Limbo.png" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <!-- Generate XML documentation -->
   <PropertyGroup>
     <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
-
-  <Target Name="PostBuild" AfterTargets="PostBuildEvent" Condition="'$(Configuration)'=='Release' AND '$(BuildTools)'=='1'">
-    <Exec Command="&quot;$(ProjectDir)..\build\Skybrud.BuildTools.Tasks.exe&quot; &quot;postBuild&quot; &quot;$(ConfigurationName)&quot; &quot;$(ProjectPath)&quot; &quot;$(TargetPath)&quot;" />
-  </Target>
 
 </Project>
