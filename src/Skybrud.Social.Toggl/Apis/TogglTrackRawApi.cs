@@ -31,6 +31,11 @@ namespace Skybrud.Social.Toggl.Apis {
         public TogglProjectsRawEndpoint Projects { get; }
 
         /// <summary>
+        /// Gets a reference to the raw <strong>User</strong> endpoint.
+        /// </summary>
+        public TogglUserRawEndpoint User { get; }
+
+        /// <summary>
         /// Gets a reference to the raw <strong>Workspaces</strong> endpoint.
         /// </summary>
         public TogglWorkspacesRawEndpoint Workspaces { get; }
@@ -44,12 +49,11 @@ namespace Skybrud.Social.Toggl.Apis {
             Clients = new TogglClientsRawEndpoint(client);
             Entries = new TogglEntriesRawEndpoint(client);
             Projects = new TogglProjectsRawEndpoint(client);
+            User = new TogglUserRawEndpoint(client);
             Workspaces = new TogglWorkspacesRawEndpoint(client);
         }
 
         #endregion
-
-
 
     }
 
