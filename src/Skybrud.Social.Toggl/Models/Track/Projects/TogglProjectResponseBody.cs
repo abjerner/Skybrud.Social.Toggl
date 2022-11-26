@@ -25,11 +25,11 @@ namespace Skybrud.Social.Toggl.Models.Track.Projects {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="obj"/>.
+        /// Initializes a new instance based on the specified <paramref name="json"/> object.
         /// </summary>
-        /// <param name="obj">An instance of <see cref="JObject"/> representing the object.</param>
-        protected TogglProjectResponseBody(JObject obj) : base(obj) {
-            Data = obj.GetObject("data", TogglProject.Parse)!;
+        /// <param name="json">An instance of <see cref="JObject"/> representing the object.</param>
+        protected TogglProjectResponseBody(JObject json) : base(json) {
+            Data = json.GetObject("data", TogglProject.Parse)!;
         }
 
         #endregion
@@ -37,13 +37,13 @@ namespace Skybrud.Social.Toggl.Models.Track.Projects {
         #region Constructors
 
         /// <summary>
-        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="TogglProjectResponseBody"/>.
+        /// Parses the specified <paramref name="json"/> object into an instance of <see cref="TogglProjectResponseBody"/>.
         /// </summary>
-        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
+        /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="TogglProjectResponseBody"/>.</returns>
-        [return: NotNullIfNotNull("obj")]
-        public static TogglProjectResponseBody? Parse(JObject? obj) {
-            return obj == null ? null : new TogglProjectResponseBody(obj);
+        [return: NotNullIfNotNull("json")]
+        public static TogglProjectResponseBody? Parse(JObject? json) {
+            return json == null ? null : new TogglProjectResponseBody(json);
         }
 
         #endregion

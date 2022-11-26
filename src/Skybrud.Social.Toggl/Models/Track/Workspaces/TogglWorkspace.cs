@@ -46,21 +46,21 @@ namespace Skybrud.Social.Toggl.Models.Track.Workspaces {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="obj"/>.
+        /// Initializes a new instance based on the specified <paramref name="json"/> object.
         /// </summary>
-        /// <param name="obj">An instance of <see cref="JObject"/> representing the project.</param>
-        protected TogglWorkspace(JObject obj) : base(obj) {
-            Id = obj.GetInt32("id");
-            Name = obj.GetString("name")!;
-            IsPremium = obj.GetBoolean("premium");
-            IsAdmin = obj.GetBoolean("admin");
+        /// <param name="json">An instance of <see cref="JObject"/> representing the project.</param>
+        protected TogglWorkspace(JObject json) : base(json) {
+            Id = json.GetInt32("id");
+            Name = json.GetString("name")!;
+            IsPremium = json.GetBoolean("premium");
+            IsAdmin = json.GetBoolean("admin");
             // TODO: Add support for "default_hourly_rate" property
             // TODO: Add support for "default_currency" property
             // TODO: Add support for "only_admins_may_create_projects" property
             // TODO: Add support for "only_admins_see_billable_rates" property
             // TODO: Add support for "rounding" property
             // TODO: Add support for "rounding_minutes" property
-            At = obj.GetString("at", EssentialsTime.FromIso8601)!;
+            At = json.GetString("at", EssentialsTime.FromIso8601)!;
             // TODO: Add support for "logo_url" property
         }
 
@@ -69,13 +69,13 @@ namespace Skybrud.Social.Toggl.Models.Track.Workspaces {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="TogglWorkspace"/>.
+        /// Parses the specified <paramref name="json"/> object into an instance of <see cref="TogglWorkspace"/>.
         /// </summary>
-        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
+        /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="TogglWorkspace"/>.</returns>
-        [return: NotNullIfNotNull("obj")]
-        public static TogglWorkspace? Parse(JObject? obj) {
-            return obj == null ? null : new TogglWorkspace(obj);
+        [return: NotNullIfNotNull("json")]
+        public static TogglWorkspace? Parse(JObject? json) {
+            return json == null ? null : new TogglWorkspace(json);
         }
 
         #endregion

@@ -100,24 +100,24 @@ namespace Skybrud.Social.Toggl.Models.Track.Entries {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="obj"/>.
+        /// Initializes a new instance based on the specified <paramref name="json"/> object.
         /// </summary>
-        /// <param name="obj">An instance of <see cref="JObject"/> representing the entry.</param>
-        protected TogglEntry(JObject obj) : base(obj) {
-            Id = obj.GetInt64("id");
-            Guid = obj.GetGuid("guid");
-            WorkspaceId = obj.GetInt32("wid");
-            ProjectId = obj.GetInt32("pid");
-            TaskId = obj.GetInt32("tid");
-            IsBillable = obj.GetBoolean("billable");
-            Start = obj.GetString("start", EssentialsTime.Parse)!;
-            Stop = obj.GetString("stop", EssentialsTime.Parse);
-            Duration = obj.GetDouble("duration", TimeSpan.FromSeconds);
-            Description = obj.GetString("description")!;
-            DurationOnly = obj.GetBoolean("duronly");
-            At = obj.GetString("at", EssentialsTime.Parse)!;
-            UserId = obj.GetInt32("uid");
-            Tags = obj.GetStringArray("tags");
+        /// <param name="json">An instance of <see cref="JObject"/> representing the entry.</param>
+        protected TogglEntry(JObject json) : base(json) {
+            Id = json.GetInt64("id");
+            Guid = json.GetGuid("guid");
+            WorkspaceId = json.GetInt32("wid");
+            ProjectId = json.GetInt32("pid");
+            TaskId = json.GetInt32("tid");
+            IsBillable = json.GetBoolean("billable");
+            Start = json.GetString("start", EssentialsTime.Parse)!;
+            Stop = json.GetString("stop", EssentialsTime.Parse);
+            Duration = json.GetDouble("duration", TimeSpan.FromSeconds);
+            Description = json.GetString("description")!;
+            DurationOnly = json.GetBoolean("duronly");
+            At = json.GetString("at", EssentialsTime.Parse)!;
+            UserId = json.GetInt32("uid");
+            Tags = json.GetStringArray("tags");
         }
 
         #endregion
@@ -125,13 +125,13 @@ namespace Skybrud.Social.Toggl.Models.Track.Entries {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="TogglEntry"/>.
+        /// Parses the specified <paramref name="json"/> object into an instance of <see cref="TogglEntry"/>.
         /// </summary>
-        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
+        /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="TogglEntry"/>.</returns>
-        [return: NotNullIfNotNull("obj")]
-        public static TogglEntry? Parse(JObject? obj) {
-            return obj == null ? null : new TogglEntry(obj);
+        [return: NotNullIfNotNull("json")]
+        public static TogglEntry? Parse(JObject? json) {
+            return json == null ? null : new TogglEntry(json);
         }
 
         #endregion

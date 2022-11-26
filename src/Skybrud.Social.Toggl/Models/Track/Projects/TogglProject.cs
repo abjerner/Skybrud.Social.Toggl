@@ -92,24 +92,24 @@ namespace Skybrud.Social.Toggl.Models.Track.Projects {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="obj"/>.
+        /// Initializes a new instance based on the specified <paramref name="json"/> object.
         /// </summary>
-        /// <param name="obj">An instance of <see cref="JObject"/> representing the project.</param>
-        protected TogglProject(JObject obj) : base(obj) {
-            Id = obj.GetInt32("id");
-            WorkspaceId = obj.GetInt32("wid");
-            ClientId = obj.GetInt32("cid");
-            Name = obj.GetString("name")!;
-            IsBillable = obj.GetBoolean("billable");
-            IsPrivate = obj.GetBoolean("private");
-            IsActive = obj.GetBoolean("active");
-            IsTemplate = obj.GetBoolean("template");
-            At = obj.GetString("at", EssentialsTime.Parse)!;
-            CreatedAt = obj.GetString("created_at", EssentialsTime.Parse)!;
-            Color = obj.GetInt32("color");
-            AutoEstimates = obj.GetBoolean("auto_estimates");
-            ActualHours = obj.GetBoolean("actual_hours");
-            HexColor = obj.GetString("hex_color")!;
+        /// <param name="json">An instance of <see cref="JObject"/> representing the project.</param>
+        protected TogglProject(JObject json) : base(json) {
+            Id = json.GetInt32("id");
+            WorkspaceId = json.GetInt32("wid");
+            ClientId = json.GetInt32("cid");
+            Name = json.GetString("name")!;
+            IsBillable = json.GetBoolean("billable");
+            IsPrivate = json.GetBoolean("private");
+            IsActive = json.GetBoolean("active");
+            IsTemplate = json.GetBoolean("template");
+            At = json.GetString("at", EssentialsTime.Parse)!;
+            CreatedAt = json.GetString("created_at", EssentialsTime.Parse)!;
+            Color = json.GetInt32("color");
+            AutoEstimates = json.GetBoolean("auto_estimates");
+            ActualHours = json.GetBoolean("actual_hours");
+            HexColor = json.GetString("hex_color")!;
         }
 
         #endregion
@@ -117,13 +117,13 @@ namespace Skybrud.Social.Toggl.Models.Track.Projects {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="TogglProject"/>.
+        /// Parses the specified <paramref name="json"/> object into an instance of <see cref="TogglProject"/>.
         /// </summary>
-        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
+        /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="TogglProject"/>.</returns>
-        [return: NotNullIfNotNull("obj")]
-        public static TogglProject? Parse(JObject? obj) {
-            return obj == null ? null : new TogglProject(obj);
+        [return: NotNullIfNotNull("json")]
+        public static TogglProject? Parse(JObject? json) {
+            return json == null ? null : new TogglProject(json);
         }
 
         #endregion

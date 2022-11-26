@@ -24,11 +24,11 @@ namespace Skybrud.Social.Toggl.Models.Track.Entries {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="obj"/>.
+        /// Initializes a new instance based on the specified <paramref name="json"/> object.
         /// </summary>
-        /// <param name="obj">An instance of <see cref="JObject"/> representing the object.</param>
-        protected TogglEntryResponseBody(JObject obj) : base(obj) {
-            Data = obj.GetObject("data", TogglEntry.Parse)!;
+        /// <param name="json">An instance of <see cref="JObject"/> representing the object.</param>
+        protected TogglEntryResponseBody(JObject json) : base(json) {
+            Data = json.GetObject("data", TogglEntry.Parse)!;
         }
 
         #endregion
@@ -36,13 +36,13 @@ namespace Skybrud.Social.Toggl.Models.Track.Entries {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="TogglEntryResponseBody"/>.
+        /// Parses the specified <paramref name="json"/> object into an instance of <see cref="TogglEntryResponseBody"/>.
         /// </summary>
-        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
+        /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="TogglEntryResponseBody"/>.</returns>
-        [return: NotNullIfNotNull("obj")]
-        public static TogglEntryResponseBody? Parse(JObject? obj) {
-            return obj == null ? null : new TogglEntryResponseBody(obj);
+        [return: NotNullIfNotNull("json")]
+        public static TogglEntryResponseBody? Parse(JObject? json) {
+            return json == null ? null : new TogglEntryResponseBody(json);
         }
 
         #endregion

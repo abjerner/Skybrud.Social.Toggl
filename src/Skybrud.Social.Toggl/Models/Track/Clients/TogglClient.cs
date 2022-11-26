@@ -43,15 +43,15 @@ namespace Skybrud.Social.Toggl.Models.Track.Clients {
         #region Constructors
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="obj"/>.
+        /// Initializes a new instance based on the specified <paramref name="json"/> object.
         /// </summary>
-        /// <param name="obj">An instance of <see cref="JObject"/> representing the client.</param>
-        protected TogglClient(JObject obj) : base(obj) {
-            Id = obj.GetInt32("id");
-            WorkspaceId = obj.GetInt32("wid");
-            Name = obj.GetString("name")!;
-            At = obj.GetString("at", EssentialsTime.Parse)!;
-            Notes = obj.GetString("notes");
+        /// <param name="json">An instance of <see cref="JObject"/> representing the client.</param>
+        protected TogglClient(JObject json) : base(json) {
+            Id = json.GetInt32("id");
+            WorkspaceId = json.GetInt32("wid");
+            Name = json.GetString("name")!;
+            At = json.GetString("at", EssentialsTime.Parse)!;
+            Notes = json.GetString("notes");
         }
 
         #endregion
@@ -59,13 +59,13 @@ namespace Skybrud.Social.Toggl.Models.Track.Clients {
         #region Static methods
 
         /// <summary>
-        /// Parses the specified <paramref name="obj"/> into an instance of <see cref="TogglClient"/>.
+        /// Parses the specified <paramref name="json"/> object into an instance of <see cref="TogglClient"/>.
         /// </summary>
-        /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
+        /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="TogglClient"/>.</returns>
-        [return: NotNullIfNotNull("obj")]
-        public static TogglClient? Parse(JObject? obj) {
-            return obj == null ? null : new TogglClient(obj);
+        [return: NotNullIfNotNull("json")]
+        public static TogglClient? Parse(JObject? json) {
+            return json == null ? null : new TogglClient(json);
         }
 
         #endregion

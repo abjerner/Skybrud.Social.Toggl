@@ -9,10 +9,10 @@ namespace Skybrud.Social.Toggl.Models {
     public class TogglResponseBody : JsonObjectBase {
 
         /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="obj"/>.
+        /// Initializes a new instance based on the specified <paramref name="json"/> object.
         /// </summary>
-        /// <param name="obj">An instance of <see cref="JObject"/> representing the response body.</param>
-        protected TogglResponseBody(JObject obj) : base(obj) { }
+        /// <param name="json">An instance of <see cref="JObject"/> representing the response body.</param>
+        protected TogglResponseBody(JObject json) : base(json) { }
 
     }
 
