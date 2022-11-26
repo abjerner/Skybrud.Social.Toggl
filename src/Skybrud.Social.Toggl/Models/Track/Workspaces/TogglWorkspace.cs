@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System.Diagnostics.CodeAnalysis;
+using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Newtonsoft;
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 using Skybrud.Essentials.Time;
@@ -50,7 +51,7 @@ namespace Skybrud.Social.Toggl.Models.Track.Workspaces {
         /// <param name="obj">An instance of <see cref="JObject"/> representing the project.</param>
         protected TogglWorkspace(JObject obj) : base(obj) {
             Id = obj.GetInt32("id");
-            Name = obj.GetString("name");
+            Name = obj.GetString("name")!;
             IsPremium = obj.GetBoolean("premium");
             IsAdmin = obj.GetBoolean("admin");
             // TODO: Add support for "default_hourly_rate" property
@@ -59,7 +60,7 @@ namespace Skybrud.Social.Toggl.Models.Track.Workspaces {
             // TODO: Add support for "only_admins_see_billable_rates" property
             // TODO: Add support for "rounding" property
             // TODO: Add support for "rounding_minutes" property
-            At = obj.GetString("at", EssentialsTime.FromIso8601);
+            At = obj.GetString("at", EssentialsTime.FromIso8601)!;
             // TODO: Add support for "logo_url" property
         }
 
@@ -72,7 +73,8 @@ namespace Skybrud.Social.Toggl.Models.Track.Workspaces {
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="TogglWorkspace"/>.</returns>
-        public static TogglWorkspace Parse(JObject obj) {
+        [return: NotNullIfNotNull("obj")]
+        public static TogglWorkspace? Parse(JObject? obj) {
             return obj == null ? null : new TogglWorkspace(obj);
         }
 

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System.Diagnostics.CodeAnalysis;
+using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Newtonsoft;
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 using Skybrud.Essentials.Time;
@@ -35,7 +36,7 @@ namespace Skybrud.Social.Toggl.Models.Track.Clients {
         /// <summary>
         /// Gets the notes of the client.
         /// </summary>
-        public string Notes { get; }
+        public string? Notes { get; }
 
         #endregion
 
@@ -48,8 +49,8 @@ namespace Skybrud.Social.Toggl.Models.Track.Clients {
         protected TogglClient(JObject obj) : base(obj) {
             Id = obj.GetInt32("id");
             WorkspaceId = obj.GetInt32("wid");
-            Name = obj.GetString("name");
-            At = obj.GetString("at", EssentialsTime.Parse);
+            Name = obj.GetString("name")!;
+            At = obj.GetString("at", EssentialsTime.Parse)!;
             Notes = obj.GetString("notes");
         }
 
@@ -62,7 +63,8 @@ namespace Skybrud.Social.Toggl.Models.Track.Clients {
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="TogglClient"/>.</returns>
-        public static TogglClient Parse(JObject obj) {
+        [return: NotNullIfNotNull("obj")]
+        public static TogglClient? Parse(JObject? obj) {
             return obj == null ? null : new TogglClient(obj);
         }
 

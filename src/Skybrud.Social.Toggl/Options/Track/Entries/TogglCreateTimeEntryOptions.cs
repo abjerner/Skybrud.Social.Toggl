@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Options;
 using Skybrud.Essentials.Json.Converters.Time;
@@ -24,7 +26,7 @@ namespace Skybrud.Social.Toggl.Options.Track.Entries {
         /// Gets or sets the description of the entry.
         /// </summary>
         [JsonProperty("description")]
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         /// <summary>
         /// Gets or sets the ID of the workspace to which the client should be added.
@@ -48,26 +50,32 @@ namespace Skybrud.Social.Toggl.Options.Track.Entries {
         /// Gets or sets the start time of the entry.
         /// </summary>
         [JsonProperty("start")]
-        public EssentialsTime Start { get; set; }
+        public EssentialsTime? Start { get; set; }
+
+        /// <summary>
+        /// Gets or sets the stop time of the entry.
+        /// </summary>
+        [JsonProperty("stop", NullValueHandling = NullValueHandling.Ignore)]
+        public EssentialsTime? Stop { get; set; }
 
         /// <summary>
         /// Gets or sets the duration of the entry.
         /// </summary>
-        [JsonProperty("duration")]
+        [JsonProperty("duration", NullValueHandling = NullValueHandling.Ignore)]
         [JsonConverter(typeof(TimeSpanSecondsConverter))]
-        public TimeSpan Duration { get; set; }
+        public TimeSpan? Duration { get; set; }
 
         /// <summary>
         /// Gets or sets the name of your client app used for accessing the Toggl API. If not specified, this property will fallback to <c>Skybrud.Social</c>.
         /// </summary>
         [JsonProperty("created_with")]
-        public string CreatedWith { get; set; }
+        public string? CreatedWith { get; set; }
 
         /// <summary>
         /// Gets or sets an array of tags of the time entry.
         /// </summary>
         [JsonProperty("tags", NullValueHandling = NullValueHandling.Ignore)]
-        public string[] Tags { get; set; }
+        public List<string> Tags { get; set; } = new();
 
         #endregion
 
@@ -75,6 +83,8 @@ namespace Skybrud.Social.Toggl.Options.Track.Entries {
 
         /// <inheritdoc />
         public IHttpRequest GetRequest() {
+
+            if (Start == null) throw new PropertyNotSetException(nameof(Start));
 
             JObject entry = JObject.FromObject(this);
             if (entry.HasValue("created_with") == false) entry["created_with"] = "Skybrud.Social";

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System.Diagnostics.CodeAnalysis;
+using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Newtonsoft;
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 
@@ -28,7 +29,7 @@ namespace Skybrud.Social.Toggl.Models.Track.Projects {
         /// </summary>
         /// <param name="obj">An instance of <see cref="JObject"/> representing the object.</param>
         protected TogglProjectResponseBody(JObject obj) : base(obj) {
-            Data = obj.GetObject("data", TogglProject.Parse);
+            Data = obj.GetObject("data", TogglProject.Parse)!;
         }
 
         #endregion
@@ -40,7 +41,8 @@ namespace Skybrud.Social.Toggl.Models.Track.Projects {
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="TogglProjectResponseBody"/>.</returns>
-        public static TogglProjectResponseBody Parse(JObject obj) {
+        [return: NotNullIfNotNull("obj")]
+        public static TogglProjectResponseBody? Parse(JObject? obj) {
             return obj == null ? null : new TogglProjectResponseBody(obj);
         }
 

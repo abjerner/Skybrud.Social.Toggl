@@ -17,7 +17,7 @@ namespace Skybrud.Social.Toggl.Responses.Track.Entries {
         /// </summary>
         /// <param name="response">The raw response received from the Toggl API.</param>
         public TogglEntryListResponse(IHttpResponse response) : base(response) {
-            Body = ParseJsonArray(response.Body, TogglEntry.Parse);
+            Body = ParseJsonArray(response.Body, TogglEntry.Parse)!;
         }
 
         #endregion

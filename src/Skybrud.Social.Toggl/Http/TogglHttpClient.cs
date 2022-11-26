@@ -15,7 +15,7 @@ namespace Skybrud.Social.Toggl.Http {
         /// <summary>
         /// Gets or sets the API token.
         /// </summary>
-        public string ApiToken { get; set; }
+        public string? ApiToken { get; set; }
 
         /// <summary>
         /// Gets a reference to the raw <strong>Track</strong> API.
@@ -29,7 +29,9 @@ namespace Skybrud.Social.Toggl.Http {
         /// <summary>
         /// Initializes a new instance with default options.
         /// </summary>
-        public TogglHttpClient() { }
+        public TogglHttpClient() {
+            Track = new TogglTrackRawApi(this);
+        }
 
         /// <summary>
         /// Initializes a new instance based on the specified <paramref name="apiToken"/>.

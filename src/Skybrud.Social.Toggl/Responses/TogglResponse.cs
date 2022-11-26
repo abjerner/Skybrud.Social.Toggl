@@ -35,7 +35,9 @@ namespace Skybrud.Social.Toggl.Responses {
         /// Initializes a new instance based on the specified <paramref name="response"/>.
         /// </summary>
         /// <param name="response">The instance of <see cref="IHttpResponse"/> representing the raw response.</param>
-        public TogglResponse(IHttpResponse response) : base(response) { }
+        public TogglResponse(IHttpResponse response) : base(response) {
+            Body = default!;
+        }
 
     }
 

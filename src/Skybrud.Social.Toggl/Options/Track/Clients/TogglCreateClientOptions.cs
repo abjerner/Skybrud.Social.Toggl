@@ -21,19 +21,19 @@ namespace Skybrud.Social.Toggl.Options.Track.Clients {
         /// Gets or sets the name of the client to be created.
         /// </summary>
         [JsonProperty("name")]
-        public string Name { get; }
+        public string Name { get; set; }
 
         /// <summary>
         /// Gets or sets the ID of the workspace to which the client should be added.
         /// </summary>
         [JsonProperty("wid")]
-        public int WorkspaceId { get; }
+        public int WorkspaceId { get; set; }
 
         /// <summary>
         /// Gets or sets the notes of the client.
         /// </summary>
         [JsonProperty("notes", NullValueHandling = NullValueHandling.Ignore)]
-        public string Notes { get; }
+        public string? Notes { get; set; }
 
         #endregion
 

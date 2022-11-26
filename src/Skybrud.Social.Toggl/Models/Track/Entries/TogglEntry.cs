@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Newtonsoft;
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
@@ -62,7 +63,7 @@ namespace Skybrud.Social.Toggl.Models.Track.Entries {
         /// <summary>
         /// Gets a timestamp representing the stop time of the time entry.
         /// </summary>
-        public EssentialsTime Stop { get; }
+        public EssentialsTime? Stop { get; }
 
         /// <summary>
         /// Gets the duration of the time entry.
@@ -109,12 +110,12 @@ namespace Skybrud.Social.Toggl.Models.Track.Entries {
             ProjectId = obj.GetInt32("pid");
             TaskId = obj.GetInt32("tid");
             IsBillable = obj.GetBoolean("billable");
-            Start = obj.GetString("start", EssentialsTime.Parse);
+            Start = obj.GetString("start", EssentialsTime.Parse)!;
             Stop = obj.GetString("stop", EssentialsTime.Parse);
             Duration = obj.GetDouble("duration", TimeSpan.FromSeconds);
-            Description = obj.GetString("description");
+            Description = obj.GetString("description")!;
             DurationOnly = obj.GetBoolean("duronly");
-            At = obj.GetString("at", EssentialsTime.Parse);
+            At = obj.GetString("at", EssentialsTime.Parse)!;
             UserId = obj.GetInt32("uid");
             Tags = obj.GetStringArray("tags");
         }
@@ -128,7 +129,8 @@ namespace Skybrud.Social.Toggl.Models.Track.Entries {
         /// </summary>
         /// <param name="obj">The instance of <see cref="JObject"/> to be parsed.</param>
         /// <returns>An instance of <see cref="TogglEntry"/>.</returns>
-        public static TogglEntry Parse(JObject obj) {
+        [return: NotNullIfNotNull("obj")]
+        public static TogglEntry? Parse(JObject? obj) {
             return obj == null ? null : new TogglEntry(obj);
         }
 

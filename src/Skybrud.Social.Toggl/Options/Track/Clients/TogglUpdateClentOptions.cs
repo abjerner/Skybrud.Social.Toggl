@@ -34,7 +34,7 @@ namespace Skybrud.Social.Toggl.Options.Track.Clients {
         /// Gets or sets the new notes of the client.
         /// </summary>
         [JsonProperty("notes")]
-        public string Notes { get; set; }
+        public string? Notes { get; set; }
 
         #endregion
 
