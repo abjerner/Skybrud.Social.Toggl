@@ -50,7 +50,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track {
         ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md#create-project</cref>
         /// </see>
         public TogglProjectResponse CreateProject(string name, int workspaceId) {
-            return TogglProjectResponse.Parse(Raw.CreateProject(name, workspaceId));
+            return new TogglProjectResponse(Raw.CreateProject(name, workspaceId));
         }
 
         /// <summary>
@@ -64,7 +64,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track {
         ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md#create-project</cref>
         /// </see>
         public TogglProjectResponse CreateProject(string name, int workspaceId, int clientId) {
-            return TogglProjectResponse.Parse(Raw.CreateProject(name, workspaceId, clientId));
+            return new TogglProjectResponse(Raw.CreateProject(name, workspaceId, clientId));
         }
 
         /// <summary>
@@ -73,7 +73,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track {
         /// <param name="options">The options for the request to the API.</param>
         /// <returns>An instance of <see cref="TogglProjectResponse"/> representing the response from the Toggl API.</returns>
         public TogglProjectResponse CreateProject(TogglCreateProjectsOptions options) {
-            return TogglProjectResponse.Parse(Raw.CreateProject(options));
+            return new TogglProjectResponse(Raw.CreateProject(options));
         }
 
         /// <summary>
@@ -109,7 +109,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track {
         ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md#update-project-data</cref>
         /// </see>
         public TogglProjectResponse UpdateProject(TogglUpdateProjectOptions options) {
-            return TogglProjectResponse.Parse(Raw.UpdateProject(options));
+            return new TogglProjectResponse(Raw.UpdateProject(options));
         }
 
         /// <summary>

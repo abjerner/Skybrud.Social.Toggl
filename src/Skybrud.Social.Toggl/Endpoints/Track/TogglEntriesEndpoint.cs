@@ -46,7 +46,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track {
         ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md#create-a-time-entry</cref>
         /// </see>
         public TogglEntryResponse CreateEntry(TogglCreateTimeEntryOptions options) {
-            return TogglEntryResponse.Parse(Raw.CreateEntry(options));
+            return new TogglEntryResponse(Raw.CreateEntry(options));
         }
 
         /// <summary>
@@ -58,7 +58,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track {
         ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md#get-time-entry-details</cref>
         /// </see>
         public TogglEntryResponse GetEntry(int entryId) {
-            return TogglEntryResponse.Parse(Raw.GetEntry(entryId));
+            return new TogglEntryResponse(Raw.GetEntry(entryId));
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track {
         ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md#get-time-entries-started-in-a-specific-time-range</cref>
         /// </see>
         public TogglEntryListResponse GetEntries(EssentialsTime startDate, EssentialsTime endDate) {
-            return TogglEntryListResponse.Parse(Raw.GetEntries(startDate, endDate));
+            return new TogglEntryListResponse(Raw.GetEntries(startDate, endDate));
         }
 
         #endregion

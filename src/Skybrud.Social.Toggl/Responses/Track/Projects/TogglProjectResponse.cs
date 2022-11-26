@@ -1,5 +1,4 @@
-﻿using System;
-using Skybrud.Essentials.Http;
+﻿using Skybrud.Essentials.Http;
 using Skybrud.Social.Toggl.Models.Track.Projects;
 
 namespace Skybrud.Social.Toggl.Responses.Track.Projects {
@@ -9,8 +8,6 @@ namespace Skybrud.Social.Toggl.Responses.Track.Projects {
     /// </summary>
     public class TogglProjectResponse : TogglResponse<TogglProjectResponseBody> {
 
-        #region Constructors
-
         /// <summary>
         /// Initializes a new instance from the specified <paramref name="response"/>.
         /// </summary>
@@ -18,22 +15,6 @@ namespace Skybrud.Social.Toggl.Responses.Track.Projects {
         public TogglProjectResponse(IHttpResponse response) : base(response) {
             Body = ParseJsonObject(response.Body, TogglProjectResponseBody.Parse)!;
         }
-
-        #endregion
-
-        #region Static methods
-
-        /// <summary>
-        /// Initializes a new instance from the specified <paramref name="response"/>.
-        /// </summary>
-        /// <param name="response">The raw response received from the Toggl API.</param>
-        /// <returns>An instance of <see cref="TogglProjectResponse"/> representing the response.</returns>
-        public static TogglProjectResponse Parse(IHttpResponse response) {
-            if (response == null) throw new ArgumentNullException(nameof(response));
-            return new TogglProjectResponse(response);
-        }
-
-        #endregion
 
     }
 

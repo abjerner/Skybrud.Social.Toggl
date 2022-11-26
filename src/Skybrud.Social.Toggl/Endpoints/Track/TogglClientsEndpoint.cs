@@ -48,7 +48,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track {
         ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#create-a-client</cref>
         /// </see>
         public TogglClientResponse CreateClient(string name, int workspaceId) {
-            return TogglClientResponse.Parse(Raw.CreateClient(name, workspaceId));
+            return new TogglClientResponse(Raw.CreateClient(name, workspaceId));
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track {
         ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#create-a-client</cref>
         /// </see>
         public TogglClientResponse CreateClient(string name, int workspaceId, string notes) {
-            return TogglClientResponse.Parse(Raw.CreateClient(name, workspaceId, notes));
+            return new TogglClientResponse(Raw.CreateClient(name, workspaceId, notes));
         }
 
         /// <summary>
@@ -74,7 +74,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track {
         ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#create-a-client</cref>
         /// </see>
         public TogglClientResponse CreateClient(TogglCreateClientOptions options) {
-            return TogglClientResponse.Parse(Raw.CreateClient(options));
+            return new TogglClientResponse(Raw.CreateClient(options));
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track {
         ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#get-clients-visible-to-user</cref>
         /// </see>
         public TogglClientListResponse GetClients() {
-            return TogglClientListResponse.Parse(Raw.GetClients());
+            return new TogglClientListResponse(Raw.GetClients());
         }
 
         #endregion
