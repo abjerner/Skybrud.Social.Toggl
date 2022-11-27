@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net;
+﻿using System.Net;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Exceptions;
 
@@ -8,7 +7,7 @@ namespace Skybrud.Social.Toggl.Exceptions {
     /// <summary>
     /// Class representing an exception/error returned by the Toggl API.
     /// </summary>
-    public class TogglHttpException : Exception, IHttpException {
+    public class TogglHttpException : TogglException, IHttpException {
 
         #region Properties
 
