@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json.Linq;
-using Skybrud.Essentials.Json.Newtonsoft;
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 using Skybrud.Essentials.Time;
 
@@ -10,7 +9,7 @@ namespace Skybrud.Social.Toggl.Models.Track.User {
     /// <summary>
     /// Class with information about the authenticated user.
     /// </summary>
-    public class TogglUser : JsonObjectBase {
+    public class TogglUser : TogglObject {
 
         #region Properties
 
@@ -81,8 +80,8 @@ namespace Skybrud.Social.Toggl.Models.Track.User {
             DefaultWorkspaceId = json.GetInt32("default_workspace_id");
             BeginningOfWeek = json.GetInt32("beginning_of_week", x => (DayOfWeek) x);
             ImageUrl = json.GetString("image_url")!;
-            CreatedAt = json.GetString("created_at", EssentialsTime.FromIso8601)!;
-            UpdatedAt = json.GetString("updated_at", EssentialsTime.FromIso8601)!;
+            CreatedAt = json.GetString("created_at", ParseIso8601Timestamp)!;
+            UpdatedAt = json.GetString("updated_at", ParseIso8601Timestamp)!;
         }
 
         #endregion
