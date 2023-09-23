@@ -1,6 +1,56 @@
 # Skybrud.Social.Toggl
 
-Skybrud.Social service implementation for the Toggl API.
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/abjerner/Skybrud.Social.Toggl/blob/v1/main/LICENSE.md)
+[![NuGet](https://img.shields.io/nuget/vpre/Skybrud.Social.Toggl.svg)](https://www.nuget.org/packages/Skybrud.Social.Toggl)
+[![NuGet](https://img.shields.io/nuget/dt/Skybrud.Social.Toggl.svg)](https://www.nuget.org/packages/Skybrud.Social.Toggl)
+
+.NET API wrapper and implementation of the [**Toggl Track API**](https://developers.track.toggl.com/docs/).
+
+<table>
+  <tr>
+    <td><strong>License:</strong></td>
+    <td><a href="https://github.com/abjerner/Skybrud.Social.Toggl/blob/v1/main/LICENSE.md"><strong>MIT License</strong></a></td>
+  </tr>
+  <tr>
+    <td><strong>Target Framework:</strong></td>
+    <td>
+      .NET 4.5, .NET 4.6, .NET 4.7 and .NET Standard 2.0
+    </td>
+  </tr>
+</table>
+
+
+
+
+
+
+<br /><br />
+
+## Installation
+
+The package is only available via [**NuGet**](https://www.nuget.org/packages/Skybrud.Social.Toggl/1.0.0-beta004). To install the package, you can either use the .NET CLI:
+
+```
+dotnet add package Skybrud.Social.Toggl --version 1.0.0-beta004
+```
+
+or the NuGet Package Manager:
+
+```
+Install-Package Skybrud.Social.Toggl -Version 1.0.0-beta004
+```
+
+
+
+
+
+
+
+
+
+
+
+<br /><br />
 
 ## Examples
 
