@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Newtonsoft;
 using Skybrud.Essentials.Time;
@@ -20,9 +21,19 @@ public class TogglObject : JsonObjectBase {
         "yyyy-MM-ddTHH\\:mm\\:ss.fZ"
     };
 
+    #region Properties
+
+    /// <summary>
+    /// Gets the internal <see cref="Newtonsoft.Json.Linq.JObject"/> the object was created from.
+    /// </summary>
+    [JsonIgnore]
+    public new JObject JObject => base.JObject!;
+
+    #endregion
+
     #region Constructors
 
-    protected TogglObject(JObject? json) : base(json) { }
+    protected TogglObject(JObject json) : base(json) { }
 
     #endregion
 
