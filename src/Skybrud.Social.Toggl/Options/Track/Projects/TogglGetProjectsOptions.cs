@@ -2,19 +2,17 @@
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Essentials.Http.Options;
-using Skybrud.Essentials.Strings.Extensions;
-using Skybrud.Social.Toggl.Contants;
-using Skybrud.Social.Toggl.Options.Track.Projects;
+using Skybrud.Social.Toggl.Http;
 
-namespace Skybrud.Social.Toggl.Options.Track.Workspaces;
+namespace Skybrud.Social.Toggl.Options.Track.Projects;
 
 /// <summary>
-/// Options for a request to the projects of a workspace.
+/// Options describing a request for getting all client in a workspace.
 /// </summary>
 /// <see>
-///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md#get-workspace-projects</cref>
+///     <cref>https://developers.track.toggl.com/docs/api/projects#get-workspaceprojects</cref>
 /// </see>
-public class TogglGetProjectsOptions : IHttpRequestOptions {
+public class TogglGetProjectsOptions : TogglTrackHttpRequestOptions {
 
     #region Properties
 
@@ -24,9 +22,11 @@ public class TogglGetProjectsOptions : IHttpRequestOptions {
     public int WorkspaceId { get; set; }
 
     /// <summary>
-    /// Gets or sets the active state that the returned projects should match. Default is <see cref="TogglProjectActiveState.True"/>.
+    /// Gets or sets the active state that the returned projects should match. Default is <see langword="null"/>, meaning both active and inactive projects will be returned.
     /// </summary>
-    public TogglProjectActiveState Active { get; set; }
+    public bool? Active { get; set; }
+
+    // TODO: Add support for more properties/parameters
 
     #endregion
 
@@ -50,7 +50,7 @@ public class TogglGetProjectsOptions : IHttpRequestOptions {
     /// </summary>
     /// <param name="workspaceId">The ID of the workspace.</param>
     /// <param name="active">The active state that the returned projects should match.</param>
-    public TogglGetProjectsOptions(int workspaceId, TogglProjectActiveState active) {
+    public TogglGetProjectsOptions(int workspaceId, bool? active) {
         WorkspaceId = workspaceId;
         Active = active;
     }
@@ -60,17 +60,16 @@ public class TogglGetProjectsOptions : IHttpRequestOptions {
     #region Member methods
 
     /// <inheritdoc />
-    public IHttpRequest GetRequest() {
+    public override IHttpRequest GetRequest() {
 
         if (WorkspaceId == 0) throw new PropertyNotSetException(nameof(WorkspaceId));
 
         // Initialize the query string
-        IHttpQueryString query = new HttpQueryString {
-            {"active", Active.ToLower()}
-        };
+        IHttpQueryString query = new HttpQueryString();
+        if (Active is not null) query.Add("active", Active.Value ? "true" : "false");
 
         // Initialize a new request
-        return HttpRequest.Get($"https://{TogglConstants.Track.HostName}/api/v8/workspaces/{WorkspaceId}/projects", query);
+        return HttpRequest.Get($"/api/v9/workspaces/{WorkspaceId}/projects", query);
 
     }
 

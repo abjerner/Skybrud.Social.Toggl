@@ -11,7 +11,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track;
 /// Raw implementation of the <strong>Projects</strong> endpoint.
 /// </summary>
 /// <see>
-///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md</cref>
+///     <cref>https://developers.track.toggl.com/docs/api/projects</cref>
 /// </see>
 public class TogglProjectsRawEndpoint {
 
@@ -35,30 +35,68 @@ public class TogglProjectsRawEndpoint {
     #region Member methods
 
     /// <summary>
-    /// Creates a new project with the specified <paramref name="name"/>.
+    /// Returns a list of projects of the workspace with the specified <paramref name="workspaceId"/>.
     /// </summary>
-    /// <param name="name">The name of the project to be created</param>
-    /// <param name="workspaceId">The ID of the workspace to which the project should be added.</param>
+    /// <param name="workspaceId">The ID of the workspace.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
     /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md#create-project</cref>
+    ///     <cref>https://developers.track.toggl.com/docs/api/projects#get-workspaceprojects</cref>
     /// </see>
-    public IHttpResponse CreateProject(string name, int workspaceId) {
-        return Client.GetResponse(new TogglCreateProjectsOptions(name, workspaceId));
+    public IHttpResponse GetProjects(int workspaceId) {
+        return Client.GetResponse(new TogglGetProjectsOptions(workspaceId));
+    }
+
+    /// <summary>
+    /// Returns a list of projects of the workspace with the specified <paramref name="workspaceId"/>.
+    /// </summary>
+    /// <param name="workspaceId">The ID of the workspace.</param>
+    /// <param name="active">The active state that the returned projects should match.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>>
+    /// <see>
+    ///     <cref>https://developers.track.toggl.com/docs/api/projects#get-workspaceprojects</cref>
+    /// </see>
+    public IHttpResponse GetProjects(int workspaceId, bool? active) {
+        return Client.GetResponse(new TogglGetProjectsOptions(workspaceId, active));
+    }
+
+    /// <summary>
+    /// Returns a list of projects matching the specified <paramref name="options"/>.
+    /// </summary>
+    /// <param name="options">The options for the request to the API.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://developers.track.toggl.com/docs/api/projects#get-workspaceprojects</cref>
+    /// </see>
+    public IHttpResponse GetProjects(TogglGetProjectsOptions options) {
+        if (options == null) throw new ArgumentNullException(nameof(options));
+        return Client.GetResponse(options);
     }
 
     /// <summary>
     /// Creates a new project with the specified <paramref name="name"/>.
     /// </summary>
-    /// <param name="name">The name of the project to be created</param>
     /// <param name="workspaceId">The ID of the workspace to which the project should be added.</param>
-    /// <param name="clientId">The ID of the parent client.</param>
+    /// <param name="name">The name of the project to be created</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
     /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md#create-project</cref>
+    ///     <cref>https://developers.track.toggl.com/docs/api/projects#post-workspaceprojects</cref>
     /// </see>
-    public IHttpResponse CreateProject(string name, int workspaceId, int clientId) {
-        return Client.GetResponse(new TogglCreateProjectsOptions(name, workspaceId, clientId));
+    public IHttpResponse CreateProject(int workspaceId, string name) {
+        return Client.GetResponse(new TogglCreateProjectOptions(workspaceId, name));
+    }
+
+    /// <summary>
+    /// Creates a new project with the specified <paramref name="name"/>.
+    /// </summary>
+    /// <param name="workspaceId">The ID of the workspace to which the project should be added.</param>
+    /// <param name="clientId">The ID of the parent client.</param>
+    /// <param name="name">The name of the project to be created</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://developers.track.toggl.com/docs/api/projects#post-workspaceprojects</cref>
+    /// </see>
+    public IHttpResponse CreateProject(int workspaceId, int clientId, string name) {
+        return Client.GetResponse(new TogglCreateProjectOptions(workspaceId, clientId, name));
     }
 
     /// <summary>
@@ -66,7 +104,10 @@ public class TogglProjectsRawEndpoint {
     /// </summary>
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
-    public IHttpResponse CreateProject(TogglCreateProjectsOptions options) {
+    /// <see>
+    ///     <cref>https://developers.track.toggl.com/docs/api/projects#post-workspaceprojects</cref>
+    /// </see>
+    public IHttpResponse CreateProject(TogglCreateProjectOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
         return Client.GetResponse(options);
     }
@@ -74,13 +115,14 @@ public class TogglProjectsRawEndpoint {
     /// <summary>
     /// Gets information about the project with the specified <paramref name="projectId"/>.
     /// </summary>
+    /// <param name="workspaceId">The ID of the parent workspace.</param>
     /// <param name="projectId">The ID of the project.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
     /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md#get-project-data</cref>
+    ///     <cref>https://developers.track.toggl.com/docs/api/projects#get-workspaceproject</cref>
     /// </see>
-    public IHttpResponse GetProject(int projectId) {
-        return Client.GetResponse(new TogglGetProjectOptions(projectId));
+    public IHttpResponse GetProject(int workspaceId, int projectId) {
+        return Client.GetResponse(new TogglGetProjectOptions(workspaceId, projectId));
     }
 
     /// <summary>
@@ -89,7 +131,7 @@ public class TogglProjectsRawEndpoint {
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
     /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md#get-project-data</cref>
+    ///     <cref>https://developers.track.toggl.com/docs/api/projects#get-workspaceproject</cref>
     /// </see>
     public IHttpResponse GetProject(TogglGetProjectOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));

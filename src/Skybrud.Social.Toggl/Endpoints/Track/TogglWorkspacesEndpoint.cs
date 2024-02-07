@@ -1,5 +1,4 @@
 ﻿using Skybrud.Social.Toggl.Options.Track.Projects;
-using Skybrud.Social.Toggl.Options.Track.Workspaces;
 using Skybrud.Social.Toggl.Responses.Track.Clients;
 using Skybrud.Social.Toggl.Responses.Track.Projects;
 using Skybrud.Social.Toggl.Responses.Track.Workspaces;
@@ -71,43 +70,6 @@ public class TogglWorkspacesEndpoint {
     /// </see>
     public TogglClientListResponse GetClients(int workspaceId) {
         return new TogglClientListResponse(Raw.GetClients(workspaceId));
-    }
-
-    /// <summary>
-    /// Gets a list of projects of the workspace with the specified <paramref name="workspaceId"/>.
-    /// </summary>
-    /// <param name="workspaceId">The ID of the workspace.</param>
-    /// <returns>An instance of <see cref="TogglProjectListResponse"/> representing the response from the Toggl API.</returns>
-    /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md#get-workspace-projects</cref>
-    /// </see>
-    public TogglProjectListResponse GetProjects(int workspaceId) {
-        return new TogglProjectListResponse(Raw.GetProjects(workspaceId));
-    }
-
-    /// <summary>
-    /// Gets a list of projects of the workspace with the specified <paramref name="workspaceId"/>.
-    /// </summary>
-    /// <param name="workspaceId">The ID of the workspace.</param>
-    /// <param name="active">The active state that the returned projects should match.</param>
-    /// <returns>An instance of <see cref="TogglProjectListResponse"/> representing the response from the Toggl API.</returns>>
-    /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md#get-workspace-projects</cref>
-    /// </see>
-    public TogglProjectListResponse GetProjects(int workspaceId, TogglProjectActiveState active) {
-        return new TogglProjectListResponse(Raw.GetProjects(workspaceId, active));
-    }
-
-    /// <summary>
-    /// Gets a list of projects matching the specified <paramref name="options"/>.
-    /// </summary>
-    /// <param name="options">The options for the request to the API.</param>
-    /// <returns>An instance of <see cref="TogglProjectListResponse"/> representing the response from the Toggl API.</returns>
-    /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md#get-workspace-projects</cref>
-    /// </see>
-    public TogglProjectListResponse GetProjects(TogglGetProjectsOptions options) {
-        return new TogglProjectListResponse(Raw.GetProjects(options));
     }
 
     #endregion
