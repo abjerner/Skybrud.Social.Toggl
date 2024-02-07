@@ -1,7 +1,6 @@
 ﻿using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
-using Skybrud.Essentials.Http.Options;
 using Skybrud.Social.Toggl.Http;
 
 namespace Skybrud.Social.Toggl.Options.Track.Projects;

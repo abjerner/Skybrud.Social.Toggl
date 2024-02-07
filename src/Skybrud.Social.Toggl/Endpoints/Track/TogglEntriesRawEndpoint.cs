@@ -42,7 +42,7 @@ public class TogglEntriesRawEndpoint {
     /// <param name="options">Theoptions for the request to the Toggl API.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
     /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md#create-a-time-entry</cref>
+    ///     <cref>https://developers.track.toggl.com/docs/api/time_entries#post-timeentries</cref>
     /// </see>
     public IHttpResponse CreateEntry(TogglCreateTimeEntryOptions options) {
         return Client.GetResponse(options);
@@ -54,10 +54,10 @@ public class TogglEntriesRawEndpoint {
     /// <param name="entryId">The ID of the time entry.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
     /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md#get-time-entry-details</cref>
+    ///     <cref>https://developers.track.toggl.com/docs/api/time_entries#get-get-a-time-entry-by-id</cref>
     /// </see>
     public IHttpResponse GetEntry(int entryId) {
-        return Client.Get($"https://{TogglConstants.Track.HostName}/api/v8/time_entries/{entryId}");
+        return Client.Get($"https://{TogglConstants.Track.HostName}/api/v9/me/time_entries/{entryId}");
     }
 
     /// <summary>

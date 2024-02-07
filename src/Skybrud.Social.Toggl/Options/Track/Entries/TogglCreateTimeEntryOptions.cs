@@ -4,11 +4,10 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
-using Skybrud.Essentials.Http.Options;
 using Skybrud.Essentials.Json.Converters.Time;
 using Skybrud.Essentials.Json.Extensions;
 using Skybrud.Essentials.Time;
-using Skybrud.Social.Toggl.Contants;
+using Skybrud.Social.Toggl.Http;
 
 namespace Skybrud.Social.Toggl.Options.Track.Entries;
 
@@ -16,35 +15,35 @@ namespace Skybrud.Social.Toggl.Options.Track.Entries;
 /// Options for request to create a new Toggl time entry.
 /// </summary>
 /// <see>
-///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md#create-a-time-entry</cref>
+///     <cref>https://developers.track.toggl.com/docs/api/time_entries#post-timeentries</cref>
 /// </see>
-public class TogglCreateTimeEntryOptions : IHttpRequestOptions {
+public class TogglCreateTimeEntryOptions : TogglTrackHttpRequestOptions {
 
     #region Properties
 
     /// <summary>
-    /// Gets or sets the description of the entry.
+    /// Gets or sets the ID of the workspace.
     /// </summary>
-    [JsonProperty("description")]
-    public string? Description { get; set; }
+    [JsonProperty("workspace_id")]
+    public int WorkspaceId { get; set; }
 
     /// <summary>
-    /// Gets or sets the ID of the workspace to which the client should be added.
+    /// Gets or sets the description of the entry.
     /// </summary>
-    [JsonProperty("wid", DefaultValueHandling = DefaultValueHandling.Ignore)]
-    public int WorkspaceId { get; set; }
+    [JsonProperty("description", NullValueHandling = NullValueHandling.Ignore)]
+    public string? Description { get; set; }
 
     /// <summary>
     /// Gets or sets the ID of the project the time entry should be added to.
     /// </summary>
-    [JsonProperty("pid", DefaultValueHandling = DefaultValueHandling.Ignore)]
-    public int ProjectId { get; set; }
+    [JsonProperty("project_id", NullValueHandling = NullValueHandling.Ignore)]
+    public int? ProjectId { get; set; }
 
     /// <summary>
     /// Gets or sets the ID of the task the time entry should be added to.
     /// </summary>
-    [JsonProperty("tid", DefaultValueHandling = DefaultValueHandling.Ignore)]
-    public int TaskId { get; set; }
+    [JsonProperty("task_id", NullValueHandling = NullValueHandling.Ignore)]
+    public int? TaskId { get; set; }
 
     /// <summary>
     /// Gets or sets the start time of the entry.
@@ -82,18 +81,14 @@ public class TogglCreateTimeEntryOptions : IHttpRequestOptions {
     #region Member methods
 
     /// <inheritdoc />
-    public IHttpRequest GetRequest() {
+    public override IHttpRequest GetRequest() {
 
         if (Start == null) throw new PropertyNotSetException(nameof(Start));
 
-        JObject entry = JObject.FromObject(this);
-        if (entry.HasValue("created_with") == false) entry["created_with"] = "Skybrud.Social";
+        JObject body = JObject.FromObject(this);
+        if (body.HasValue("created_with") == false) body["created_with"] = "Skybrud.Social";
 
-        JObject body = new () {
-            {"time_entry",  entry}
-        };
-
-        return HttpRequest.Post($"https://{TogglConstants.Track.HostName}/api/v8/time_entries", body);
+        return HttpRequest.Post($"/api/v9/workspaces/{WorkspaceId}/time_entries", body);
 
     }
 

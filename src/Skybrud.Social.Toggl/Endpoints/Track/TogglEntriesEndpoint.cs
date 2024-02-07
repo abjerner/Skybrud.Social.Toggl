@@ -43,7 +43,7 @@ public class TogglEntriesEndpoint {
     /// <param name="options">Theoptions for the request to the Toggl API.</param>
     /// <returns>An instance of <see cref="TogglEntryResponse"/> representing the response.</returns>
     /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md#create-a-time-entry</cref>
+    ///     <cref>https://developers.track.toggl.com/docs/api/time_entries#post-timeentries</cref>
     /// </see>
     public TogglEntryResponse CreateEntry(TogglCreateTimeEntryOptions options) {
         return new TogglEntryResponse(Raw.CreateEntry(options));
@@ -55,7 +55,7 @@ public class TogglEntriesEndpoint {
     /// <param name="entryId">The ID of the time entry.</param>
     /// <returns>An instance of <see cref="TogglEntryResponse"/> representing the response.</returns>
     /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md#get-time-entry-details</cref>
+    ///     <cref>https://developers.track.toggl.com/docs/api/time_entries#get-get-a-time-entry-by-id</cref>
     /// </see>
     public TogglEntryResponse GetEntry(int entryId) {
         return new TogglEntryResponse(Raw.GetEntry(entryId));
