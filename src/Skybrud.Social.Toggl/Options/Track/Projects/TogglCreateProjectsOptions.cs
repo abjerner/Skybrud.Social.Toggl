@@ -5,79 +5,77 @@ using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Options;
 using Skybrud.Social.Toggl.Contants;
 
-namespace Skybrud.Social.Toggl.Options.Track.Projects {
+namespace Skybrud.Social.Toggl.Options.Track.Projects;
+
+/// <summary>
+/// Options for request to create a new Toggl project.
+/// </summary>
+public class TogglCreateProjectsOptions : IHttpRequestOptions {
+
+    #region Properties
 
     /// <summary>
-    /// Options for request to create a new Toggl project.
+    /// Gets or sets the name of the project to be created.
     /// </summary>
-    public class TogglCreateProjectsOptions : IHttpRequestOptions {
+    [JsonProperty("name")]
+    public string Name { get; }
 
-        #region Properties
+    /// <summary>
+    /// Gets or sets the ID of the workspace to which the project should be added.
+    /// </summary>
+    [JsonProperty("wid")]
+    public int WorkspaceId { get; }
 
-        /// <summary>
-        /// Gets or sets the name of the project to be created.
-        /// </summary>
-        [JsonProperty("name")]
-        public string Name { get; }
+    /// <summary>
+    /// Gets or sets the ID of the client to which the project should be added. If <c>0</c> (default), the project will not be added to a client.
+    /// </summary>
+    [JsonProperty("cid", DefaultValueHandling = DefaultValueHandling.Ignore)]
+    public int ClientId { get; }
 
-        /// <summary>
-        /// Gets or sets the ID of the workspace to which the project should be added.
-        /// </summary>
-        [JsonProperty("wid")]
-        public int WorkspaceId { get; }
+    #endregion
 
-        /// <summary>
-        /// Gets or sets the ID of the client to which the project should be added. If <c>0</c> (default), the project will not be added to a client.
-        /// </summary>
-        [JsonProperty("cid", DefaultValueHandling = DefaultValueHandling.Ignore)]
-        public int ClientId { get; }
+    #region Constructors
 
-        #endregion
+    /// <summary>
+    /// Initializes a new instance of <see cref="TogglCreateProjectsOptions"/> based on the specified <paramref name="name"/> and <paramref name="workspaceId"/>.
+    /// </summary>
+    /// <param name="name">The name of the project.</param>
+    /// <param name="workspaceId">The ID of the parent workspace.</param>
+    public TogglCreateProjectsOptions(string name, int workspaceId) {
+        Name = name;
+        WorkspaceId = workspaceId;
+    }
 
-        #region Constructors
+    /// <summary>
+    /// Initializes a new instance of <see cref="TogglCreateProjectsOptions"/> based on the specified <paramref name="name"/> and <paramref name="workspaceId"/>.
+    /// </summary>
+    /// <param name="name">The name of the project.</param>
+    /// <param name="workspaceId">The ID of the parent workspace.</param>
+    /// <param name="clientId">The ID of the parent client.</param>
+    public TogglCreateProjectsOptions(string name, int workspaceId, int clientId) {
+        Name = name;
+        WorkspaceId = workspaceId;
+        ClientId = clientId;
+    }
 
-        /// <summary>
-        /// Initializes a new instance of <see cref="TogglCreateProjectsOptions"/> based on the specified <paramref name="name"/> and <paramref name="workspaceId"/>.
-        /// </summary>
-        /// <param name="name">The name of the project.</param>
-        /// <param name="workspaceId">The ID of the parent workspace.</param>
-        public TogglCreateProjectsOptions(string name, int workspaceId) {
-            Name = name;
-            WorkspaceId = workspaceId;
-        }
+    #endregion
 
-        /// <summary>
-        /// Initializes a new instance of <see cref="TogglCreateProjectsOptions"/> based on the specified <paramref name="name"/> and <paramref name="workspaceId"/>.
-        /// </summary>
-        /// <param name="name">The name of the project.</param>
-        /// <param name="workspaceId">The ID of the parent workspace.</param>
-        /// <param name="clientId">The ID of the parent client.</param>
-        public TogglCreateProjectsOptions(string name, int workspaceId, int clientId) {
-            Name = name;
-            WorkspaceId = workspaceId;
-            ClientId = clientId;
-        }
+    #region Member methods
 
-        #endregion
+    /// <inheritdoc />
+    public IHttpRequest GetRequest() {
 
-        #region Member methods
+        if (string.IsNullOrWhiteSpace(Name)) throw new PropertyNotSetException(nameof(Name));
+        if (WorkspaceId == 0) throw new PropertyNotSetException(nameof(WorkspaceId));
 
-        /// <inheritdoc />
-        public IHttpRequest GetRequest() {
+        JObject body = new () {
+            { "project", JObject.FromObject(this) }
+        };
 
-            if (string.IsNullOrWhiteSpace(Name)) throw new PropertyNotSetException(nameof(Name));
-            if (WorkspaceId == 0) throw new PropertyNotSetException(nameof(WorkspaceId));
-
-            JObject body = new () {
-                { "project", JObject.FromObject(this) }
-            };
-
-            return HttpRequest.Post($"https://{TogglConstants.Track.HostName}/api/v8/projects", body);
-
-        }
-
-        #endregion
+        return HttpRequest.Post($"https://{TogglConstants.Track.HostName}/api/v8/projects", body);
 
     }
+
+    #endregion
 
 }

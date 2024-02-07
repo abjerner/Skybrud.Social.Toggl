@@ -2,39 +2,37 @@
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Exceptions;
 
-namespace Skybrud.Social.Toggl.Exceptions {
+namespace Skybrud.Social.Toggl.Exceptions;
+
+/// <summary>
+/// Class representing an exception/error returned by the Toggl API.
+/// </summary>
+public class TogglHttpException : TogglException, IHttpException {
+
+    #region Properties
 
     /// <summary>
-    /// Class representing an exception/error returned by the Toggl API.
+    /// Gets a reference to the underlying <see cref="IHttpResponse"/>.
     /// </summary>
-    public class TogglHttpException : TogglException, IHttpException {
+    public IHttpResponse Response { get; }
 
-        #region Properties
+    /// <summary>
+    /// Gets the HTTP status code returned by the Toggl API.
+    /// </summary>
+    public HttpStatusCode StatusCode => Response.StatusCode;
 
-        /// <summary>
-        /// Gets a reference to the underlying <see cref="IHttpResponse"/>.
-        /// </summary>
-        public IHttpResponse Response { get; }
+    #endregion
 
-        /// <summary>
-        /// Gets the HTTP status code returned by the Toggl API.
-        /// </summary>
-        public HttpStatusCode StatusCode => Response.StatusCode;
+    #region Constructors
 
-        #endregion
-
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new exception based on the specified <paramref name="response"/>.
-        /// </summary>
-        /// <param name="response">The instance of <see cref="IHttpResponse"/> representing the raw response.</param>
-        public TogglHttpException(IHttpResponse response) : base("Invalid response received from the Toggl API (Status: " + (int) response.StatusCode + ")") {
-            Response = response;
-        }
-
-        #endregion
-
+    /// <summary>
+    /// Initializes a new exception based on the specified <paramref name="response"/>.
+    /// </summary>
+    /// <param name="response">The instance of <see cref="IHttpResponse"/> representing the raw response.</param>
+    public TogglHttpException(IHttpResponse response) : base("Invalid response received from the Toggl API (Status: " + (int) response.StatusCode + ")") {
+        Response = response;
     }
+
+    #endregion
 
 }

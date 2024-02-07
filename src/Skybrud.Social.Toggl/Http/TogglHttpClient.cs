@@ -3,56 +3,54 @@ using Skybrud.Essentials.Http.Client;
 using Skybrud.Essentials.Security;
 using Skybrud.Social.Toggl.Apis;
 
-namespace Skybrud.Social.Toggl.Http {
+namespace Skybrud.Social.Toggl.Http;
+
+/// <summary>
+/// Class for handling the HTTP communication with the Toggl API.
+/// </summary>
+public class TogglHttpClient : HttpClient {
+
+    #region Properties
 
     /// <summary>
-    /// Class for handling the HTTP communication with the Toggl API.
+    /// Gets or sets the API token.
     /// </summary>
-    public class TogglHttpClient : HttpClient {
+    public string? ApiToken { get; set; }
 
-        #region Properties
+    /// <summary>
+    /// Gets a reference to the raw <strong>Track</strong> API.
+    /// </summary>
+    public TogglTrackRawApi Track { get; }
 
-        /// <summary>
-        /// Gets or sets the API token.
-        /// </summary>
-        public string? ApiToken { get; set; }
+    #endregion
 
-        /// <summary>
-        /// Gets a reference to the raw <strong>Track</strong> API.
-        /// </summary>
-        public TogglTrackRawApi Track { get; }
+    #region Constructors
 
-        #endregion
-
-        #region Constructors
-
-        /// <summary>
-        /// Initializes a new instance with default options.
-        /// </summary>
-        public TogglHttpClient() {
-            Track = new TogglTrackRawApi(this);
-        }
-
-        /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="apiToken"/>.
-        /// </summary>
-        /// <param name="apiToken">The access token to be used.</param>
-        public TogglHttpClient(string apiToken) {
-            ApiToken = apiToken;
-            Track = new TogglTrackRawApi(this);
-        }
-
-        #endregion
-
-        #region Member methods
-
-        /// <inheritdoc />
-        protected override void PrepareHttpRequest(IHttpRequest request) {
-            if (string.IsNullOrWhiteSpace(ApiToken) == false) request.Authorization = $"Basic {SecurityUtils.Base64Encode($"{ApiToken}:api_token")}";
-        }
-
-        #endregion
-
+    /// <summary>
+    /// Initializes a new instance with default options.
+    /// </summary>
+    public TogglHttpClient() {
+        Track = new TogglTrackRawApi(this);
     }
+
+    /// <summary>
+    /// Initializes a new instance based on the specified <paramref name="apiToken"/>.
+    /// </summary>
+    /// <param name="apiToken">The access token to be used.</param>
+    public TogglHttpClient(string apiToken) {
+        ApiToken = apiToken;
+        Track = new TogglTrackRawApi(this);
+    }
+
+    #endregion
+
+    #region Member methods
+
+    /// <inheritdoc />
+    protected override void PrepareHttpRequest(IHttpRequest request) {
+        if (string.IsNullOrWhiteSpace(ApiToken) == false) request.Authorization = $"Basic {SecurityUtils.Base64Encode($"{ApiToken}:api_token")}";
+    }
+
+    #endregion
 
 }

@@ -6,76 +6,74 @@ using Skybrud.Essentials.Strings.Extensions;
 using Skybrud.Social.Toggl.Contants;
 using Skybrud.Social.Toggl.Options.Track.Projects;
 
-namespace Skybrud.Social.Toggl.Options.Track.Workspaces {
+namespace Skybrud.Social.Toggl.Options.Track.Workspaces;
+
+/// <summary>
+/// Options for a request to the projects of a workspace.
+/// </summary>
+/// <see>
+///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md#get-workspace-projects</cref>
+/// </see>
+public class TogglGetProjectsOptions : IHttpRequestOptions {
+
+    #region Properties
 
     /// <summary>
-    /// Options for a request to the projects of a workspace.
+    /// Gets or sets the ID of the workspace.
     /// </summary>
-    /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md#get-workspace-projects</cref>
-    /// </see>
-    public class TogglGetProjectsOptions : IHttpRequestOptions {
+    public int WorkspaceId { get; set; }
 
-        #region Properties
+    /// <summary>
+    /// Gets or sets the active state that the returned projects should match. Default is <see cref="TogglProjectActiveState.True"/>.
+    /// </summary>
+    public TogglProjectActiveState Active { get; set; }
 
-        /// <summary>
-        /// Gets or sets the ID of the workspace.
-        /// </summary>
-        public int WorkspaceId { get; set; }
+    #endregion
 
-        /// <summary>
-        /// Gets or sets the active state that the returned projects should match. Default is <see cref="TogglProjectActiveState.True"/>.
-        /// </summary>
-        public TogglProjectActiveState Active { get; set; }
+    #region Constructors
 
-        #endregion
+    /// <summary>
+    /// Initializes a new instance with default options.
+    /// </summary>
+    public TogglGetProjectsOptions() { }
 
-        #region Constructors
+    /// <summary>
+    /// Initializes a new instance based on the specified <paramref name="workspaceId"/>.
+    /// </summary>
+    /// <param name="workspaceId">The ID of the workspace.</param>
+    public TogglGetProjectsOptions(int workspaceId) {
+        WorkspaceId = workspaceId;
+    }
 
-        /// <summary>
-        /// Initializes a new instance with default options.
-        /// </summary>
-        public TogglGetProjectsOptions() { }
+    /// <summary>
+    /// Initializes a new instance based on the specified <paramref name="workspaceId"/>.
+    /// </summary>
+    /// <param name="workspaceId">The ID of the workspace.</param>
+    /// <param name="active">The active state that the returned projects should match.</param>
+    public TogglGetProjectsOptions(int workspaceId, TogglProjectActiveState active) {
+        WorkspaceId = workspaceId;
+        Active = active;
+    }
 
-        /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="workspaceId"/>.
-        /// </summary>
-        /// <param name="workspaceId">The ID of the workspace.</param>
-        public TogglGetProjectsOptions(int workspaceId) {
-            WorkspaceId = workspaceId;
-        }
+    #endregion
 
-        /// <summary>
-        /// Initializes a new instance based on the specified <paramref name="workspaceId"/>.
-        /// </summary>
-        /// <param name="workspaceId">The ID of the workspace.</param>
-        /// <param name="active">The active state that the returned projects should match.</param>
-        public TogglGetProjectsOptions(int workspaceId, TogglProjectActiveState active) {
-            WorkspaceId = workspaceId;
-            Active = active;
-        }
+    #region Member methods
 
-        #endregion
+    /// <inheritdoc />
+    public IHttpRequest GetRequest() {
 
-        #region Member methods
+        if (WorkspaceId == 0) throw new PropertyNotSetException(nameof(WorkspaceId));
 
-        /// <inheritdoc />
-        public IHttpRequest GetRequest() {
+        // Initialize the query string
+        IHttpQueryString query = new HttpQueryString {
+            {"active", Active.ToLower()}
+        };
 
-            if (WorkspaceId == 0) throw new PropertyNotSetException(nameof(WorkspaceId));
-
-            // Initialize the query string
-            IHttpQueryString query = new HttpQueryString {
-                {"active", Active.ToLower()}
-            };
-
-            // Initialize a new request
-            return HttpRequest.Get($"https://{TogglConstants.Track.HostName}/api/v8/workspaces/{WorkspaceId}/projects", query);
-
-        }
-
-        #endregion
+        // Initialize a new request
+        return HttpRequest.Get($"https://{TogglConstants.Track.HostName}/api/v8/workspaces/{WorkspaceId}/projects", query);
 
     }
+
+    #endregion
 
 }

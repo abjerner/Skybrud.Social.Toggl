@@ -7,47 +7,45 @@ using Skybrud.Essentials.Time;
 
 #pragma warning disable CS1591
 
-namespace Skybrud.Social.Toggl.Models {
+namespace Skybrud.Social.Toggl.Models;
 
-    public class TogglObject : JsonObjectBase {
+public class TogglObject : JsonObjectBase {
 
-        private static readonly string[] _formats = {
-            "yyyy-MM-ddTHH\\:mm\\:ss.ffffffZ",
-            "yyyy-MM-ddTHH\\:mm\\:ss.fffffZ",
-            "yyyy-MM-ddTHH\\:mm\\:ss.ffffZ",
-            "yyyy-MM-ddTHH\\:mm\\:ss.fffZ",
-            "yyyy-MM-ddTHH\\:mm\\:ss.ffZ",
-            "yyyy-MM-ddTHH\\:mm\\:ss.fZ"
-        };
+    private static readonly string[] _formats = {
+        "yyyy-MM-ddTHH\\:mm\\:ss.ffffffZ",
+        "yyyy-MM-ddTHH\\:mm\\:ss.fffffZ",
+        "yyyy-MM-ddTHH\\:mm\\:ss.ffffZ",
+        "yyyy-MM-ddTHH\\:mm\\:ss.fffZ",
+        "yyyy-MM-ddTHH\\:mm\\:ss.ffZ",
+        "yyyy-MM-ddTHH\\:mm\\:ss.fZ"
+    };
 
-        #region Constructors
+    #region Constructors
 
-        protected TogglObject(JObject? json) : base(json) { }
+    protected TogglObject(JObject? json) : base(json) { }
 
-        #endregion
+    #endregion
 
-        #region Static methods
+    #region Static methods
 
-        /// <summary>
-        /// Parses the specified ISO 8601 <paramref name="timestamp"/> into a corresponding instance of <see cref="EssentialsTime"/>.
-        /// </summary>
-        /// <param name="timestamp">The ISO 8601 timestamp.</param>
-        /// <returns>An instance of <see cref="EssentialsTime"/>.</returns>
-        /// <remarks>
-        ///     <para>
-        ///         Timestamps returned by the V9 API includes microseconds, whereas the V8 only includes
-        ///         milliseconds. The V9 API however doesn't include traling zeros, so the method checks a few
-        ///         different formats (ISO 8601 timestamp formats with different precision).
-        ///     </para>
-        /// </remarks>
-        [return: NotNullIfNotNull("timestamp")]
-        protected static EssentialsTime? ParseIso8601Timestamp(string? timestamp) {
-            if (timestamp == null) return null;
-            return DateTimeOffset.ParseExact(timestamp, _formats, CultureInfo.InvariantCulture, DateTimeStyles.None);
-        }
-
-        #endregion
-
+    /// <summary>
+    /// Parses the specified ISO 8601 <paramref name="timestamp"/> into a corresponding instance of <see cref="EssentialsTime"/>.
+    /// </summary>
+    /// <param name="timestamp">The ISO 8601 timestamp.</param>
+    /// <returns>An instance of <see cref="EssentialsTime"/>.</returns>
+    /// <remarks>
+    ///     <para>
+    ///         Timestamps returned by the V9 API includes microseconds, whereas the V8 only includes
+    ///         milliseconds. The V9 API however doesn't include traling zeros, so the method checks a few
+    ///         different formats (ISO 8601 timestamp formats with different precision).
+    ///     </para>
+    /// </remarks>
+    [return: NotNullIfNotNull("timestamp")]
+    protected static EssentialsTime? ParseIso8601Timestamp(string? timestamp) {
+        if (timestamp == null) return null;
+        return DateTimeOffset.ParseExact(timestamp, _formats, CultureInfo.InvariantCulture, DateTimeStyles.None);
     }
+
+    #endregion
 
 }
