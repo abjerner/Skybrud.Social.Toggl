@@ -24,6 +24,11 @@ public class TogglClient : JsonObjectBase {
     public int WorkspaceId { get; }
 
     /// <summary>
+    /// Gets whether the client has been archived.
+    /// </summary>
+    public bool IsArchived { get; }
+
+    /// <summary>
     /// Gets the name of the client.
     /// </summary>
     public string Name { get; }
@@ -32,11 +37,6 @@ public class TogglClient : JsonObjectBase {
     /// Gets a timestamp for when the client was last updated.
     /// </summary>
     public EssentialsTime At { get; }
-
-    /// <summary>
-    /// Gets the notes of the client.
-    /// </summary>
-    public string? Notes { get; }
 
     #endregion
 
@@ -49,9 +49,9 @@ public class TogglClient : JsonObjectBase {
     protected TogglClient(JObject json) : base(json) {
         Id = json.GetInt32("id");
         WorkspaceId = json.GetInt32("wid");
+        IsArchived = json.GetBoolean("archived");
         Name = json.GetString("name")!;
-        At = json.GetString("at", EssentialsTime.Parse)!;
-        Notes = json.GetString("notes");
+        At = json.GetString("at", EssentialsTime.FromIso8601)!;
     }
 
     #endregion

@@ -1,16 +1,17 @@
 ﻿using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.Toggl.Http;
+using Skybrud.Social.Toggl.Models.Track.Clients;
 
 namespace Skybrud.Social.Toggl.Options.Track.Clients;
 
 /// <summary>
-/// Options for a request to get information about a single Toggl client.
+/// Options for a request to delete a Toggl client.
 /// </summary>
 /// <see>
-///     <cref>https://developers.track.toggl.com/docs/api/clients#get-load-client-from-id</cref>
+///     <cref>https://developers.track.toggl.com/docs/api/clients#delete-delete-client</cref>
 /// </see>
-public class TogglGetClientOptions : TogglTrackHttpRequestOptions {
+public class TogglDeleteClientOptions : TogglTrackHttpRequestOptions {
 
     #region Properties
 
@@ -33,9 +34,18 @@ public class TogglGetClientOptions : TogglTrackHttpRequestOptions {
     /// </summary>
     /// <param name="workspaceId">The ID of the parent workspace.</param>
     /// <param name="clientId">The ID of the client.</param>
-    public TogglGetClientOptions(int workspaceId, int clientId) {
+    public TogglDeleteClientOptions(int workspaceId, int clientId) {
         WorkspaceId = workspaceId;
         ClientId = clientId;
+    }
+
+    /// <summary>
+    /// Initialize a new instance based on the specified <paramref name="client"/>.
+    /// </summary>
+    /// <param name="client">The Toggl client to be deleted.</param>
+    public TogglDeleteClientOptions(TogglClient client) {
+        WorkspaceId = client.WorkspaceId;
+        ClientId = client.Id;
     }
 
     #endregion
@@ -45,7 +55,7 @@ public class TogglGetClientOptions : TogglTrackHttpRequestOptions {
     /// <inheritdoc />
     public override IHttpRequest GetRequest() {
         if (ClientId == 0) throw new PropertyNotSetException(nameof(ClientId));
-        return HttpRequest.Get($"/api/v9/workspaces/{WorkspaceId}/clients/{ClientId}");
+        return HttpRequest.Delete($"/api/v9/workspaces/{WorkspaceId}/clients/{ClientId}");
     }
 
     #endregion
