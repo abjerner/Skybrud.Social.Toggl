@@ -11,7 +11,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track;
 /// Raw implementation of the <strong>Clients</strong> endpoint.
 /// </summary>
 /// <see>
-///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md</cref>
+///     <cref>https://developers.track.toggl.com/docs/api/clients</cref>
 /// </see>
 public class TogglClientsRawEndpoint {
 
@@ -37,30 +37,15 @@ public class TogglClientsRawEndpoint {
     /// <summary>
     /// Creates a new client with the specified <paramref name="name"/>.
     /// </summary>
-    /// <param name="name">The name of the client.</param>
     /// <param name="workspaceId">The ID of the parent workspace.</param>
+    /// <param name="name">The name of the client.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
     /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#create-a-client</cref>
+    ///     <cref>https://developers.track.toggl.com/docs/api/clients#post-create-client</cref>
     /// </see>
-    public IHttpResponse CreateClient(string name, int workspaceId) {
+    public IHttpResponse CreateClient(int workspaceId, string name) {
         if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
-        return Client.GetResponse(new TogglCreateClientOptions(name, workspaceId));
-    }
-
-    /// <summary>
-    /// Creates a new client with the specified <paramref name="name"/>.
-    /// </summary>
-    /// <param name="name">The name of the client.</param>
-    /// <param name="workspaceId">The ID of the parent workspace.</param>
-    /// <param name="notes">Notes for the client.</param>
-    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
-    /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#create-a-client</cref>
-    /// </see>
-    public IHttpResponse CreateClient(string name, int workspaceId, string notes) {
-        if (string.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
-        return Client.GetResponse(new TogglCreateClientOptions(name, workspaceId, notes));
+        return Client.GetResponse(new TogglCreateClientOptions(workspaceId, name));
     }
 
     /// <summary>
@@ -69,7 +54,7 @@ public class TogglClientsRawEndpoint {
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
     /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#create-a-client</cref>
+    ///     <cref>https://developers.track.toggl.com/docs/api/clients#post-create-client</cref>
     /// </see>
     public IHttpResponse CreateClient(TogglCreateClientOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
@@ -79,13 +64,26 @@ public class TogglClientsRawEndpoint {
     /// <summary>
     /// Gets information about the client with the specified <paramref name="clientId"/>.
     /// </summary>
+    /// <param name="workspaceId">The ID of the parent workspace.</param>
     /// <param name="clientId">The ID of the client.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
     /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#get-client-details</cref>
+    ///     <cref>https://developers.track.toggl.com/docs/api/clients#get-load-client-from-id</cref>
     /// </see>
-    public IHttpResponse GetClient(int clientId) {
-        return Client.Get($"https://{TogglConstants.Track.HostName}/api/v8/clients/{clientId}");
+    public IHttpResponse GetClient(int workspaceId, int clientId) {
+        return GetClient(new TogglGetClientOptions(workspaceId, clientId));
+    }
+
+    /// <summary>
+    /// Gets information about the client identified by the specified <paramref name="options"/>.
+    /// </summary>
+    /// <param name="options">The options for the request to the API.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://developers.track.toggl.com/docs/api/clients#get-load-client-from-id</cref>
+    /// </see>
+    public IHttpResponse GetClient(TogglGetClientOptions options) {
+        return Client.GetResponse(options);
     }
 
     /// <summary>

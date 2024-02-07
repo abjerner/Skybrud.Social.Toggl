@@ -9,7 +9,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track;
 /// Implementation of the <strong>Clients</strong> endpoint.
 /// </summary>
 /// <see>
-///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md</cref>
+///     <cref>https://developers.track.toggl.com/docs/api/clients</cref>
 /// </see>
 public class TogglClientsEndpoint {
 
@@ -41,28 +41,14 @@ public class TogglClientsEndpoint {
     /// <summary>
     /// Creates a new client with the specified <paramref name="name"/>.
     /// </summary>
-    /// <param name="name">The name of the client.</param>
     /// <param name="workspaceId">The ID of the parent workspace.</param>
+    /// <param name="name">The name of the client.</param>
     /// <returns>An instance of <see cref="TogglClientResponse"/> representing the response from the Toggl API.</returns>
     /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#create-a-client</cref>
+    ///     <cref>https://developers.track.toggl.com/docs/api/clients#post-create-client</cref>
     /// </see>
-    public TogglClientResponse CreateClient(string name, int workspaceId) {
-        return new TogglClientResponse(Raw.CreateClient(name, workspaceId));
-    }
-
-    /// <summary>
-    /// Creates a new client with the specified <paramref name="name"/>.
-    /// </summary>
-    /// <param name="name">The name of the client.</param>
-    /// <param name="workspaceId">The ID of the parent workspace.</param>
-    /// <param name="notes">Notes for the client.</param>
-    /// <returns>An instance of <see cref="TogglClientResponse"/> representing the response from the Toggl API.</returns>
-    /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#create-a-client</cref>
-    /// </see>
-    public TogglClientResponse CreateClient(string name, int workspaceId, string notes) {
-        return new TogglClientResponse(Raw.CreateClient(name, workspaceId, notes));
+    public TogglClientResponse CreateClient(int workspaceId, string name) {
+        return new TogglClientResponse(Raw.CreateClient(workspaceId, name));
     }
 
     /// <summary>
@@ -71,7 +57,7 @@ public class TogglClientsEndpoint {
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="TogglClientResponse"/> representing the response from the Toggl API.</returns>
     /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#create-a-client</cref>
+    ///     <cref>https://developers.track.toggl.com/docs/api/clients#post-create-client</cref>
     /// </see>
     public TogglClientResponse CreateClient(TogglCreateClientOptions options) {
         return new TogglClientResponse(Raw.CreateClient(options));
@@ -80,13 +66,26 @@ public class TogglClientsEndpoint {
     /// <summary>
     /// Gets information about the client with the specified <paramref name="clientId"/>.
     /// </summary>
+    /// <param name="workspaceId">The ID of the parent workspace.</param>
     /// <param name="clientId">The ID of the client.</param>
     /// <returns>An instance of <see cref="TogglClientResponse"/> representing the response from the Toggl API.</returns>
     /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#get-client-details</cref>
+    ///     <cref>https://developers.track.toggl.com/docs/api/clients#get-load-client-from-id</cref>
     /// </see>
-    public TogglClientResponse GetClient(int clientId) {
-        return new TogglClientResponse(Raw.GetClient(clientId));
+    public TogglClientResponse GetClient(int workspaceId, int clientId) {
+        return new TogglClientResponse(Raw.GetClient(workspaceId, clientId));
+    }
+
+    /// <summary>
+    /// Gets information about the client identified by the specified <paramref name="options"/>.
+    /// </summary>
+    /// <param name="options">The options for the request to the API.</param>
+    /// <returns>An instance of <see cref="TogglClientResponse"/> representing the response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://developers.track.toggl.com/docs/api/clients#get-load-client-from-id</cref>
+    /// </see>
+    public TogglClientResponse GetClient(TogglGetClientOptions options) {
+        return new TogglClientResponse(Raw.GetClient(options));
     }
 
     /// <summary>
