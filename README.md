@@ -28,16 +28,16 @@
 
 ## Installation
 
-The package is only available via [**NuGet**](https://www.nuget.org/packages/Skybrud.Social.Toggl/1.0.0-beta004). To install the package, you can either use the .NET CLI:
+The package is only available via [**NuGet**](https://www.nuget.org/packages/Skybrud.Social.Toggl/1.0.0-beta005). To install the package, you can either use the .NET CLI:
 
 ```
-dotnet add package Skybrud.Social.Toggl --version 1.0.0-beta004
+dotnet add package Skybrud.Social.Toggl --version 1.0.0-beta005
 ```
 
 or the NuGet Package Manager:
 
 ```
-Install-Package Skybrud.Social.Toggl -Version 1.0.0-beta004
+Install-Package Skybrud.Social.Toggl -Version 1.0.0-beta005
 ```
 
 
@@ -79,13 +79,16 @@ The `TogglHttpService` class is the entry point for communicating with the Toggl
 @inherits UmbracoViewPage<Skybrud.Social.Toggl.TogglHttpService>
 @{
 
+    // Declare your workspace ID
+    int workspaceId = 1234;
+
     // Initialize from your API token
     TogglHttpService toggl = TogglHttpService.CreateFromApiToken("Your API token");
 
     try {
 
         // Make the request to the API
-        TogglClientListResponse response = toggl.Track.Clients.GetClients();
+        TogglClientListResponse response = toggl.Track.Clients.GetClients(workspaceId);
 
         <table class="table list">
             <thead>
@@ -117,7 +120,7 @@ The `TogglHttpService` class is the entry point for communicating with the Toggl
 
 ### List all projects
 
-Projects are fetched via the **Workspaces** endpoint, and you must specify the ID of the workspace to retrieve projects for:
+Projects are fetched via the **Projects** endpoint, and you must specify the ID of the workspace to retrieve projects for:
 
 ```cshtml
 @using Skybrud.Social.Toggl
@@ -130,13 +133,16 @@ Projects are fetched via the **Workspaces** endpoint, and you must specify the I
 @inherits UmbracoViewPage<Skybrud.Social.Toggl.TogglHttpService>
 @{
 
+    // Declare your workspace ID
+    int workspaceId = 1234;
+
     // Initialize from your API token
     TogglHttpService toggl = TogglHttpService.CreateFromApiToken("Your API token");
 
     try {
 
         // Make the request to the API
-        TogglProjectListResponse response = toggl.Track.Workspaces.GetProjects(123456, TogglProjectActiveState.Both);
+        TogglProjectListResponse response = toggl.Track.Workspaces.GetProjects(workspaceId);
 
         <table class="table list">
             <thead>

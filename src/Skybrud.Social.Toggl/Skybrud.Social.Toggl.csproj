@@ -10,21 +10,21 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <VersionPrefix>1.0.0-beta004</VersionPrefix>
+    <VersionPrefix>1.0.0-beta005</VersionPrefix>
     <VersionSuffix Condition="'$(Configuration)'=='Debug'">build$([System.DateTime]::UtcNow.ToString(`yyyyMMddHHmm`))</VersionSuffix>
     <Company>Limbo</Company>
     <Product>Skybrud.Social</Product>
     <Authors>Anders Bjerner</Authors>
-    <Copyright>Copyright © 2022</Copyright>
+    <Copyright>Copyright © $([System.DateTime]::UtcNow.ToString(`yyyy`))</Copyright>
     <Description>API service implementation for the Toggl API.</Description>
   </PropertyGroup>
 
   <!-- Information for the NuGet package -->
   <PropertyGroup>
     <PackageId>Skybrud.Social.Toggl</PackageId>
-    <PackageTags>Toggl, Skybrud, Social, JSON, Limbo</PackageTags>
+    <PackageTags>Toggl, Skybrud, Social, JSON, Limbo, Integration</PackageTags>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://github.com/abjerner/Skybrud.Social.Toggl</PackageProjectUrl>
+    <PackageProjectUrl>https://social.skybrud.dk/toggl/</PackageProjectUrl>
     <PackageIcon>Limbo.png</PackageIcon>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/abjerner/Skybrud.Social.Toggl</RepositoryUrl>
