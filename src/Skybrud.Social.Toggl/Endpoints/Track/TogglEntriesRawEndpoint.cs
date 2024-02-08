@@ -1,9 +1,6 @@
 ﻿using System;
 using Skybrud.Essentials.Http;
-using Skybrud.Essentials.Http.Collections;
 using Skybrud.Essentials.Time;
-using Skybrud.Essentials.Time.Iso8601;
-using Skybrud.Social.Toggl.Contants;
 using Skybrud.Social.Toggl.Http;
 using Skybrud.Social.Toggl.Options.Track.Entries;
 
@@ -44,7 +41,7 @@ public class TogglEntriesRawEndpoint {
     ///     <cref>https://developers.track.toggl.com/docs/api/time_entries#get-timeentries</cref>
     /// </see>
     public IHttpResponse GetEntries() {
-        return Client.Get($"https://{TogglConstants.Track.HostName}/api/v9/me/time_entries");
+        return GetEntries(new TogglGetEntriesOptions());
     }
 
     /// <summary>
@@ -59,21 +56,31 @@ public class TogglEntriesRawEndpoint {
     public IHttpResponse GetEntries(EssentialsTime startDate, EssentialsTime endDate) {
         if (startDate == null) throw new ArgumentNullException(nameof(startDate));
         if (endDate == null) throw new ArgumentNullException(nameof(endDate));
-        return Client.Get($"https://{TogglConstants.Track.HostName}/api/v9/me/time_entries", new HttpQueryString {
-            {"start_date", startDate.ToString(Iso8601Constants.DateTimeSeconds)},
-            {"end_date", endDate.ToString(Iso8601Constants.DateTimeSeconds)}
-        });
+        return GetEntries(new TogglGetEntriesOptions(startDate, endDate));
     }
 
     /// <summary>
-    /// Creates a new time entry wqith the specified <paramref name="options"/>.
+    /// Returns a list of time entries of the authenticated user.
+    /// </summary>
+    /// <param name="options">The options describing the request to the API.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+    /// <see>
+    ///     <cref>https://developers.track.toggl.com/docs/api/time_entries#get-timeentries</cref>
+    /// </see>
+    public IHttpResponse GetEntries(TogglGetEntriesOptions options) {
+        if (options == null) throw new ArgumentNullException(nameof(options));
+        return Client.GetResponse(options);
+    }
+
+    /// <summary>
+    /// Creates a new time entry with the specified <paramref name="options"/>.
     /// </summary>
     /// <param name="options">Theoptions for the request to the Toggl API.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
     /// <see>
     ///     <cref>https://developers.track.toggl.com/docs/api/time_entries#post-timeentries</cref>
     /// </see>
-    public IHttpResponse CreateEntry(TogglCreateTimeEntryOptions options) {
+    public IHttpResponse CreateEntry(TogglCreateEntryOptions options) {
         return Client.GetResponse(options);
     }
 
@@ -85,8 +92,21 @@ public class TogglEntriesRawEndpoint {
     /// <see>
     ///     <cref>https://developers.track.toggl.com/docs/api/time_entries#get-get-a-time-entry-by-id</cref>
     /// </see>
-    public IHttpResponse GetEntry(int entryId) {
-        return Client.Get($"https://{TogglConstants.Track.HostName}/api/v9/me/time_entries/{entryId}");
+    public IHttpResponse GetEntry(long entryId) {
+        return GetEntry(new TogglGetEntryOptions(entryId));
+    }
+
+    /// <summary>
+    /// gets information about the time entry identified by the specified <paramref name="options"/>.
+    /// </summary>
+    /// <param name="options">The options describing the request to the API.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+    /// <see>
+    ///     <cref>https://developers.track.toggl.com/docs/api/time_entries#get-get-a-time-entry-by-id</cref>
+    /// </see>
+    public IHttpResponse GetEntry(TogglGetEntryOptions options) {
+        if (options == null) throw new ArgumentNullException(nameof(options));
+        return Client.GetResponse(options);
     }
 
     #endregion

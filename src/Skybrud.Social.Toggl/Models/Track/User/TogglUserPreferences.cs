@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Extensions;
-using Skybrud.Essentials.Json.Newtonsoft;
 
 namespace Skybrud.Social.Toggl.Models.Track.User;
 
@@ -11,7 +10,7 @@ namespace Skybrud.Social.Toggl.Models.Track.User;
 /// <see>
 ///     <cref>https://developers.track.toggl.com/docs/api/preferences#get-preferences-for-the-current-user</cref>
 /// </see>
-public class TogglUserPreferences : JsonObjectBase {
+public class TogglUserPreferences : TogglObject {
 
     #region Properties
 

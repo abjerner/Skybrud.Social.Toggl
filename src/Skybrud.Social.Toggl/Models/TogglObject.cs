@@ -47,7 +47,7 @@ public class TogglObject : JsonObjectBase {
     /// <remarks>
     ///     <para>
     ///         Timestamps returned by the V9 API includes microseconds, whereas the V8 only includes
-    ///         milliseconds. The V9 API however doesn't include traling zeros, so the method checks a few
+    ///         milliseconds. The V9 API however doesn't include trailing zeros, so the method checks a few
     ///         different formats (ISO 8601 timestamp formats with different precision).
     ///     </para>
     /// </remarks>

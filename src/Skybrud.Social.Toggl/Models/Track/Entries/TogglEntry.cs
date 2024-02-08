@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json.Linq;
-using Skybrud.Essentials.Json.Newtonsoft;
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 using Skybrud.Essentials.Time;
 
@@ -11,7 +10,7 @@ namespace Skybrud.Social.Toggl.Models.Track.Entries;
 /// <summary>
 /// Class representing a Toggl time entry.
 /// </summary>
-public class TogglEntry : JsonObjectBase {
+public class TogglEntry : TogglObject {
 
     #region Properties
 
@@ -21,11 +20,6 @@ public class TogglEntry : JsonObjectBase {
     public long Id { get; }
 
     /// <summary>
-    /// Gets the <see cref="System.Guid"/> ID of the time entry.
-    /// </summary>
-    public Guid Guid { get; }
-
-    /// <summary>
     /// Gets the ID of the parent workspace.
     /// </summary>
     public int WorkspaceId { get; }
@@ -33,21 +27,23 @@ public class TogglEntry : JsonObjectBase {
     /// <summary>
     /// Gets the ID of the parent project.
     /// </summary>
-    public int ProjectId { get; }
+    public int? ProjectId { get; }
 
     /// <summary>
     /// Gets whether the time entry has been added to a project.
     /// </summary>
+    [MemberNotNullWhen(true, "ProjectId")]
     public bool HasProjectId => ProjectId > 0;
 
     /// <summary>
     /// Gets the ID of the task of the time entry.
     /// </summary>
-    public int TaskId { get; }
+    public int? TaskId { get; }
 
     /// <summary>
     /// Gets whether the time entry has been added to a task.
     /// </summary>
+    [MemberNotNullWhen(true, "TaskId")]
     public bool HasTaskId => TaskId > 0;
 
     /// <summary>
@@ -105,18 +101,17 @@ public class TogglEntry : JsonObjectBase {
     /// <param name="json">An instance of <see cref="JObject"/> representing the entry.</param>
     protected TogglEntry(JObject json) : base(json) {
         Id = json.GetInt64("id");
-        Guid = json.GetGuid("guid");
-        WorkspaceId = json.GetInt32("wid");
-        ProjectId = json.GetInt32("pid");
-        TaskId = json.GetInt32("tid");
+        WorkspaceId = json.GetInt32("workspace_id");
+        ProjectId = json.GetInt32OrNull("project_id");
+        TaskId = json.GetInt32OrNull("tid");
         IsBillable = json.GetBoolean("billable");
-        Start = json.GetString("start", EssentialsTime.Parse)!;
-        Stop = json.GetString("stop", EssentialsTime.Parse);
+        Start = json.GetString("start", EssentialsTime.FromIso8601)!;
+        Stop = json.GetString("stop", EssentialsTime.FromIso8601);
         Duration = json.GetDouble("duration", TimeSpan.FromSeconds);
         Description = json.GetString("description")!;
         DurationOnly = json.GetBoolean("duronly");
-        At = json.GetString("at", EssentialsTime.Parse)!;
-        UserId = json.GetInt32("uid");
+        At = json.GetString("at", EssentialsTime.FromIso8601)!;
+        UserId = json.GetInt32("user_id");
         Tags = json.GetStringArray("tags");
     }
 

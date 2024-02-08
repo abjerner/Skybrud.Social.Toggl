@@ -30,6 +30,11 @@ public class TogglTrackApi {
     public TogglProjectsEndpoint Projects { get; }
 
     /// <summary>
+    /// Gets a reference to the <strong>Tags</strong> endpoint.
+    /// </summary>
+    public TogglTagsEndpoint Tags { get; }
+
+    /// <summary>
     /// Gets a reference to the <strong>User</strong> endpoint.
     /// </summary>
     public TogglUserEndpoint User { get; }
@@ -48,6 +53,7 @@ public class TogglTrackApi {
         Clients = new TogglClientsEndpoint(service);
         Entries = new TogglEntriesEndpoint(service);
         Projects = new TogglProjectsEndpoint(service);
+        Tags = new TogglTagsEndpoint(service);
         User = new TogglUserEndpoint(service);
         Workspaces = new TogglWorkspacesEndpoint(service);
     }

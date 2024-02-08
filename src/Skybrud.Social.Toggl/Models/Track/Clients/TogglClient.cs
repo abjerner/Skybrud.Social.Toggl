@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json.Linq;
-using Skybrud.Essentials.Json.Newtonsoft;
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 using Skybrud.Essentials.Time;
 
@@ -9,7 +8,7 @@ namespace Skybrud.Social.Toggl.Models.Track.Clients;
 /// <summary>
 /// Class representing a Toggl client.
 /// </summary>
-public class TogglClient : JsonObjectBase {
+public class TogglClient : TogglObject {
 
     #region Properties
 

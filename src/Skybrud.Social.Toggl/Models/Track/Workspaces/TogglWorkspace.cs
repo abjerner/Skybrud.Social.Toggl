@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json.Linq;
-using Skybrud.Essentials.Json.Newtonsoft;
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 using Skybrud.Essentials.Time;
 
@@ -12,7 +11,7 @@ namespace Skybrud.Social.Toggl.Models.Track.Workspaces;
 /// <see>
 ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md</cref>
 /// </see>
-public class TogglWorkspace : JsonObjectBase {
+public class TogglWorkspace : TogglObject {
 
     #region Properties
 
@@ -48,7 +47,7 @@ public class TogglWorkspace : JsonObjectBase {
     /// <summary>
     /// Initializes a new instance based on the specified <paramref name="json"/> object.
     /// </summary>
-    /// <param name="json">An instance of <see cref="JObject"/> representing the project.</param>
+    /// <param name="json">An instance of <see cref="JObject"/> representing the workspace.</param>
     protected TogglWorkspace(JObject json) : base(json) {
         Id = json.GetInt32("id");
         Name = json.GetString("name")!;

@@ -31,6 +31,11 @@ public class TogglTrackRawApi {
     public TogglProjectsRawEndpoint Projects { get; }
 
     /// <summary>
+    /// Gets a reference to the raw <strong>Tags</strong> endpoint.
+    /// </summary>
+    public TogglTagsRawEndpoint Tags { get; }
+
+    /// <summary>
     /// Gets a reference to the raw <strong>User</strong> endpoint.
     /// </summary>
     public TogglUserRawEndpoint User { get; }
@@ -49,6 +54,7 @@ public class TogglTrackRawApi {
         Clients = new TogglClientsRawEndpoint(client);
         Entries = new TogglEntriesRawEndpoint(client);
         Projects = new TogglProjectsRawEndpoint(client);
+        Tags = new TogglTagsRawEndpoint(client);
         User = new TogglUserRawEndpoint(client);
         Workspaces = new TogglWorkspacesRawEndpoint(client);
     }

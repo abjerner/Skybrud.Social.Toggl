@@ -1,6 +1,4 @@
-﻿using Skybrud.Social.Toggl.Options.Track.Projects;
-using Skybrud.Social.Toggl.Responses.Track.Clients;
-using Skybrud.Social.Toggl.Responses.Track.Projects;
+﻿using Skybrud.Social.Toggl.Options.Track.Workspaces;
 using Skybrud.Social.Toggl.Responses.Track.Workspaces;
 
 namespace Skybrud.Social.Toggl.Endpoints.Track;
@@ -37,16 +35,30 @@ public class TogglWorkspacesEndpoint {
 
     #region Member methods
 
+    #region GetWorkspaces(...)
+
     /// <summary>
     /// Gets a list of workspaces the owner of the access token belongs to.
     /// </summary>
     /// <returns>An instance of <see cref="TogglWorkspaceListResponse"/> representing the response from the Toggl API.</returns>
-    /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md#get-workspaces</cref>
-    /// </see>
+    /// <remarks>This method is not mentioned by the Toggl Track API documentation.</remarks>
     public TogglWorkspaceListResponse GetWorkspaces() {
         return new TogglWorkspaceListResponse(Raw.GetWorkspaces());
     }
+
+    /// <summary>
+    /// Gets a list of workspaces of the authenticated user.
+    /// </summary>
+    /// <param name="options">The options describing the request to the API.</param>
+    /// <returns>An instance of <see cref="TogglWorkspaceListResponse"/> representing the response from the Toggl API.</returns>
+    /// <remarks>This method is not mentioned by the Toggl Track API documentation.</remarks>
+    public TogglWorkspaceListResponse GetWorkspaces(TogglGetWorkspacesOptions options) {
+        return new TogglWorkspaceListResponse(Raw.GetWorkspaces(options));
+    }
+
+    #endregion
+
+    #region GetWorkspace(...)
 
     /// <summary>
     /// Gets information about the workspace with the specified <paramref name="workspaceId"/>.
@@ -61,16 +73,18 @@ public class TogglWorkspacesEndpoint {
     }
 
     /// <summary>
-    /// Gets a list of all workspace clients.
+    /// Gets information about the workspace identified by the specified <paramref name="options"/>.
     /// </summary>
-    /// <param name="workspaceId">The ID of the workspace.</param>
-    /// <returns>An instance of <see cref="TogglClientListResponse"/> representing the response from the Toggl API.</returns>
+    /// <param name="options">The options describing the request to the API.</param>
+    /// <returns>An instance of <see cref="TogglWorkspaceResponse"/> representing the response from the Toggl API.</returns>
     /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md#get-workspace-clients</cref>
+    ///     <cref>https://developers.track.toggl.com/docs/api/workspaces#get-get-single-workspace</cref>
     /// </see>
-    public TogglClientListResponse GetClients(int workspaceId) {
-        return new TogglClientListResponse(Raw.GetClients(workspaceId));
+    public TogglWorkspaceResponse GetWorkspace(TogglGetWorkspaceOptions options) {
+        return new TogglWorkspaceResponse(Raw.GetWorkspace(options));
     }
+
+    #endregion
 
     #endregion
 

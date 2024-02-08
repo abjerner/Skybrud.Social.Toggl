@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json.Linq;
-using Skybrud.Essentials.Json.Newtonsoft;
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 using Skybrud.Essentials.Time;
 
@@ -12,7 +11,7 @@ namespace Skybrud.Social.Toggl.Models.Track.Projects;
 /// <see>
 ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md</cref>
 /// </see>
-public class TogglProject : JsonObjectBase {
+public class TogglProject : TogglObject {
 
     #region Properties
 
@@ -29,7 +28,7 @@ public class TogglProject : JsonObjectBase {
     /// <summary>
     /// Gets the ID of client the project belongs to.
     /// </summary>
-    public int ClientId { get; }
+    public int? ClientId { get; }
 
     /// <summary>
     /// Gets the name of the project.
@@ -67,9 +66,9 @@ public class TogglProject : JsonObjectBase {
     public EssentialsTime CreatedAt { get; }
 
     /// <summary>
-    /// Gets the ID of the color selected for the project.
+    /// Gets the HEX color code selected for the project.
     /// </summary>
-    public int Color { get; }
+    public string Color { get; }
 
     /// <summary>
     /// whether the estimated hours are automatically calculated based on task estimations or manually fixed based
@@ -78,14 +77,9 @@ public class TogglProject : JsonObjectBase {
     public bool AutoEstimates { get; }
 
     /// <summary>
-    /// <em>Not documentated in the Toggl API Documentation.</em>
+    /// <em>Not documented in the Toggl API Documentation.</em>
     /// </summary>
     public bool ActualHours { get; }
-
-    /// <summary>
-    /// <em>Not documentated in the Toggl API Documentation.</em>
-    /// </summary>
-    public string HexColor { get; }
 
     #endregion
 
@@ -97,19 +91,18 @@ public class TogglProject : JsonObjectBase {
     /// <param name="json">An instance of <see cref="JObject"/> representing the project.</param>
     protected TogglProject(JObject json) : base(json) {
         Id = json.GetInt32("id");
-        WorkspaceId = json.GetInt32("wid");
-        ClientId = json.GetInt32("cid");
+        WorkspaceId = json.GetInt32("workspace_id");
+        ClientId = json.GetInt32OrNull("client_id");
         Name = json.GetString("name")!;
         IsBillable = json.GetBoolean("billable");
         IsPrivate = json.GetBoolean("private");
         IsActive = json.GetBoolean("active");
         IsTemplate = json.GetBoolean("template");
-        At = json.GetString("at", EssentialsTime.Parse)!;
-        CreatedAt = json.GetString("created_at", EssentialsTime.Parse)!;
-        Color = json.GetInt32("color");
+        At = json.GetString("at", EssentialsTime.FromIso8601)!;
+        CreatedAt = json.GetString("created_at", EssentialsTime.FromIso8601)!;
+        Color = json.GetString("color")!;
         AutoEstimates = json.GetBoolean("auto_estimates");
         ActualHours = json.GetBoolean("actual_hours");
-        HexColor = json.GetString("hex_color")!;
     }
 
     #endregion

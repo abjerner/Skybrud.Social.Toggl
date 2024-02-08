@@ -62,14 +62,26 @@ public class TogglEntriesEndpoint {
     }
 
     /// <summary>
-    /// Creates a new time entry wqith the specified <paramref name="options"/>.
+    /// Returns a list of time entries of the authenticated user.
+    /// </summary>
+    /// <param name="options">The options describing the request to the API.</param>
+    /// <returns>An instance of <see cref="TogglEntryListResponse"/> representing the response.</returns>
+    /// <see>
+    ///     <cref>https://developers.track.toggl.com/docs/api/time_entries#get-timeentries</cref>
+    /// </see>
+    public TogglEntryListResponse GetEntries(TogglGetEntriesOptions options) {
+        return new TogglEntryListResponse(Raw.GetEntries(options));
+    }
+
+    /// <summary>
+    /// Creates a new time entry with the specified <paramref name="options"/>.
     /// </summary>
     /// <param name="options">Theoptions for the request to the Toggl API.</param>
     /// <returns>An instance of <see cref="TogglEntryResponse"/> representing the response.</returns>
     /// <see>
     ///     <cref>https://developers.track.toggl.com/docs/api/time_entries#post-timeentries</cref>
     /// </see>
-    public TogglEntryResponse CreateEntry(TogglCreateTimeEntryOptions options) {
+    public TogglEntryResponse CreateEntry(TogglCreateEntryOptions options) {
         return new TogglEntryResponse(Raw.CreateEntry(options));
     }
 
@@ -81,8 +93,20 @@ public class TogglEntriesEndpoint {
     /// <see>
     ///     <cref>https://developers.track.toggl.com/docs/api/time_entries#get-get-a-time-entry-by-id</cref>
     /// </see>
-    public TogglEntryResponse GetEntry(int entryId) {
+    public TogglEntryResponse GetEntry(long entryId) {
         return new TogglEntryResponse(Raw.GetEntry(entryId));
+    }
+
+    /// <summary>
+    /// gets information about the time entry identified by the specified <paramref name="options"/>.
+    /// </summary>
+    /// <param name="options">The options describing the request to the API.</param>
+    /// <returns>An instance of <see cref="TogglEntryResponse"/> representing the response.</returns>
+    /// <see>
+    ///     <cref>https://developers.track.toggl.com/docs/api/time_entries#get-get-a-time-entry-by-id</cref>
+    /// </see>
+    public TogglEntryResponse GetEntry(TogglGetEntryOptions options) {
+        return new TogglEntryResponse(Raw.GetEntry(options));
     }
 
     #endregion

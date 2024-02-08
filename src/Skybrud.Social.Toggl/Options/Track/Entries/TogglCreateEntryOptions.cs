@@ -17,7 +17,7 @@ namespace Skybrud.Social.Toggl.Options.Track.Entries;
 /// <see>
 ///     <cref>https://developers.track.toggl.com/docs/api/time_entries#post-timeentries</cref>
 /// </see>
-public class TogglCreateTimeEntryOptions : TogglTrackHttpRequestOptions {
+public class TogglCreateEntryOptions : TogglTrackHttpRequestOptions {
 
     #region Properties
 
@@ -83,6 +83,7 @@ public class TogglCreateTimeEntryOptions : TogglTrackHttpRequestOptions {
     /// <inheritdoc />
     public override IHttpRequest GetRequest() {
 
+        if (WorkspaceId == 0) throw new PropertyNotSetException(nameof(WorkspaceId));
         if (Start == null) throw new PropertyNotSetException(nameof(Start));
 
         JObject body = JObject.FromObject(this);

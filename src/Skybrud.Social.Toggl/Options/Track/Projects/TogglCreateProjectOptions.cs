@@ -6,8 +6,11 @@ using Skybrud.Social.Toggl.Http;
 namespace Skybrud.Social.Toggl.Options.Track.Projects;
 
 /// <summary>
-/// Options for request to create a new Toggl project.
+/// Options describing a request for creating a new Toggl project.
 /// </summary>
+/// <see>
+///     <cref>https://developers.track.toggl.com/docs/api/projects#post-workspaceprojects</cref>
+/// </see>
 public class TogglCreateProjectOptions : TogglTrackHttpRequestOptions {
 
     #region Properties
@@ -49,7 +52,7 @@ public class TogglCreateProjectOptions : TogglTrackHttpRequestOptions {
     /// <param name="workspaceId">The ID of the parent workspace.</param>
     /// <param name="clientId">The ID of the parent client.</param>
     /// <param name="name">The name of the project.</param>
-    public TogglCreateProjectOptions(int workspaceId, int clientId, string name) {
+    public TogglCreateProjectOptions(int workspaceId, int? clientId, string name) {
         WorkspaceId = workspaceId;
         ClientId = clientId;
         Name = name;

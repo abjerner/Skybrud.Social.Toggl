@@ -1,4 +1,5 @@
 ﻿using System;
+using Skybrud.Essentials.Http;
 using Skybrud.Social.Toggl.Models.Track.Clients;
 using Skybrud.Social.Toggl.Options.Track.Clients;
 using Skybrud.Social.Toggl.Responses;
@@ -114,11 +115,6 @@ public class TogglClientsEndpoint {
         return new TogglClientResponse(Raw.GetClient(options));
     }
 
-
-
-
-
-
     /// <summary>
     /// Updates the client matching the specified <paramref name="workspaceId"/> and <paramref name="clientId"/>.
     /// </summary>
@@ -159,6 +155,80 @@ public class TogglClientsEndpoint {
     }
 
     /// <summary>
+    /// Archives the client matching the specified <paramref name="workspaceId"/> and <paramref name="clientId"/>.
+    /// </summary>
+    /// <param name="workspaceId">The ID of the parent workspace.</param>
+    /// <param name="clientId">The ID of the client to be archived.</param>
+    /// <returns>An instance of <see cref="TogglClientResponse"/> representing the response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://developers.track.toggl.com/docs/api/clients#post-archives-client</cref>
+    /// </see>
+    public TogglClientResponse ArchiveClient(int workspaceId, int clientId) {
+        return new TogglClientResponse(Raw.ArchiveClient(workspaceId, clientId));
+    }
+
+    /// <summary>
+    /// Archives the specified <paramref name="client"/>.
+    /// </summary>
+    /// <param name="client">The client to be archived.</param>
+    /// <returns>An instance of <see cref="TogglClientResponse"/> representing the response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://developers.track.toggl.com/docs/api/clients#post-archives-client</cref>
+    /// </see>
+    public TogglClientResponse ArchiveClient(TogglClient client) {
+        return new TogglClientResponse(Raw.ArchiveClient(client));
+    }
+
+    /// <summary>
+    /// Archives the client identified by the specified <paramref name="options"/>.
+    /// </summary>
+    /// <param name="options">The options for the request to the API.</param>
+    /// <returns>An instance of <see cref="TogglClientResponse"/> representing the response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://developers.track.toggl.com/docs/api/clients#post-archives-client</cref>
+    /// </see>
+    public TogglClientResponse ArchiveClient(TogglArchiveClientOptions options) {
+        return new TogglClientResponse(Raw.ArchiveClient(options));
+    }
+
+    /// <summary>
+    /// Restores the client matching the specified <paramref name="workspaceId"/> and <paramref name="clientId"/>.
+    /// </summary>
+    /// <param name="workspaceId">The ID of the parent workspace.</param>
+    /// <param name="clientId">The ID of the client to be restored.</param>
+    /// <returns>An instance of <see cref="TogglClientResponse"/> representing the response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://developers.track.toggl.com/docs/api/clients#post-restores-client-and-related-projects</cref>
+    /// </see>
+    public TogglClientResponse RestoreClient(int workspaceId, int clientId) {
+        return new TogglClientResponse(Raw.RestoreClient(workspaceId, clientId));
+    }
+
+    /// <summary>
+    /// Restores the specified <paramref name="client"/>.
+    /// </summary>
+    /// <param name="client">The client to be restored.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://developers.track.toggl.com/docs/api/clients#post-restores-client-and-related-projects</cref>
+    /// </see>
+    public TogglClientResponse RestoreClient(TogglClient client) {
+        return new TogglClientResponse(Raw.RestoreClient(client));
+    }
+
+    /// <summary>
+    /// Restores the client identified by the specified <paramref name="options"/>.
+    /// </summary>
+    /// <param name="options">The options for the request to the API.</param>
+    /// <returns>An instance of <see cref="TogglClientResponse"/> representing the response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://developers.track.toggl.com/docs/api/clients#post-restores-client-and-related-projects</cref>
+    /// </see>
+    public TogglClientResponse RestoreClient(TogglRestoreClientOptions options) {
+        return new TogglClientResponse(Raw.RestoreClient(options));
+    }
+
+    /// <summary>
     /// Deletes the client with the specified <paramref name="clientId"/>.
     /// </summary>
     /// <param name="workspaceId">The ID of the parent workspace.</param>
@@ -181,6 +251,18 @@ public class TogglClientsEndpoint {
     /// </see>
     public TogglResponse DeleteClient(TogglClient client) {
         return new TogglResponse(Raw.DeleteClient(client));
+    }
+
+    /// <summary>
+    /// Deletes the client identified by the specified <paramref name="options"/>.
+    /// </summary>
+    /// <param name="options">The options for the request to the API.</param>
+    /// <returns>An instance of <see cref="TogglResponse"/> representing the response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://developers.track.toggl.com/docs/api/clients#delete-delete-client</cref>
+    /// </see>
+    public TogglResponse DeleteClient(TogglDeleteClientOptions options) {
+        return new TogglResponse(Raw.DeleteClient(options));
     }
 
     #endregion

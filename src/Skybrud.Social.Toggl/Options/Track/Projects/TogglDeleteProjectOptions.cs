@@ -1,25 +1,29 @@
 ﻿using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
-using Skybrud.Essentials.Http.Options;
-using Skybrud.Social.Toggl.Contants;
+using Skybrud.Social.Toggl.Http;
 using Skybrud.Social.Toggl.Models.Track.Projects;
 
 namespace Skybrud.Social.Toggl.Options.Track.Projects;
 
 /// <summary>
-/// Options for a request to delete a Toggl project.
+/// Options describing a request for deleting a Toggl project.
 /// </summary>
 /// <see>
-///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md#delete-a-project</cref>
+///     <cref>https://developers.track.toggl.com/docs/api/projects#delete-workspaceproject</cref>
 /// </see>
-public class TogglDeleteProjectOptions : IHttpRequestOptions {
+public class TogglDeleteProjectOptions : TogglTrackHttpRequestOptions {
 
     #region Properties
 
     /// <summary>
+    /// Gets or sets the ID of the parent workspace.
+    /// </summary>
+    public int WorkspaceId { get; set; }
+
+    /// <summary>
     /// Gets or sets the ID of the project to be deleted.
     /// </summary>
-    public int Id { get; set; }
+    public int ProjectId { get; set; }
 
     #endregion
 
@@ -31,11 +35,13 @@ public class TogglDeleteProjectOptions : IHttpRequestOptions {
     public TogglDeleteProjectOptions() { }
 
     /// <summary>
-    /// Initializes a new instance from the specified <paramref name="projectId"/>.
+    /// Initializes a new instance based on the specified <paramref name="workspaceId"/> and <paramref name="projectId"/>.
     /// </summary>
+    /// <param name="workspaceId">The ID of the parent workspace.</param>
     /// <param name="projectId">The ID of the project to be deleted.</param>
-    public TogglDeleteProjectOptions(int projectId) {
-        Id = projectId;
+    public TogglDeleteProjectOptions(int workspaceId, int projectId) {
+        WorkspaceId = workspaceId;
+        ProjectId = projectId;
     }
 
     /// <summary>
@@ -43,7 +49,8 @@ public class TogglDeleteProjectOptions : IHttpRequestOptions {
     /// </summary>
     /// <param name="project">The project to be deleted.</param>
     public TogglDeleteProjectOptions(TogglProject project) {
-        Id = project.Id;
+        WorkspaceId = project.WorkspaceId;
+        ProjectId = project.Id;
     }
 
     #endregion
@@ -51,9 +58,10 @@ public class TogglDeleteProjectOptions : IHttpRequestOptions {
     #region Member methods
 
     /// <inheritdoc />
-    public IHttpRequest GetRequest() {
-        if (Id == 0) throw new PropertyNotSetException(nameof(Id));
-        return HttpRequest.Delete($"https://{TogglConstants.Track.HostName}/api/v8/projects/{Id}");
+    public override IHttpRequest GetRequest() {
+        if (WorkspaceId == 0) throw new PropertyNotSetException(nameof(WorkspaceId));
+        if (ProjectId == 0) throw new PropertyNotSetException(nameof(ProjectId));
+        return HttpRequest.Delete($"/api/v9/workspaces/{WorkspaceId}/projects/{ProjectId}");
     }
 
     #endregion

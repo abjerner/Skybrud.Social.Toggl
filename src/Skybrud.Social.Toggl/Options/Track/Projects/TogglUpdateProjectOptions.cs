@@ -1,27 +1,33 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
-using Skybrud.Essentials.Http.Options;
-using Skybrud.Social.Toggl.Contants;
+using Skybrud.Social.Toggl.Http;
 using Skybrud.Social.Toggl.Models.Track.Projects;
 
 namespace Skybrud.Social.Toggl.Options.Track.Projects;
 
 /// <summary>
-/// Options for a request to update an existing Toggl project.
+/// Options describing a request for updating a Toggl project.
 /// </summary>
 /// <see>
-///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md#update-project-data</cref>
+///     <cref>https://developers.track.toggl.com/docs/api/projects#put-workspaceproject</cref>
 /// </see>
-public class TogglUpdateProjectOptions : IHttpRequestOptions {
+public class TogglUpdateProjectOptions : TogglTrackHttpRequestOptions {
 
     #region Properties
+
+    /// <summary>
+    /// Gets or sets the ID of the parent workspace.
+    /// </summary>
+    [JsonIgnore]
+    public int WorkspaceId { get; set; }
 
     /// <summary>
     /// Gets the ID of the project.
     /// </summary>
     [JsonIgnore]
-    public int Id { get; }
+    public int ProjectId { get; }
 
     /// <summary>
     /// Gets or sets the new name of the project.
@@ -32,8 +38,8 @@ public class TogglUpdateProjectOptions : IHttpRequestOptions {
     /// <summary>
     /// Gets or sets the new client ID of the project.
     /// </summary>
-    [JsonProperty("cid")]
-    public int ClientId { get; set; }
+    [JsonProperty("client_id")]
+    public int? ClientId { get; set; }
 
     /// <summary>
     /// Gets or sets whether the project is active.
@@ -56,11 +62,11 @@ public class TogglUpdateProjectOptions : IHttpRequestOptions {
     /// </summary>
     /// <param name="project">The project to be updated.</param>
     public TogglUpdateProjectOptions(TogglProject project) {
-        Id = project.Id;
+        ProjectId = project.Id;
         ClientId = project.ClientId;
         Name = project.Name;
         IsActive = project.IsActive;
-        Color = project.Color.ToString();
+        Color = project.Color;
     }
 
     #endregion
@@ -68,13 +74,17 @@ public class TogglUpdateProjectOptions : IHttpRequestOptions {
     #region Member methods
 
     /// <inheritdoc />
-    public IHttpRequest GetRequest() {
+    public override IHttpRequest GetRequest() {
 
-        JObject body = new () {
-            {"project", JObject.FromObject(this)}
-        };
+        // Input validation
+        if (WorkspaceId == 0) throw new PropertyNotSetException(nameof(WorkspaceId));
+        if (ProjectId == 0) throw new PropertyNotSetException(nameof(ProjectId));
 
-        return HttpRequest.Put($"https://{TogglConstants.Track.HostName}//api/v8/projects/{Id}", body);
+        // Serialize the request body
+        JObject body = JObject.FromObject(this);
+
+        // Initialize a new PUT request
+        return HttpRequest.Put($"/api/v9/workspaces/{WorkspaceId}/projects/{ProjectId}", body);
 
     }
 

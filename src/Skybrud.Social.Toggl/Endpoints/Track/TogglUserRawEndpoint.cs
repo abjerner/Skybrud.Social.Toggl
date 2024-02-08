@@ -1,6 +1,5 @@
 ﻿using System.Threading.Tasks;
 using Skybrud.Essentials.Http;
-using Skybrud.Essentials.Http.Client;
 using Skybrud.Social.Toggl.Http;
 
 namespace Skybrud.Social.Toggl.Endpoints.Track;

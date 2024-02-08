@@ -153,45 +153,6 @@ public class TogglClientsRawEndpoint {
     }
 
     /// <summary>
-    /// Deletes the client with the specified <paramref name="clientId"/>.
-    /// </summary>
-    /// <param name="workspaceId">The ID of the parent workspace.</param>
-    /// <param name="clientId">The ID of the client.</param>
-    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
-    /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#delete-a-client</cref>
-    /// </see>
-    public IHttpResponse DeleteClient(int workspaceId, int clientId) {
-        return DeleteClient(new TogglDeleteClientOptions(workspaceId, clientId));
-    }
-
-    /// <summary>
-    /// Deletes the specified <paramref name="client"/>.
-    /// </summary>
-    /// <param name="client">The client to be deleted.</param>
-    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
-    /// <see>
-    ///     <cref>https://developers.track.toggl.com/docs/api/clients#delete-delete-client</cref>
-    /// </see>
-    public IHttpResponse DeleteClient(TogglClient client) {
-        if (client == null) throw new ArgumentNullException(nameof(client));
-        return DeleteClient(new TogglDeleteClientOptions(client));
-    }
-
-    /// <summary>
-    /// Deletes the client identified by the specified <paramref name="options"/>.
-    /// </summary>
-    /// <param name="options">The options for the request to the API.</param>
-    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
-    /// <see>
-    ///     <cref>https://developers.track.toggl.com/docs/api/clients#delete-delete-client</cref>
-    /// </see>
-    public IHttpResponse DeleteClient(TogglDeleteClientOptions options) {
-        if (options == null) throw new ArgumentNullException(nameof(options));
-        return Client.GetResponse(options);
-    }
-
-    /// <summary>
     /// Archives the client matching the specified <paramref name="workspaceId"/> and <paramref name="clientId"/>.
     /// </summary>
     /// <param name="workspaceId">The ID of the parent workspace.</param>
@@ -218,7 +179,7 @@ public class TogglClientsRawEndpoint {
     }
 
     /// <summary>
-    /// Archives the client indentified by the specified <paramref name="options"/>.
+    /// Archives the client identified by the specified <paramref name="options"/>.
     /// </summary>
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
@@ -257,7 +218,7 @@ public class TogglClientsRawEndpoint {
     }
 
     /// <summary>
-    /// Restores the client indentified by the specified <paramref name="options"/>.
+    /// Restores the client identified by the specified <paramref name="options"/>.
     /// </summary>
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
@@ -265,6 +226,45 @@ public class TogglClientsRawEndpoint {
     ///     <cref>https://developers.track.toggl.com/docs/api/clients#post-restores-client-and-related-projects</cref>
     /// </see>
     public IHttpResponse RestoreClient(TogglRestoreClientOptions options) {
+        if (options == null) throw new ArgumentNullException(nameof(options));
+        return Client.GetResponse(options);
+    }
+
+    /// <summary>
+    /// Deletes the client with the specified <paramref name="clientId"/>.
+    /// </summary>
+    /// <param name="workspaceId">The ID of the parent workspace.</param>
+    /// <param name="clientId">The ID of the client.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#delete-a-client</cref>
+    /// </see>
+    public IHttpResponse DeleteClient(int workspaceId, int clientId) {
+        return DeleteClient(new TogglDeleteClientOptions(workspaceId, clientId));
+    }
+
+    /// <summary>
+    /// Deletes the specified <paramref name="client"/>.
+    /// </summary>
+    /// <param name="client">The client to be deleted.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://developers.track.toggl.com/docs/api/clients#delete-delete-client</cref>
+    /// </see>
+    public IHttpResponse DeleteClient(TogglClient client) {
+        if (client == null) throw new ArgumentNullException(nameof(client));
+        return DeleteClient(new TogglDeleteClientOptions(client));
+    }
+
+    /// <summary>
+    /// Deletes the client identified by the specified <paramref name="options"/>.
+    /// </summary>
+    /// <param name="options">The options for the request to the API.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://developers.track.toggl.com/docs/api/clients#delete-delete-client</cref>
+    /// </see>
+    public IHttpResponse DeleteClient(TogglDeleteClientOptions options) {
         if (options == null) throw new ArgumentNullException(nameof(options));
         return Client.GetResponse(options);
     }

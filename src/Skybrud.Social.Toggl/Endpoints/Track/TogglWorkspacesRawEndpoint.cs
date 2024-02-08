@@ -1,8 +1,7 @@
 ﻿using System;
 using Skybrud.Essentials.Http;
-using Skybrud.Social.Toggl.Contants;
 using Skybrud.Social.Toggl.Http;
-using Skybrud.Social.Toggl.Options.Track.Projects;
+using Skybrud.Social.Toggl.Options.Track.Workspaces;
 
 namespace Skybrud.Social.Toggl.Endpoints.Track;
 
@@ -33,16 +32,29 @@ public class TogglWorkspacesRawEndpoint {
 
     #region Member methods
 
+    #region GetWorkspaces(...)
+
     /// <summary>
-    /// Gets a list of workspaces the owner of the access token belongs to.
+    /// Gets a list of workspaces of the authenticated user.
     /// </summary>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
-    /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md#get-workspaces</cref>
-    /// </see>
     public IHttpResponse GetWorkspaces() {
-        return Client.Get($"https://{TogglConstants.Track.HostName}/api/v8/workspaces");
+        return GetWorkspaces(new TogglGetWorkspacesOptions());
     }
+
+    /// <summary>
+    /// Gets a list of workspaces of the authenticated user.
+    /// </summary>
+    /// <param name="options">The options describing the request to the API.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+    public IHttpResponse GetWorkspaces(TogglGetWorkspacesOptions options) {
+        if (options is null) throw new ArgumentNullException(nameof(options));
+        return Client.GetResponse(options);
+    }
+
+    #endregion
+
+    #region GetWorkspace(...)
 
     /// <summary>
     /// Gets information about the workspace with the specified <paramref name="workspaceId"/>.
@@ -50,35 +62,26 @@ public class TogglWorkspacesRawEndpoint {
     /// <param name="workspaceId">The ID of the workspace.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
     /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md#get-single-workspace</cref>
+    ///     <cref>https://developers.track.toggl.com/docs/api/workspaces#get-get-single-workspace</cref>
     /// </see>
     public IHttpResponse GetWorkspace(int workspaceId) {
-        return Client.Get($"https://{TogglConstants.Track.HostName}/api/v8/workspaces/{workspaceId}");
+        return GetWorkspace(new TogglGetWorkspaceOptions(workspaceId));
     }
 
     /// <summary>
-    /// Gets a list of all workspace clients.
+    /// Gets information about the workspace identified by the specified <paramref name="options"/>.
     /// </summary>
-    /// <param name="workspaceId">The ID of the workspace.</param>
+    /// <param name="options">The options describing the request to the API.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
     /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md#get-workspace-clients</cref>
+    ///     <cref>https://developers.track.toggl.com/docs/api/workspaces#get-get-single-workspace</cref>
     /// </see>
-    public IHttpResponse GetClients(int workspaceId) {
-        return Client.Get($"https://{TogglConstants.Track.HostName}/api/v8/workspaces/{workspaceId}/clients");
+    public IHttpResponse GetWorkspace(TogglGetWorkspaceOptions options) {
+        if (options is null) throw new ArgumentNullException(nameof(options));
+        return Client.GetResponse(options);
     }
 
-    /// <summary>
-    /// Gets a list of tags of the workspace.
-    /// </summary>
-    /// <param name="workspaceId">The ID of the workspace.</param>
-    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
-    /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md#get-workspace-tags</cref>
-    /// </see>
-    public IHttpResponse GetTags(int workspaceId) {
-        return Client.Get($"https://{TogglConstants.Track.HostName}/api/v8/workspaces/{workspaceId}/tags");
-    }
+    #endregion
 
     #endregion
 
