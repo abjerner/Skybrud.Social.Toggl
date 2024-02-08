@@ -37,6 +37,35 @@ public class TogglEntriesRawEndpoint {
     #region Member methods
 
     /// <summary>
+    /// Returns a list of time entries of the authenticated user. Only time entries started during the last 9 days are returned.
+    /// </summary>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+    /// <see>
+    ///     <cref>https://developers.track.toggl.com/docs/api/time_entries#get-timeentries</cref>
+    /// </see>
+    public IHttpResponse GetEntries() {
+        return Client.Get($"https://{TogglConstants.Track.HostName}/api/v9/me/time_entries");
+    }
+
+    /// <summary>
+    /// Returns a list of time entries of the authenticated user.
+    /// </summary>
+    /// <param name="startDate">Only time entries after this date are returned.</param>
+    /// <param name="endDate">Only time entries before this date are returned.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+    /// <see>
+    ///     <cref>https://developers.track.toggl.com/docs/api/time_entries#get-timeentries</cref>
+    /// </see>
+    public IHttpResponse GetEntries(EssentialsTime startDate, EssentialsTime endDate) {
+        if (startDate == null) throw new ArgumentNullException(nameof(startDate));
+        if (endDate == null) throw new ArgumentNullException(nameof(endDate));
+        return Client.Get($"https://{TogglConstants.Track.HostName}/api/v9/me/time_entries", new HttpQueryString {
+            {"start_date", startDate.ToString(Iso8601Constants.DateTimeSeconds)},
+            {"end_date", endDate.ToString(Iso8601Constants.DateTimeSeconds)}
+        });
+    }
+
+    /// <summary>
     /// Creates a new time entry wqith the specified <paramref name="options"/>.
     /// </summary>
     /// <param name="options">Theoptions for the request to the Toggl API.</param>
@@ -58,35 +87,6 @@ public class TogglEntriesRawEndpoint {
     /// </see>
     public IHttpResponse GetEntry(int entryId) {
         return Client.Get($"https://{TogglConstants.Track.HostName}/api/v9/me/time_entries/{entryId}");
-    }
-
-    /// <summary>
-    /// Gets a list of time entries of the authenticated user. Only time entries started during the last 9 days are returned.
-    /// </summary>
-    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md#get-time-entries-started-in-a-specific-time-range</cref>
-    /// </see>
-    public IHttpResponse GetEntries() {
-        return Client.Get($"https://{TogglConstants.Track.HostName}/api/v8/time_entries");
-    }
-
-    /// <summary>
-    /// Gets a list of time entries of the authenticated user.
-    /// </summary>
-    /// <param name="startDate">Only time entries after this date are returned.</param>
-    /// <param name="endDate">Only time entries before this date are returned.</param>
-    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md#get-time-entries-started-in-a-specific-time-range</cref>
-    /// </see>
-    public IHttpResponse GetEntries(EssentialsTime startDate, EssentialsTime endDate) {
-        if (startDate == null) throw new ArgumentNullException(nameof(startDate));
-        if (endDate == null) throw new ArgumentNullException(nameof(endDate));
-        return Client.Get($"https://{TogglConstants.Track.HostName}/api/v8/time_entries", new HttpQueryString {
-            {"start_date", startDate.ToString(Iso8601Constants.DateTimeSeconds)},
-            {"end_date", endDate.ToString(Iso8601Constants.DateTimeSeconds)}
-        });
     }
 
     #endregion

@@ -38,6 +38,30 @@ public class TogglEntriesEndpoint {
     #region Member methods
 
     /// <summary>
+    /// Returns a list of time entries of the authenticated user. Only time entries started during the last 9 days are returned.
+    /// </summary>
+    /// <returns>An instance of <see cref="TogglEntryListResponse"/> representing the response.</returns>
+    /// <see>
+    ///     <cref>https://developers.track.toggl.com/docs/api/time_entries#get-timeentries</cref>
+    /// </see>
+    public TogglEntryListResponse GetEntries() {
+        return new TogglEntryListResponse(Raw.GetEntries());
+    }
+
+    /// <summary>
+    /// Returns a list of time entries of the authenticated user.
+    /// </summary>
+    /// <param name="startDate">Only time entries after this date are returned.</param>
+    /// <param name="endDate">Only time entries before this date are returned.</param>
+    /// <returns>An instance of <see cref="TogglEntryListResponse"/> representing the response.</returns>
+    /// <see>
+    ///     <cref>https://developers.track.toggl.com/docs/api/time_entries#get-timeentries</cref>
+    /// </see>
+    public TogglEntryListResponse GetEntries(EssentialsTime startDate, EssentialsTime endDate) {
+        return new TogglEntryListResponse(Raw.GetEntries(startDate, endDate));
+    }
+
+    /// <summary>
     /// Creates a new time entry wqith the specified <paramref name="options"/>.
     /// </summary>
     /// <param name="options">Theoptions for the request to the Toggl API.</param>
@@ -59,19 +83,6 @@ public class TogglEntriesEndpoint {
     /// </see>
     public TogglEntryResponse GetEntry(int entryId) {
         return new TogglEntryResponse(Raw.GetEntry(entryId));
-    }
-
-    /// <summary>
-    /// Gets a list of time entries of the authenticated user.
-    /// </summary>
-    /// <param name="startDate">Only time entries after this date are returned.</param>
-    /// <param name="endDate">Only time entries before this date are returned.</param>
-    /// <returns>An instance of <see cref="TogglEntryListResponse"/> representing the response.</returns>
-    /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md#get-time-entries-started-in-a-specific-time-range</cref>
-    /// </see>
-    public TogglEntryListResponse GetEntries(EssentialsTime startDate, EssentialsTime endDate) {
-        return new TogglEntryListResponse(Raw.GetEntries(startDate, endDate));
     }
 
     #endregion
