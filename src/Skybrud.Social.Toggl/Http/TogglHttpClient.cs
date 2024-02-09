@@ -1,4 +1,5 @@
-﻿using Skybrud.Essentials.Http;
+﻿using System.Threading.Tasks;
+using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Client;
 using Skybrud.Essentials.Http.Options;
 using Skybrud.Essentials.Security;
@@ -54,14 +55,11 @@ public class TogglHttpClient : HttpClient {
     }
 
     /// <summary>
-    /// Returns the response of the request identified by the specified <paramref name="options"/>.
+    /// Virtual method that can be used for configuring a request.
     /// </summary>
-    /// <param name="options">The options for the request to the API.</param>
-    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
-    public override IHttpResponse GetResponse(IHttpRequestOptions options) {
-
-        // Get the request based on the options
-        IHttpRequest request = options.GetRequest();
+    /// <param name="options">The options describing the request.</param>
+    /// <param name="request">The request.</param>
+    protected virtual void PrepareHttpRequest(IHttpRequestOptions options, IHttpRequest request) {
 
         // Append the scheme and host if not already present
         switch (options) {
@@ -73,8 +71,43 @@ public class TogglHttpClient : HttpClient {
         // Prepare the request
         PrepareHttpRequest(request);
 
+    }
+
+    /// <summary>
+    /// Returns the response of the request identified by the specified <paramref name="options"/>.
+    /// </summary>
+    /// <param name="options">The options for the request to the API.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+    public override IHttpResponse GetResponse(IHttpRequestOptions options) {
+
+        // Get the request based on the options
+        IHttpRequest request = options.GetRequest();
+
+        // Prepare the request
+        PrepareHttpRequest(options, request);
+
         // Send the request to the API and return the response
         return request.GetResponse();
+
+    }
+
+    /// <summary>
+    /// Returns the response of the request identified by the specified <paramref name="options"/>.
+    /// </summary>
+    /// <param name="options">The options for the request to the API.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response.</returns>
+    public new async Task<IHttpResponse> GetResponseAsync(IHttpRequestOptions options) {
+
+        // TODO: should use "override" instead of "new", but base method currently isn't "virtual"
+
+        // Get the request based on the options
+        IHttpRequest request = options.GetRequest();
+
+        // Prepare the request
+        PrepareHttpRequest(options, request);
+
+        // Send the request to the API and return the response
+        return await request.GetResponseAsync();
 
     }
 

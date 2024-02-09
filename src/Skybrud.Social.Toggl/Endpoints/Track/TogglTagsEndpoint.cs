@@ -1,4 +1,5 @@
-﻿using Skybrud.Social.Toggl.Options.Track.Tags;
+﻿using System.Threading.Tasks;
+using Skybrud.Social.Toggl.Options.Track.Tags;
 using Skybrud.Social.Toggl.Responses.Track.Tag;
 
 namespace Skybrud.Social.Toggl.Endpoints.Track;
@@ -57,6 +58,30 @@ public class TogglTagsEndpoint {
     /// </see>
     public TogglTagListResponse GetTags(TogglGetTagsOptions options) {
         return new TogglTagListResponse(Raw.GetTags(options));
+    }
+
+    /// <summary>
+    /// Returns a list of all tags of the workspace with the specified <paramref name="workspaceId."/>
+    /// </summary>
+    /// <param name="workspaceId">The ID of the workspace.</param>
+    /// <returns>An instance of <see cref="TogglTagListResponse"/> representing the response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://developers.track.toggl.com/docs/api/tags#get-tags</cref>
+    /// </see>
+    public async Task<TogglTagListResponse> GetTagsAsync(int workspaceId) {
+        return new TogglTagListResponse(await Raw.GetTagsAsync(workspaceId));
+    }
+
+    /// <summary>
+    /// Returns a list of all tags of the workspace identified by the specified <paramref name="options"/>.
+    /// </summary>
+    /// <param name="options">The options describing the request to the API.</param>
+    /// <returns>An instance of <see cref="TogglTagListResponse"/> representing raw response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://developers.track.toggl.com/docs/api/tags#get-tags</cref>
+    /// </see>
+    public async Task<TogglTagListResponse> GetTagsAsync(TogglGetTagsOptions options) {
+        return new TogglTagListResponse(await Raw.GetTagsAsync(options));
     }
 
     #endregion
