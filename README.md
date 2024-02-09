@@ -28,16 +28,16 @@
 
 ## Installation
 
-The package is only available via [**NuGet**](https://www.nuget.org/packages/Skybrud.Social.Toggl/1.0.0-beta005). To install the package, you can either use the .NET CLI:
+The package is only available via [**NuGet**](https://www.nuget.org/packages/Skybrud.Social.Toggl/1.0.0-beta006). To install the package, you can either use the .NET CLI:
 
 ```
-dotnet add package Skybrud.Social.Toggl --version 1.0.0-beta005
+dotnet add package Skybrud.Social.Toggl --version 1.0.0-beta006
 ```
 
 or the NuGet Package Manager:
 
 ```
-Install-Package Skybrud.Social.Toggl -Version 1.0.0-beta005
+Install-Package Skybrud.Social.Toggl -Version 1.0.0-beta006
 ```
 
 
