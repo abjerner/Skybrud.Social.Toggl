@@ -9,7 +9,7 @@ namespace Skybrud.Social.Toggl.Models.Track.Workspaces;
 /// Class representing a Toggl workspace.
 /// </summary>
 /// <see>
-///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md</cref>
+///     <cref>https://developers.track.toggl.com/docs/api/workspaces</cref>
 /// </see>
 public class TogglWorkspace : TogglObject {
 

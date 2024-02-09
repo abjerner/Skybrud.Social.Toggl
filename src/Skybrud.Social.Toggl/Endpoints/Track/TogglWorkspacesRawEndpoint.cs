@@ -10,7 +10,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track;
 /// Raw implementation of the <strong>Workspaces</strong> endpoint.
 /// </summary>
 /// <see>
-///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md</cref>
+///     <cref>https://developers.track.toggl.com/docs/api/workspaces</cref>
 /// </see>
 public class TogglWorkspacesRawEndpoint {
 

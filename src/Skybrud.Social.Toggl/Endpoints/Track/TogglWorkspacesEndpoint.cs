@@ -8,7 +8,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track;
 /// Implementation of the <strong>Workspaces</strong> endpoint.
 /// </summary>
 /// <see>
-///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md</cref>
+///     <cref>https://developers.track.toggl.com/docs/api/workspaces</cref>
 /// </see>
 public class TogglWorkspacesEndpoint {
 
@@ -90,7 +90,7 @@ public class TogglWorkspacesEndpoint {
     /// <param name="workspaceId">The ID of the workspace.</param>
     /// <returns>An instance of <see cref="TogglWorkspaceResponse"/> representing the response from the Toggl API.</returns>
     /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md#get-single-workspace</cref>
+    ///     <cref>https://developers.track.toggl.com/docs/api/workspaces#get-get-single-workspace</cref>
     /// </see>
     public TogglWorkspaceResponse GetWorkspace(int workspaceId) {
         return new TogglWorkspaceResponse(Raw.GetWorkspace(workspaceId));
@@ -118,7 +118,7 @@ public class TogglWorkspacesEndpoint {
     /// <param name="workspaceId">The ID of the workspace.</param>
     /// <returns>An instance of <see cref="TogglWorkspaceResponse"/> representing the response from the Toggl API.</returns>
     /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/workspaces.md#get-single-workspace</cref>
+    ///     <cref>https://developers.track.toggl.com/docs/api/workspaces#get-get-single-workspace</cref>
     /// </see>
     public async Task<TogglWorkspaceResponse> GetWorkspaceAsync(int workspaceId) {
         return new TogglWorkspaceResponse(await Raw.GetWorkspaceAsync(workspaceId));

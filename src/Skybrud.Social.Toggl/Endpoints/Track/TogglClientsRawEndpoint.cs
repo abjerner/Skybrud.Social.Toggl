@@ -485,7 +485,7 @@ public class TogglClientsRawEndpoint {
     /// <param name="clientId">The ID of the client.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
     /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#delete-a-client</cref>
+    ///     <cref>https://developers.track.toggl.com/docs/api/clients/index.html#delete-delete-client</cref>
     /// </see>
     public IHttpResponse DeleteClient(int workspaceId, int clientId) {
         return DeleteClient(new TogglDeleteClientOptions(workspaceId, clientId));
@@ -528,7 +528,7 @@ public class TogglClientsRawEndpoint {
     /// <param name="clientId">The ID of the client.</param>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
     /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#delete-a-client</cref>
+    ///     <cref>https://developers.track.toggl.com/docs/api/clients/index.html#delete-delete-client</cref>
     /// </see>
     public async Task<IHttpResponse> DeleteClientAsync(int workspaceId, int clientId) {
         return await DeleteClientAsync(new TogglDeleteClientOptions(workspaceId, clientId));

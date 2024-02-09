@@ -474,7 +474,7 @@ public class TogglClientsEndpoint {
     /// <param name="clientId">The ID of the client.</param>
     /// <returns>An instance of <see cref="TogglResponse"/> representing the response from the Toggl API.</returns>
     /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#delete-a-client</cref>
+    ///     <cref>https://developers.track.toggl.com/docs/api/clients/index.html#delete-delete-client</cref>
     /// </see>
     public TogglResponse DeleteClient(int workspaceId, int clientId) {
         return new TogglResponse(Raw.DeleteClient(workspaceId, clientId));
@@ -486,7 +486,7 @@ public class TogglClientsEndpoint {
     /// <param name="client">The client to be deleted.</param>
     /// <returns>An instance of <see cref="TogglResponse"/> representing the response from the Toggl API.</returns>
     /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#delete-a-client</cref>
+    ///     <cref>https://developers.track.toggl.com/docs/api/clients/index.html#delete-delete-client</cref>
     /// </see>
     public TogglResponse DeleteClient(TogglClient client) {
         return new TogglResponse(Raw.DeleteClient(client));
@@ -498,7 +498,7 @@ public class TogglClientsEndpoint {
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="TogglResponse"/> representing the response from the Toggl API.</returns>
     /// <see>
-    ///     <cref>https://developers.track.toggl.com/docs/api/clients#delete-delete-client</cref>
+    ///     <cref>https://developers.track.toggl.com/docs/api/clients/index.html#delete-delete-client</cref>
     /// </see>
     public TogglResponse DeleteClient(TogglDeleteClientOptions options) {
         return new TogglResponse(Raw.DeleteClient(options));
@@ -515,7 +515,7 @@ public class TogglClientsEndpoint {
     /// <param name="clientId">The ID of the client.</param>
     /// <returns>An instance of <see cref="TogglResponse"/> representing the response from the Toggl API.</returns>
     /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#delete-a-client</cref>
+    ///     <cref>https://developers.track.toggl.com/docs/api/clients/index.html#delete-delete-client</cref>
     /// </see>
     public async Task<TogglResponse> DeleteClientAsync(int workspaceId, int clientId) {
         return new TogglResponse(await Raw.DeleteClientAsync(workspaceId, clientId));
@@ -527,7 +527,7 @@ public class TogglClientsEndpoint {
     /// <param name="client">The client to be deleted.</param>
     /// <returns>An instance of <see cref="TogglResponse"/> representing the response from the Toggl API.</returns>
     /// <see>
-    ///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/clients.md#delete-a-client</cref>
+    ///     <cref>https://developers.track.toggl.com/docs/api/clients/index.html#delete-delete-client</cref>
     /// </see>
     public async Task<TogglResponse> DeleteClientAsync(TogglClient client) {
         return new TogglResponse(await Raw.DeleteClientAsync(client));
@@ -539,7 +539,7 @@ public class TogglClientsEndpoint {
     /// <param name="options">The options for the request to the API.</param>
     /// <returns>An instance of <see cref="TogglResponse"/> representing the response from the Toggl API.</returns>
     /// <see>
-    ///     <cref>https://developers.track.toggl.com/docs/api/clients#delete-delete-client</cref>
+    ///     <cref>https://developers.track.toggl.com/docs/api/clients/index.html#delete-delete-client</cref>
     /// </see>
     public async Task<TogglResponse> DeleteClientAsync(TogglDeleteClientOptions options) {
         return new TogglResponse(await Raw.DeleteClientAsync(options));

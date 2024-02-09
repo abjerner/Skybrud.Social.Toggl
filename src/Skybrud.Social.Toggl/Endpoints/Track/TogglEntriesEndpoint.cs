@@ -9,7 +9,7 @@ namespace Skybrud.Social.Toggl.Endpoints.Track;
 /// Implementation of the <strong>Entries</strong> endpoint.
 /// </summary>
 /// <see>
-///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/time_entries.md</cref>
+///     <cref>https://developers.track.toggl.com/docs/api/time_entries</cref>
 /// </see>
 public class TogglEntriesEndpoint {
 

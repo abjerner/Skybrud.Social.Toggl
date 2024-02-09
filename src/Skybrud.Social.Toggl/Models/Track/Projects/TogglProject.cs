@@ -9,7 +9,7 @@ namespace Skybrud.Social.Toggl.Models.Track.Projects;
 /// Class representing a Toggl project.
 /// </summary>
 /// <see>
-///     <cref>https://github.com/toggl/toggl_api_docs/blob/master/chapters/projects.md</cref>
+///     <cref>https://developers.track.toggl.com/docs/api/projects</cref>
 /// </see>
 public class TogglProject : TogglObject {
 
