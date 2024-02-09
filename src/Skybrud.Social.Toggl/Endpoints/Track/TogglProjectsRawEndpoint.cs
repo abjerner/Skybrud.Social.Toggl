@@ -130,7 +130,21 @@ public class TogglProjectsRawEndpoint {
     ///     <cref>https://developers.track.toggl.com/docs/api/projects#post-workspaceprojects</cref>
     /// </see>
     public IHttpResponse CreateProject(int workspaceId, string name) {
-        return Client.GetResponse(new TogglCreateProjectOptions(workspaceId, name));
+        return CreateProject(new TogglCreateProjectOptions(workspaceId, name));
+    }
+
+    /// <summary>
+    /// Creates a new project with the specified <paramref name="name"/>.
+    /// </summary>
+    /// <param name="workspaceId">The ID of the workspace to which the project should be added.</param>
+    /// <param name="name">The name of the project to be created</param>
+    /// <param name="active">Whether the created project should be active. If not set to <see langword="true"/>, the project will be created as archived.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://developers.track.toggl.com/docs/api/projects#post-workspaceprojects</cref>
+    /// </see>
+    public IHttpResponse CreateProject(int workspaceId, string name, bool? active) {
+        return CreateProject(new TogglCreateProjectOptions(workspaceId, name, active));
     }
 
     /// <summary>
@@ -144,7 +158,22 @@ public class TogglProjectsRawEndpoint {
     ///     <cref>https://developers.track.toggl.com/docs/api/projects#post-workspaceprojects</cref>
     /// </see>
     public IHttpResponse CreateProject(int workspaceId, int? clientId, string name) {
-        return Client.GetResponse(new TogglCreateProjectOptions(workspaceId, clientId, name));
+        return CreateProject(new TogglCreateProjectOptions(workspaceId, clientId, name));
+    }
+
+    /// <summary>
+    /// Creates a new project with the specified <paramref name="name"/>.
+    /// </summary>
+    /// <param name="workspaceId">The ID of the workspace to which the project should be added.</param>
+    /// <param name="clientId">The ID of the parent client.</param>
+    /// <param name="name">The name of the project to be created</param>
+    /// <param name="active">Whether the created project should be active. If not set to <see langword="true"/>, the project will be created as archived.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://developers.track.toggl.com/docs/api/projects#post-workspaceprojects</cref>
+    /// </see>
+    public IHttpResponse CreateProject(int workspaceId, int? clientId, string name, bool? active) {
+        return CreateProject(new TogglCreateProjectOptions(workspaceId, clientId, name, active));
     }
 
     /// <summary>
@@ -174,7 +203,21 @@ public class TogglProjectsRawEndpoint {
     ///     <cref>https://developers.track.toggl.com/docs/api/projects#post-workspaceprojects</cref>
     /// </see>
     public async Task<IHttpResponse> CreateProjectAsync(int workspaceId, string name) {
-        return await Client.GetResponseAsync(new TogglCreateProjectOptions(workspaceId, name));
+        return await CreateProjectAsync(new TogglCreateProjectOptions(workspaceId, name));
+    }
+
+    /// <summary>
+    /// Creates a new project with the specified <paramref name="name"/>.
+    /// </summary>
+    /// <param name="workspaceId">The ID of the workspace to which the project should be added.</param>
+    /// <param name="name">The name of the project to be created</param>
+    /// <param name="active">Whether the created project should be active. If not set to <see langword="true"/>, the project will be created as archived.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://developers.track.toggl.com/docs/api/projects#post-workspaceprojects</cref>
+    /// </see>
+    public async Task<IHttpResponse> CreateProjectAsync(int workspaceId, string name, bool? active) {
+        return await CreateProjectAsync(new TogglCreateProjectOptions(workspaceId, name, active));
     }
 
     /// <summary>
@@ -188,7 +231,22 @@ public class TogglProjectsRawEndpoint {
     ///     <cref>https://developers.track.toggl.com/docs/api/projects#post-workspaceprojects</cref>
     /// </see>
     public async Task<IHttpResponse> CreateProjectAsync(int workspaceId, int? clientId, string name) {
-        return await Client.GetResponseAsync(new TogglCreateProjectOptions(workspaceId, clientId, name));
+        return await CreateProjectAsync(new TogglCreateProjectOptions(workspaceId, clientId, name));
+    }
+
+    /// <summary>
+    /// Creates a new project with the specified <paramref name="name"/>.
+    /// </summary>
+    /// <param name="workspaceId">The ID of the workspace to which the project should be added.</param>
+    /// <param name="clientId">The ID of the parent client.</param>
+    /// <param name="name">The name of the project to be created</param>
+    /// <param name="active">Whether the created project should be active. If not set to <see langword="true"/>, the project will be created as archived.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://developers.track.toggl.com/docs/api/projects#post-workspaceprojects</cref>
+    /// </see>
+    public async Task<IHttpResponse> CreateProjectAsync(int workspaceId, int? clientId, string name, bool? active) {
+        return await CreateProjectAsync(new TogglCreateProjectOptions(workspaceId, clientId, name, active));
     }
 
     /// <summary>
