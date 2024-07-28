@@ -217,6 +217,52 @@ public class TogglUserRawEndpoint {
         return await Client.GetResponseAsync(options);
     }
 
+    /// <summary>
+    /// Returns all workspaced the authenticated user is a part of.
+    /// </summary>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-workspaces</cref>
+    /// </see>
+    public IHttpResponse GetWorkspaces() {
+        return Client.Get("/api/v9/me/workspaces");
+    }
+
+    /// <summary>
+    /// Returns all workspaces the authenticated user is a part of.
+    /// </summary>
+    /// <param name="options">The options for the request to the API.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-workspaces</cref>
+    /// </see>
+    public IHttpResponse GetWorkspaces(TogglGetWorkspacesOptions options) {
+        return Client.GetResponse(options);
+    }
+
+    /// <summary>
+    /// Returns all workspaces the authenticated user is a part of.
+    /// </summary>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-workspaces</cref>
+    /// </see>
+    public async Task<IHttpResponse> GetWorkspacesAsync() {
+        return await Client.GetAsync("/api/v9/me/workspaces");
+    }
+
+    /// <summary>
+    /// Returns all workspaces the authenticated user is a part of.
+    /// </summary>
+    /// <param name="options">The options for the request to the API.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-workspaces</cref>
+    /// </see>
+    public async Task<IHttpResponse> GetWorkspacesAsync(TogglGetWorkspacesOptions options) {
+        return await Client.GetResponseAsync(options);
+    }
+
     #endregion
 
 }

@@ -5,6 +5,7 @@ using Skybrud.Social.Toggl.Options.Track.User;
 using Skybrud.Social.Toggl.Responses.Track.Clients;
 using Skybrud.Social.Toggl.Responses.Track.Projects;
 using Skybrud.Social.Toggl.Responses.Track.User;
+using Skybrud.Social.Toggl.Responses.Track.Workspaces;
 
 namespace Skybrud.Social.Toggl.Endpoints.Track;
 
@@ -212,6 +213,52 @@ public class TogglUserEndpoint {
     /// </see>
     public async Task<TogglProjectListResponse> GetProjectsAsync(TogglGetProjectsOptions options) {
         return new TogglProjectListResponse(await Raw.GetProjectsAsync(options));
+    }
+
+    /// <summary>
+    /// Returns all workspaced the authenticated user is a part of.
+    /// </summary>
+    /// <returns>An instance of <see cref="TogglWorkspaceListResponse"/> representing the response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-workspaces</cref>
+    /// </see>
+    public TogglWorkspaceListResponse GetWorkspaces() {
+        return new TogglWorkspaceListResponse(Raw.GetWorkspaces());
+    }
+
+    /// <summary>
+    /// Returns all workspaces the authenticated user is a part of.
+    /// </summary>
+    /// <param name="options">The options for the request to the API.</param>
+    /// <returns>An instance of <see cref="TogglWorkspaceListResponse"/> representing the response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-workspaces</cref>
+    /// </see>
+    public TogglWorkspaceListResponse GetWorkspaces(TogglGetWorkspacesOptions options) {
+        return new TogglWorkspaceListResponse(Raw.GetWorkspaces(options));
+    }
+
+    /// <summary>
+    /// Returns all workspaces the authenticated user is a part of.
+    /// </summary>
+    /// <returns>An instance of <see cref="TogglWorkspaceListResponse"/> representing the response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-workspaces</cref>
+    /// </see>
+    public async Task<TogglWorkspaceListResponse> GetWorkspacesAsync() {
+        return new TogglWorkspaceListResponse(await Raw.GetWorkspacesAsync());
+    }
+
+    /// <summary>
+    /// Returns all workspaces the authenticated user is a part of.
+    /// </summary>
+    /// <param name="options">The options for the request to the API.</param>
+    /// <returns>An instance of <see cref="TogglWorkspaceListResponse"/> representing the response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-workspaces</cref>
+    /// </see>
+    public async Task<TogglWorkspaceListResponse> GetWorkspacesAsync(TogglGetWorkspacesOptions options) {
+        return new TogglWorkspaceListResponse(await Raw.GetWorkspacesAsync(options));
     }
 
     #endregion
