@@ -240,6 +240,52 @@ public class TogglUserRawEndpoint {
     }
 
     /// <summary>
+    /// Returns all organizations the authenticated user is a part of.
+    /// </summary>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-organizations-that-a-user-is-part-of</cref>
+    /// </see>
+    public IHttpResponse GetOrganizations() {
+        return GetOrganizations(new TogglGetOrganizationsOptions());
+    }
+
+    /// <summary>
+    /// Returns all organizations the authenticated user is a part of.
+    /// </summary>
+    /// <param name="options">The options for the request to the API.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-organizations-that-a-user-is-part-of</cref>
+    /// </see>
+    public IHttpResponse GetOrganizations(TogglGetOrganizationsOptions options) {
+        return Client.GetResponse(options);
+    }
+
+    /// <summary>
+    /// Returns all organizations the authenticated user is a part of.
+    /// </summary>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-organizations-that-a-user-is-part-of</cref>
+    /// </see>
+    public async Task<IHttpResponse> GetOrganizationsAsync() {
+        return await GetOrganizationsAsync(new TogglGetOrganizationsOptions());
+    }
+
+    /// <summary>
+    /// Returns all organizations the authenticated user is a part of.
+    /// </summary>
+    /// <param name="options">The options for the request to the API.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-organizations-that-a-user-is-part-of</cref>
+    /// </see>
+    public async Task<IHttpResponse> GetOrganizationsAsync(TogglGetOrganizationsOptions options) {
+        return await Client.GetResponseAsync(options);
+    }
+
+    /// <summary>
     /// Returns a list with all non-archived projects of the authenticated user.
     /// </summary>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>

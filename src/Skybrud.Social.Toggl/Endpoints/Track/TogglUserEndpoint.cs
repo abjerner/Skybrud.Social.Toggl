@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Skybrud.Essentials.Time;
 using Skybrud.Social.Toggl.Options.Track.User;
 using Skybrud.Social.Toggl.Responses.Track.Clients;
+using Skybrud.Social.Toggl.Responses.Track.Organizations;
 using Skybrud.Social.Toggl.Responses.Track.Projects;
 using Skybrud.Social.Toggl.Responses.Track.User;
 using Skybrud.Social.Toggl.Responses.Track.Workspaces;
@@ -235,6 +236,52 @@ public class TogglUserEndpoint {
     /// </see>
     public async Task<TogglUserLocationResponse> GetLocationAsync(TogglGetLocationOptions options) {
         return new TogglUserLocationResponse(await Raw.GetLocationAsync(options));
+    }
+
+    /// <summary>
+    /// Returns all organizations the authenticated user is a part of.
+    /// </summary>
+    /// <returns>An instance of <see cref="TogglOrganizationListResponse"/> representing the response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-organizations-that-a-user-is-part-of</cref>
+    /// </see>
+    public TogglOrganizationListResponse GetOrganizations() {
+        return new TogglOrganizationListResponse(Raw.GetOrganizations());
+    }
+
+    /// <summary>
+    /// Returns all organizations the authenticated user is a part of.
+    /// </summary>
+    /// <param name="options">The options for the request to the API.</param>
+    /// <returns>An instance of <see cref="TogglOrganizationListResponse"/> representing the response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-organizations-that-a-user-is-part-of</cref>
+    /// </see>
+    public TogglOrganizationListResponse GetOrganizations(TogglGetOrganizationsOptions options) {
+        return new TogglOrganizationListResponse(Raw.GetOrganizations(options));
+    }
+
+    /// <summary>
+    /// Returns all organizations the authenticated user is a part of.
+    /// </summary>
+    /// <returns>An instance of <see cref="TogglOrganizationListResponse"/> representing the response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-organizations-that-a-user-is-part-of</cref>
+    /// </see>
+    public async Task<TogglOrganizationListResponse> GetOrganizationsAsync() {
+        return new TogglOrganizationListResponse(await Raw.GetOrganizationsAsync());
+    }
+
+    /// <summary>
+    /// Returns all organizations the authenticated user is a part of.
+    /// </summary>
+    /// <param name="options">The options for the request to the API.</param>
+    /// <returns>An instance of <see cref="TogglOrganizationListResponse"/> representing the response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-organizations-that-a-user-is-part-of</cref>
+    /// </see>
+    public async Task<TogglOrganizationListResponse> GetOrganizationsAsync(TogglGetOrganizationsOptions options) {
+        return new TogglOrganizationListResponse(await Raw.GetOrganizationsAsync(options));
     }
 
     /// <summary>
