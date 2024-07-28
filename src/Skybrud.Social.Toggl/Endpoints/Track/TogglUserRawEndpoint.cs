@@ -194,6 +194,52 @@ public class TogglUserRawEndpoint {
     }
 
     /// <summary>
+    /// Returns the client's IP-based location. If no data is present, empty response will be yielded.
+    /// </summary>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-users-last-known-location</cref>
+    /// </see>
+    public IHttpResponse GetLocation() {
+        return GetLocation(new TogglGetLocationOptions());
+    }
+
+    /// <summary>
+    /// Returns the client's IP-based location. If no data is present, empty response will be yielded.
+    /// </summary>
+    /// <param name="options">The options for the request to the API.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-users-last-known-location</cref>
+    /// </see>
+    public IHttpResponse GetLocation(TogglGetLocationOptions options) {
+        return Client.GetResponse(options);
+    }
+
+    /// <summary>
+    /// Returns the client's IP-based location. If no data is present, empty response will be yielded.
+    /// </summary>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-users-last-known-location</cref>
+    /// </see>
+    public async Task<IHttpResponse> GetLocationAsync() {
+        return await GetLocationAsync(new TogglGetLocationOptions());
+    }
+
+    /// <summary>
+    /// Returns the client's IP-based location. If no data is present, empty response will be yielded.
+    /// </summary>
+    /// <param name="options">The options for the request to the API.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-users-last-known-location</cref>
+    /// </see>
+    public async Task<IHttpResponse> GetLocationAsync(TogglGetLocationOptions options) {
+        return await Client.GetResponseAsync(options);
+    }
+
+    /// <summary>
     /// Returns a list with all non-archived projects of the authenticated user.
     /// </summary>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
