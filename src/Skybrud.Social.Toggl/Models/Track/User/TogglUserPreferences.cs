@@ -52,7 +52,7 @@ public class TogglUserPreferences : TogglObject {
     /// </summary>
     /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
     /// <returns>An instance of <see cref="TogglUserPreferences"/>.</returns>
-    [return: NotNullIfNotNull("json")]
+    [return: NotNullIfNotNull(nameof(json))]
     public static TogglUserPreferences? Parse(JObject? json) {
         return json == null ? null : new TogglUserPreferences(json);
     }

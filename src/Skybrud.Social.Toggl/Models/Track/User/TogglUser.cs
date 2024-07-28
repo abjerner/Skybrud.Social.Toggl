@@ -93,7 +93,7 @@ public class TogglUser : TogglObject {
     /// </summary>
     /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
     /// <returns>An instance of <see cref="TogglUser"/>.</returns>
-    [return: NotNullIfNotNull("json")]
+    [return: NotNullIfNotNull(nameof(json))]
     public static TogglUser? Parse(JObject? json) {
         return json == null ? null : new TogglUser(json);
     }

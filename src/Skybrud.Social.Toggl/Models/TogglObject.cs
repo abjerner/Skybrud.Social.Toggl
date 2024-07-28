@@ -12,14 +12,14 @@ namespace Skybrud.Social.Toggl.Models;
 
 public class TogglObject : JsonObjectBase {
 
-    private static readonly string[] _formats = {
-        "yyyy-MM-ddTHH\\:mm\\:ss.ffffffZ",
-        "yyyy-MM-ddTHH\\:mm\\:ss.fffffZ",
-        "yyyy-MM-ddTHH\\:mm\\:ss.ffffZ",
-        "yyyy-MM-ddTHH\\:mm\\:ss.fffZ",
-        "yyyy-MM-ddTHH\\:mm\\:ss.ffZ",
-        "yyyy-MM-ddTHH\\:mm\\:ss.fZ"
-    };
+    private static readonly string[] _formats = [
+        @"yyyy-MM-ddTHH\:mm\:ss.ffffffZ",
+        @"yyyy-MM-ddTHH\:mm\:ss.fffffZ",
+        @"yyyy-MM-ddTHH\:mm\:ss.ffffZ",
+        @"yyyy-MM-ddTHH\:mm\:ss.fffZ",
+        @"yyyy-MM-ddTHH\:mm\:ss.ffZ",
+        @"yyyy-MM-ddTHH\:mm\:ss.fZ"
+    ];
 
     #region Properties
 
@@ -51,7 +51,7 @@ public class TogglObject : JsonObjectBase {
     ///         different formats (ISO 8601 timestamp formats with different precision).
     ///     </para>
     /// </remarks>
-    [return: NotNullIfNotNull("timestamp")]
+    [return: NotNullIfNotNull(nameof(timestamp))]
     protected static EssentialsTime? ParseIso8601Timestamp(string? timestamp) {
         if (timestamp == null) return null;
         return DateTimeOffset.ParseExact(timestamp, _formats, CultureInfo.InvariantCulture, DateTimeStyles.None);

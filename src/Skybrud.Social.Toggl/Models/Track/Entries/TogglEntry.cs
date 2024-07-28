@@ -32,7 +32,7 @@ public class TogglEntry : TogglObject {
     /// <summary>
     /// Gets whether the time entry has been added to a project.
     /// </summary>
-    [MemberNotNullWhen(true, "ProjectId")]
+    [MemberNotNullWhen(true, nameof(ProjectId))]
     public bool HasProjectId => ProjectId > 0;
 
     /// <summary>
@@ -43,7 +43,7 @@ public class TogglEntry : TogglObject {
     /// <summary>
     /// Gets whether the time entry has been added to a task.
     /// </summary>
-    [MemberNotNullWhen(true, "TaskId")]
+    [MemberNotNullWhen(true, nameof(TaskId))]
     public bool HasTaskId => TaskId > 0;
 
     /// <summary>
@@ -124,7 +124,7 @@ public class TogglEntry : TogglObject {
     /// </summary>
     /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
     /// <returns>An instance of <see cref="TogglEntry"/>.</returns>
-    [return: NotNullIfNotNull("json")]
+    [return: NotNullIfNotNull(nameof(json))]
     public static TogglEntry? Parse(JObject? json) {
         return json == null ? null : new TogglEntry(json);
     }

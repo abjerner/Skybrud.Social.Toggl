@@ -62,7 +62,7 @@ public class TogglClient : TogglObject {
     /// </summary>
     /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
     /// <returns>An instance of <see cref="TogglClient"/>.</returns>
-    [return: NotNullIfNotNull("json")]
+    [return: NotNullIfNotNull(nameof(json))]
     public static TogglClient? Parse(JObject? json) {
         return json == null ? null : new TogglClient(json);
     }

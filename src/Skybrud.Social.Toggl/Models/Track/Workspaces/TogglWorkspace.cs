@@ -72,7 +72,7 @@ public class TogglWorkspace : TogglObject {
     /// </summary>
     /// <param name="json">The instance of <see cref="JObject"/> to be parsed.</param>
     /// <returns>An instance of <see cref="TogglWorkspace"/>.</returns>
-    [return: NotNullIfNotNull("json")]
+    [return: NotNullIfNotNull(nameof(json))]
     public static TogglWorkspace? Parse(JObject? json) {
         return json == null ? null : new TogglWorkspace(json);
     }
