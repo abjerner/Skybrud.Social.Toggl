@@ -14,7 +14,7 @@
   <tr>
     <td><strong>Target Framework:</strong></td>
     <td>
-      .NET 4.5, .NET 4.6, .NET 4.7 and .NET Standard 2.0
+      .NET 4.5, .NET 4.6, .NET 4.7, .NET Standard 2.0 and .NET8
     </td>
   </tr>
 </table>
@@ -28,16 +28,16 @@
 
 ## Installation
 
-The package is only available via [**NuGet**](https://www.nuget.org/packages/Skybrud.Social.Toggl/1.0.0-beta007). To install the package, you can either use the .NET CLI:
+The package is only available via [**NuGet**](https://www.nuget.org/packages/Skybrud.Social.Toggl/1.0.0-beta008). To install the package, you can either use the .NET CLI:
 
 ```
-dotnet add package Skybrud.Social.Toggl --version 1.0.0-beta007
+dotnet add package Skybrud.Social.Toggl --version 1.0.0-beta008
 ```
 
 or the NuGet Package Manager:
 
 ```
-Install-Package Skybrud.Social.Toggl -Version 1.0.0-beta007
+Install-Package Skybrud.Social.Toggl -Version 1.0.0-beta008
 ```
 
 
