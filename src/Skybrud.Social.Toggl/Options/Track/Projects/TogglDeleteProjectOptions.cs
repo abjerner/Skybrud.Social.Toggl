@@ -1,4 +1,6 @@
-﻿using Skybrud.Essentials.Common;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
+using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.Toggl.Http;
 using Skybrud.Social.Toggl.Models.Track.Projects;
@@ -18,14 +20,22 @@ public class TogglDeleteProjectOptions : TogglTrackHttpRequestOptions {
     /// <summary>
     /// Gets or sets the ID of the parent workspace.
     /// </summary>
+#if NET8_0_OR_GREATER
+    public required int WorkspaceId { get; set; }
+#else
     public int WorkspaceId { get; set; }
+#endif
 
     /// <summary>
     /// Gets or sets the ID of the project to be deleted.
     /// </summary>
+#if NET8_0_OR_GREATER
+    public required int ProjectId { get; set; }
+#else
     public int ProjectId { get; set; }
+#endif
 
-    #endregion
+#endregion
 
     #region Constructors
 
@@ -39,6 +49,9 @@ public class TogglDeleteProjectOptions : TogglTrackHttpRequestOptions {
     /// </summary>
     /// <param name="workspaceId">The ID of the parent workspace.</param>
     /// <param name="projectId">The ID of the project to be deleted.</param>
+#if NET8_0_OR_GREATER
+    [SetsRequiredMembers]
+#endif
     public TogglDeleteProjectOptions(int workspaceId, int projectId) {
         WorkspaceId = workspaceId;
         ProjectId = projectId;
@@ -48,7 +61,11 @@ public class TogglDeleteProjectOptions : TogglTrackHttpRequestOptions {
     /// Initializes a new instance from an existing <paramref name="project"/>.
     /// </summary>
     /// <param name="project">The project to be deleted.</param>
+#if NET8_0_OR_GREATER
+    [SetsRequiredMembers]
+#endif
     public TogglDeleteProjectOptions(TogglProject project) {
+        if (project is null) throw new ArgumentNullException(nameof(project));
         WorkspaceId = project.WorkspaceId;
         ProjectId = project.Id;
     }

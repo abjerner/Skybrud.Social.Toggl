@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using System.Diagnostics.CodeAnalysis;
+using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.Toggl.Http;
@@ -18,17 +19,25 @@ public class TogglCreateProjectOptions : TogglTrackHttpRequestOptions {
     /// <summary>
     /// Gets or sets the ID of the workspace to which the project should be added.
     /// </summary>
-    public int WorkspaceId { get; }
+#if NET8_0_OR_GREATER
+    public required int WorkspaceId { get; set; }
+#else
+    public int WorkspaceId { get; set; }
+#endif
 
     /// <summary>
     /// Gets or sets the ID of the client to which the project should be added. If <see langword="null"/> (default), the project will not be added to a client.
     /// </summary>
-    public int? ClientId { get; }
+    public int? ClientId { get; set; }
 
     /// <summary>
     /// Gets or sets the name of the project to be created.
     /// </summary>
-    public string? Name { get; }
+#if NET8_0_OR_GREATER
+    public required string Name { get; set; }
+#else
+    public string? Name { get; set; }
+#endif
 
     /// <summary>
     /// gets or sets whether the created project should be active.
@@ -51,6 +60,9 @@ public class TogglCreateProjectOptions : TogglTrackHttpRequestOptions {
     /// </summary>
     /// <param name="workspaceId">The ID of the parent workspace.</param>
     /// <param name="name">The name of the project.</param>
+#if NET8_0_OR_GREATER
+    [SetsRequiredMembers]
+#endif
     public TogglCreateProjectOptions(int workspaceId, string name) {
         WorkspaceId = workspaceId;
         Name = name;
@@ -62,6 +74,9 @@ public class TogglCreateProjectOptions : TogglTrackHttpRequestOptions {
     /// <param name="workspaceId">The ID of the parent workspace.</param>
     /// <param name="name">The name of the project.</param>
     /// <param name="active">Whether the created project should be active. If not set to <see langword="true"/>, the project will be created as archived.</param>
+#if NET8_0_OR_GREATER
+    [SetsRequiredMembers]
+#endif
     public TogglCreateProjectOptions(int workspaceId, string name, bool? active) {
         WorkspaceId = workspaceId;
         Name = name;
@@ -74,6 +89,9 @@ public class TogglCreateProjectOptions : TogglTrackHttpRequestOptions {
     /// <param name="workspaceId">The ID of the parent workspace.</param>
     /// <param name="clientId">The ID of the parent client.</param>
     /// <param name="name">The name of the project.</param>
+#if NET8_0_OR_GREATER
+    [SetsRequiredMembers]
+#endif
     public TogglCreateProjectOptions(int workspaceId, int? clientId, string name) {
         WorkspaceId = workspaceId;
         ClientId = clientId;
@@ -87,6 +105,9 @@ public class TogglCreateProjectOptions : TogglTrackHttpRequestOptions {
     /// <param name="clientId">The ID of the parent client.</param>
     /// <param name="name">The name of the project.</param>
     /// <param name="active">Whether the created project should be active. If not set to <see langword="true"/>, the project will be created as archived.</param>
+#if NET8_0_OR_GREATER
+    [SetsRequiredMembers]
+#endif
     public TogglCreateProjectOptions(int workspaceId, int? clientId, string name, bool? active) {
         WorkspaceId = workspaceId;
         ClientId = clientId;

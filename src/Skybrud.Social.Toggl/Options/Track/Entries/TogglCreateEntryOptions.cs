@@ -25,7 +25,11 @@ public class TogglCreateEntryOptions : TogglTrackHttpRequestOptions {
     /// Gets or sets the ID of the workspace.
     /// </summary>
     [JsonProperty("workspace_id")]
+#if NET8_0_OR_GREATER
+    public required int WorkspaceId { get; set; }
+#else
     public int WorkspaceId { get; set; }
+#endif
 
     /// <summary>
     /// Gets or sets the description of the entry.
@@ -49,7 +53,11 @@ public class TogglCreateEntryOptions : TogglTrackHttpRequestOptions {
     /// Gets or sets the start time of the entry.
     /// </summary>
     [JsonProperty("start")]
+#if NET8_0_OR_GREATER
+    public required EssentialsTime Start { get; set; }
+#else
     public EssentialsTime? Start { get; set; }
+#endif
 
     /// <summary>
     /// Gets or sets the stop time of the entry.

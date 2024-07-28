@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Diagnostics.CodeAnalysis;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
@@ -20,23 +21,39 @@ public class TogglCreateClientOptions : TogglTrackHttpRequestOptions {
     /// Gets or sets the ID of the workspace to which the client should be added.
     /// </summary>
     [JsonProperty("wid")]
+#if NET8_0_OR_GREATER
+    public required int WorkspaceId { get; set; }
+#else
     public int WorkspaceId { get; set; }
+#endif
 
     /// <summary>
     /// Gets or sets the name of the client to be created.
     /// </summary>
     [JsonProperty("name")]
-    public string Name { get; set; }
+#if NET8_0_OR_GREATER
+    public required string Name { get; set; }
+#else
+    public string? Name { get; set; }
+#endif
 
     #endregion
 
     #region Constructors
 
     /// <summary>
+    /// Initializes a new instance with default options.
+    /// </summary>
+    public TogglCreateClientOptions() { }
+
+    /// <summary>
     /// Initializes a new instance of <see cref="TogglCreateClientOptions"/> based on the specified <paramref name="workspaceId"/> and <paramref name="name"/>.
     /// </summary>
     /// <param name="workspaceId">The ID of the parent workspace.</param>
     /// <param name="name">The name of the client.</param>
+#if NET8_0_OR_GREATER
+    [SetsRequiredMembers]
+#endif
     public TogglCreateClientOptions(int workspaceId, string name) {
         WorkspaceId = workspaceId;
         Name = name;

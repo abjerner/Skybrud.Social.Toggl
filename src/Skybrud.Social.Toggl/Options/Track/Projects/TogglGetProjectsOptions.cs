@@ -1,4 +1,5 @@
-﻿using Skybrud.Essentials.Common;
+﻿using System.Diagnostics.CodeAnalysis;
+using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Essentials.Http.Collections;
 using Skybrud.Social.Toggl.Http;
@@ -18,7 +19,11 @@ public class TogglGetProjectsOptions : TogglTrackHttpRequestOptions {
     /// <summary>
     /// Gets or sets the ID of the workspace.
     /// </summary>
+#if NET8_0_OR_GREATER
+    public required int WorkspaceId { get; set; }
+#else
     public int WorkspaceId { get; set; }
+#endif
 
     /// <summary>
     /// Gets or sets the active state that the returned projects should match. Default is <see langword="null"/>, meaning both active and inactive projects will be returned.
@@ -40,6 +45,9 @@ public class TogglGetProjectsOptions : TogglTrackHttpRequestOptions {
     /// Initializes a new instance based on the specified <paramref name="workspaceId"/>.
     /// </summary>
     /// <param name="workspaceId">The ID of the workspace.</param>
+#if NET8_0_OR_GREATER
+    [SetsRequiredMembers]
+#endif
     public TogglGetProjectsOptions(int workspaceId) {
         WorkspaceId = workspaceId;
     }
@@ -49,6 +57,9 @@ public class TogglGetProjectsOptions : TogglTrackHttpRequestOptions {
     /// </summary>
     /// <param name="workspaceId">The ID of the workspace.</param>
     /// <param name="active">The active state that the returned projects should match.</param>
+#if NET8_0_OR_GREATER
+    [SetsRequiredMembers]
+#endif
     public TogglGetProjectsOptions(int workspaceId, bool? active) {
         WorkspaceId = workspaceId;
         Active = active;

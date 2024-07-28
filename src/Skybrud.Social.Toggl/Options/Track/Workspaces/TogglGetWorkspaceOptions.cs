@@ -1,4 +1,5 @@
-﻿using Skybrud.Essentials.Common;
+﻿using System.Diagnostics.CodeAnalysis;
+using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.Toggl.Http;
 
@@ -14,7 +15,11 @@ public class TogglGetWorkspaceOptions : TogglTrackHttpRequestOptions {
     /// <summary>
     /// Gets or sets the ID of the workspace.
     /// </summary>
+#if NET8_0_OR_GREATER
+    public required int WorkspaceId { get; set; }
+#else
     public int WorkspaceId { get; set; }
+#endif
 
     #endregion
 
@@ -29,6 +34,9 @@ public class TogglGetWorkspaceOptions : TogglTrackHttpRequestOptions {
     /// Initializes a new instance based on the specified <paramref name="workspaceId"/>.
     /// </summary>
     /// <param name="workspaceId">The ID of the workspace.</param>
+#if NET8_0_OR_GREATER
+    [SetsRequiredMembers]
+#endif
     public TogglGetWorkspaceOptions(int workspaceId) {
         WorkspaceId = workspaceId;
     }

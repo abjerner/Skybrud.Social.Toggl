@@ -1,4 +1,5 @@
-﻿using Skybrud.Essentials.Common;
+﻿using System.Diagnostics.CodeAnalysis;
+using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.Toggl.Http;
 
@@ -17,22 +18,38 @@ public class TogglGetProjectOptions : TogglTrackHttpRequestOptions {
     /// <summary>
     /// Gets or sets the ID of the parent workspace.
     /// </summary>
-    public int WorkspaceId { get; }
+#if NET8_0_OR_GREATER
+    public required int WorkspaceId { get; set; }
+#else
+    public int WorkspaceId { get; set; }
+#endif
 
     /// <summary>
     /// Gets or sets the ID of the project.
     /// </summary>
-    public int ProjectId { get; }
+#if NET8_0_OR_GREATER
+    public required int ProjectId { get; set; }
+#else
+    public int ProjectId { get; set; }
+#endif
 
     #endregion
 
     #region Constructors
 
     /// <summary>
+    /// Initializes a new instance with default options.
+    /// </summary>
+    public TogglGetProjectOptions() { }
+
+    /// <summary>
     /// Initializes a new instance based on the specified <paramref name="projectId"/>.
     /// </summary>
     /// <param name="workspaceId">The ID of the parent project.</param>
     /// <param name="projectId">The ID of the project.</param>
+#if NET8_0_OR_GREATER
+    [SetsRequiredMembers]
+#endif
     public TogglGetProjectOptions(int workspaceId, int projectId) {
         WorkspaceId = workspaceId;
         ProjectId = projectId;

@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System.Diagnostics.CodeAnalysis;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
@@ -21,7 +22,7 @@ public class TogglUpdateProjectOptions : TogglTrackHttpRequestOptions {
     /// Gets or sets the ID of the parent workspace.
     /// </summary>
     [JsonIgnore]
-    public int WorkspaceId { get; set; }
+    public int WorkspaceId { get; }
 
     /// <summary>
     /// Gets the ID of the project.
@@ -61,7 +62,11 @@ public class TogglUpdateProjectOptions : TogglTrackHttpRequestOptions {
     /// Initializes a new instance from an existing <paramref name="project"/>.
     /// </summary>
     /// <param name="project">The project to be updated.</param>
+#if NET8_0_OR_GREATER
+    [SetsRequiredMembers]
+#endif
     public TogglUpdateProjectOptions(TogglProject project) {
+        WorkspaceId = project.WorkspaceId;
         ProjectId = project.Id;
         ClientId = project.ClientId;
         Name = project.Name;

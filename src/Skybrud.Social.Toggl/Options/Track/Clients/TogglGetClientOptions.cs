@@ -1,4 +1,5 @@
-﻿using Skybrud.Essentials.Common;
+﻿using System.Diagnostics.CodeAnalysis;
+using Skybrud.Essentials.Common;
 using Skybrud.Essentials.Http;
 using Skybrud.Social.Toggl.Http;
 
@@ -17,22 +18,38 @@ public class TogglGetClientOptions : TogglTrackHttpRequestOptions {
     /// <summary>
     /// Gets or sets the ID of the parent workspace.
     /// </summary>
-    public int WorkspaceId { get; }
+#if NET8_0_OR_GREATER
+    public required int WorkspaceId { get; set; }
+#else
+    public int WorkspaceId { get; set; }
+#endif
 
     /// <summary>
     /// Gets or sets the ID of the client.
     /// </summary>
-    public int ClientId { get; }
+#if NET8_0_OR_GREATER
+    public required int ClientId { get; set; }
+#else
+    public int ClientId { get; set; }
+#endif
 
     #endregion
 
     #region Constructors
 
     /// <summary>
+    /// Initializes a new instance with default options.
+    /// </summary>
+    public TogglGetClientOptions() { }
+
+    /// <summary>
     /// Initializes a new instance based on the specified <paramref name="workspaceId"/> and <paramref name="clientId"/>.
     /// </summary>
     /// <param name="workspaceId">The ID of the parent workspace.</param>
     /// <param name="clientId">The ID of the client.</param>
+#if NET8_0_OR_GREATER
+    [SetsRequiredMembers]
+#endif
     public TogglGetClientOptions(int workspaceId, int clientId) {
         WorkspaceId = workspaceId;
         ClientId = clientId;
