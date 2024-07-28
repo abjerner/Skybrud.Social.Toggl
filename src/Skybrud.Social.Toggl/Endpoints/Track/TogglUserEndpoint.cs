@@ -1,5 +1,4 @@
-﻿using Skybrud.Essentials.Http;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Skybrud.Essentials.Time;
 using Skybrud.Social.Toggl.Options.Track.User;
 using Skybrud.Social.Toggl.Responses.Track.Clients;
@@ -46,7 +45,7 @@ public class TogglUserEndpoint {
     /// <summary>
     /// Returns information about the authenticated user.
     /// </summary>
-    /// <returns>An instance of <see cref="IHttpResponse"/> representing the response from the Toggl API.</returns>
+    /// <returns>An instance of <see cref="TogglUserResponse"/> representing the response from the Toggl API.</returns>
     /// <see>
     ///     <cref>https://developers.track.toggl.com/docs/api/me#get-me</cref>
     /// </see>
@@ -57,7 +56,7 @@ public class TogglUserEndpoint {
     /// <summary>
     /// Returns information about the authenticated user.
     /// </summary>
-    /// <returns>An instance of <see cref="IHttpResponse"/> representing the response from the Toggl API.</returns>
+    /// <returns>An instance of <see cref="TogglUserResponse"/> representing the response from the Toggl API.</returns>
     /// <see>
     ///     <cref>https://developers.track.toggl.com/docs/api/me#get-me</cref>
     /// </see>
@@ -218,7 +217,7 @@ public class TogglUserEndpoint {
     /// <summary>
     /// Returns the client's IP-based location. If no data is present, empty response will be yielded.
     /// </summary>
-    /// <returns>An instance of <see cref="IHttpResponse"/> representing the response from the Toggl API.</returns>
+    /// <returns>An instance of <see cref="TogglUserLocationResponse"/> representing the response from the Toggl API.</returns>
     /// <see>
     ///     <cref>https://engineering.toggl.com/docs/api/me#get-users-last-known-location</cref>
     /// </see>
@@ -230,7 +229,7 @@ public class TogglUserEndpoint {
     /// Returns the client's IP-based location. If no data is present, empty response will be yielded.
     /// </summary>
     /// <param name="options">The options for the request to the API.</param>
-    /// <returns>An instance of <see cref="IHttpResponse"/> representing the response from the Toggl API.</returns>
+    /// <returns>An instance of <see cref="TogglUserLocationResponse"/> representing the response from the Toggl API.</returns>
     /// <see>
     ///     <cref>https://engineering.toggl.com/docs/api/me#get-users-last-known-location</cref>
     /// </see>
@@ -287,7 +286,7 @@ public class TogglUserEndpoint {
     /// <summary>
     /// Returns a list with all non-archived projects of the authenticated user.
     /// </summary>
-    /// <returns>An instance of <see cref="IHttpResponse"/> representing the response from the Toggl API.</returns>
+    /// <returns>An instance of <see cref="TogglProjectListResponse"/> representing the response from the Toggl API.</returns>
     /// <see>
     ///     <cref>https://engineering.toggl.com/docs/api/me#get-projects</cref>
     /// </see>
@@ -299,7 +298,7 @@ public class TogglUserEndpoint {
     /// Returns a list with all non-archived projects of the authenticated user.
     /// </summary>
     /// <param name="includeArchived">Whether archived projects should be included in the list.</param>
-    /// <returns>An instance of <see cref="IHttpResponse"/> representing the response from the Toggl API.</returns>
+    /// <returns>An instance of <see cref="TogglProjectListResponse"/> representing the response from the Toggl API.</returns>
     /// <see>
     ///     <cref>https://engineering.toggl.com/docs/api/me#get-projects</cref>
     /// </see>
@@ -311,7 +310,7 @@ public class TogglUserEndpoint {
     /// Returns a list with all projects of the authenticated user matching the specified <paramref name="options"/>.
     /// </summary>
     /// <param name="options">The options for the request to the API.</param>
-    /// <returns>An instance of <see cref="IHttpResponse"/> representing the response from the Toggl API.</returns>
+    /// <returns>An instance of <see cref="TogglProjectListResponse"/> representing the response from the Toggl API.</returns>
     /// <see>
     ///     <cref>https://engineering.toggl.com/docs/api/me#get-projects</cref>
     /// </see>
@@ -322,7 +321,7 @@ public class TogglUserEndpoint {
     /// <summary>
     /// Returns a list with all non-archived projects of the authenticated user.
     /// </summary>
-    /// <returns>An instance of <see cref="IHttpResponse"/> representing the response from the Toggl API.</returns>
+    /// <returns>An instance of <see cref="TogglProjectListResponse"/> representing the response from the Toggl API.</returns>
     /// <see>
     ///     <cref>https://engineering.toggl.com/docs/api/me#get-projects</cref>
     /// </see>
@@ -334,7 +333,7 @@ public class TogglUserEndpoint {
     /// Returns a list with all non-archived projects of the authenticated user.
     /// </summary>
     /// <param name="includeArchived">Whether archived projects should be included in the list.</param>
-    /// <returns>An instance of <see cref="IHttpResponse"/> representing the response from the Toggl API.</returns>
+    /// <returns>An instance of <see cref="TogglProjectListResponse"/> representing the response from the Toggl API.</returns>
     /// <see>
     ///     <cref>https://engineering.toggl.com/docs/api/me#get-projects</cref>
     /// </see>
@@ -346,7 +345,7 @@ public class TogglUserEndpoint {
     /// Returns a list with all projects of the authenticated user matching the specified <paramref name="options"/>.
     /// </summary>
     /// <param name="options">The options for the request to the API.</param>
-    /// <returns>An instance of <see cref="IHttpResponse"/> representing the response from the Toggl API.</returns>
+    /// <returns>An instance of <see cref="TogglProjectListResponse"/> representing the response from the Toggl API.</returns>
     /// <see>
     ///     <cref>https://engineering.toggl.com/docs/api/me#get-projects</cref>
     /// </see>
