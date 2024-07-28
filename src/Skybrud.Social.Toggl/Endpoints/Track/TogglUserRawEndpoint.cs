@@ -148,12 +148,58 @@ public class TogglUserRawEndpoint {
     }
 
     /// <summary>
-     /// Returns a list with all non-archived projects of the authenticated user.
-     /// </summary>
-     /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
-     /// <see>
-     ///     <cref>https://engineering.toggl.com/docs/api/me#get-projects</cref>
-     /// </see>
+    /// Returns a list of all Toggl Track features.
+    /// </summary>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-features</cref>
+    /// </see>
+    public IHttpResponse GetFeatures() {
+        return GetFeatures(new TogglGetFeaturesOptions());
+    }
+
+    /// <summary>
+    /// Returns a list of all Toggl Track features.
+    /// </summary>
+    /// <param name="options">The options for the request to the API.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-features</cref>
+    /// </see>
+    public IHttpResponse GetFeatures(TogglGetFeaturesOptions options) {
+        return Client.GetResponse(options);
+    }
+
+    /// <summary>
+    /// Returns a list of all Toggl Track features.
+    /// </summary>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-features</cref>
+    /// </see>
+    public async Task<IHttpResponse> GetFeaturesAsync() {
+        return await GetFeaturesAsync(new TogglGetFeaturesOptions());
+    }
+
+    /// <summary>
+    /// Returns a list of all Toggl Track features.
+    /// </summary>
+    /// <param name="options">The options for the request to the API.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-features</cref>
+    /// </see>
+    public async Task<IHttpResponse> GetFeaturesAsync(TogglGetFeaturesOptions options) {
+        return await Client.GetResponseAsync(options);
+    }
+
+    /// <summary>
+    /// Returns a list with all non-archived projects of the authenticated user.
+    /// </summary>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the raw response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-projects</cref>
+    /// </see>
     public IHttpResponse GetProjects() {
         return GetProjects(new TogglGetProjectsOptions());
     }

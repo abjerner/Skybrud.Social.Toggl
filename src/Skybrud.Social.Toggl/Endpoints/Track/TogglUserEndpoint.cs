@@ -146,6 +146,52 @@ public class TogglUserEndpoint {
     }
 
     /// <summary>
+    /// Returns a list of all Toggl Track features.
+    /// </summary>
+    /// <returns>An instance of <see cref="TogglUserFeaturesResponse"/> representing the response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-features</cref>
+    /// </see>
+    public TogglUserFeaturesResponse GetFeatures() {
+        return new TogglUserFeaturesResponse(Raw.GetFeatures());
+    }
+
+    /// <summary>
+    /// Returns a list of all Toggl Track features.
+    /// </summary>
+    /// <param name="options">The options for the request to the API.</param>
+    /// <returns>An instance of <see cref="TogglUserFeaturesResponse"/> representing the response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-features</cref>
+    /// </see>
+    public TogglUserFeaturesResponse GetFeatures(TogglGetFeaturesOptions options) {
+        return new TogglUserFeaturesResponse(Raw.GetFeatures(options));
+    }
+
+    /// <summary>
+    /// Returns a list of all Toggl Track features.
+    /// </summary>
+    /// <returns>An instance of <see cref="TogglUserFeaturesResponse"/> representing the response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-features</cref>
+    /// </see>
+    public async Task<TogglUserFeaturesResponse> GetFeaturesAsync() {
+        return new TogglUserFeaturesResponse(await Raw.GetFeaturesAsync());
+    }
+
+    /// <summary>
+    /// Returns a list of all Toggl Track features.
+    /// </summary>
+    /// <param name="options">The options for the request to the API.</param>
+    /// <returns>An instance of <see cref="TogglUserFeaturesResponse"/> representing the response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-features</cref>
+    /// </see>
+    public async Task<TogglUserFeaturesResponse> GetFeaturesAsync(TogglGetFeaturesOptions options) {
+        return new TogglUserFeaturesResponse(await Raw.GetFeaturesAsync(options));
+    }
+
+    /// <summary>
     /// Returns a list with all non-archived projects of the authenticated user.
     /// </summary>
     /// <returns>An instance of <see cref="IHttpResponse"/> representing the response from the Toggl API.</returns>
