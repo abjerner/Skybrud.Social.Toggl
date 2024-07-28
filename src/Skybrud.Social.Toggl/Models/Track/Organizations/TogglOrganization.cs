@@ -97,8 +97,8 @@ public class TogglOrganization : TogglObject {
     /// </summary>
     /// <param name="json">An instance of <see cref="JObject"/> representing the workspace.</param>
     protected TogglOrganization(JObject json) : base(json) {
-        At = json.GetString("at", EssentialsTime.FromIso8601)!;
-        CreatedAt = json.GetString("created_at", EssentialsTime.FromIso8601)!;
+        At = json.GetString("at", ParseIso8601Timestamp)!;
+        CreatedAt = json.GetString("created_at", ParseIso8601Timestamp)!;
         Id = json.GetInt32("id");
         IsAdmin = json.GetBoolean("admin");
         IsMultiWorkspaceEnabled = json.GetBoolean("is_multi_workspace_enabled");
