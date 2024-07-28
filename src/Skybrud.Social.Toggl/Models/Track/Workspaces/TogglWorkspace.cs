@@ -36,7 +36,7 @@ public class TogglWorkspace : TogglObject {
     public bool IsAdmin { get; }
 
     /// <summary>
-    /// Gets a timestamp that indicates the time workspace was last updated.
+    /// Gets a timestamp that indicates the time the workspace was last updated.
     /// </summary>
     public EssentialsTime At { get; }
 

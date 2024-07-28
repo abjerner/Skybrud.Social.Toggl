@@ -1,11 +1,10 @@
 ﻿using Skybrud.Essentials.Http;
-using Skybrud.Social.Toggl.Models.Track.Projects;
 using Skybrud.Social.Toggl.Models.Track.Workspaces;
 
 namespace Skybrud.Social.Toggl.Responses.Track.Workspaces;
 
 /// <summary>
-/// Class representing a response with a single <see cref="TogglProject"/>.
+/// Class representing a response with a single <see cref="TogglWorkspace"/>.
 /// </summary>
 public class TogglWorkspaceResponse : TogglResponse<TogglWorkspace> {
 
