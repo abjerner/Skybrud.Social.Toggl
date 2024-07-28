@@ -71,8 +71,8 @@ public class TogglUserEndpoint {
     /// <see>
     ///     <cref>https://developers.track.toggl.com/docs/api/preferences#get-preferences-for-the-current-user</cref>
     /// </see>
-    public TogglUserPreferencesResponse GetUserPreferences() {
-        return new TogglUserPreferencesResponse(Raw.GetUserPreferences());
+    public TogglUserPreferencesResponse GetPreferences() {
+        return new TogglUserPreferencesResponse(Raw.GetPreferences());
     }
 
     /// <summary>
@@ -82,8 +82,8 @@ public class TogglUserEndpoint {
     /// <see>
     ///     <cref>https://developers.track.toggl.com/docs/api/preferences#get-preferences-for-the-current-user</cref>
     /// </see>
-    public async Task<TogglUserPreferencesResponse> GetUserPreferencesAsync() {
-        return new TogglUserPreferencesResponse(await Raw.GetUserPreferencesAsync());
+    public async Task<TogglUserPreferencesResponse> GetPreferencesAsync() {
+        return new TogglUserPreferencesResponse(await Raw.GetPreferencesAsync());
     }
 
     /// <summary>

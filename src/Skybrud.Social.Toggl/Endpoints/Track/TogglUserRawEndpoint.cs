@@ -62,7 +62,7 @@ public class TogglUserRawEndpoint {
     /// <see>
     ///     <cref>https://developers.track.toggl.com/docs/api/preferences#get-preferences-for-the-current-user</cref>
     /// </see>
-    public IHttpResponse GetUserPreferences() {
+    public IHttpResponse GetPreferences() {
         return Client.Get("https://api.track.toggl.com/api/v9/me/preferences");
     }
 
@@ -73,7 +73,7 @@ public class TogglUserRawEndpoint {
     /// <see>
     ///     <cref>https://developers.track.toggl.com/docs/api/preferences#get-preferences-for-the-current-user</cref>
     /// </see>
-    public async Task<IHttpResponse> GetUserPreferencesAsync() {
+    public async Task<IHttpResponse> GetPreferencesAsync() {
         return await Client.GetAsync("https://api.track.toggl.com/api/v9/me/preferences");
     }
 
