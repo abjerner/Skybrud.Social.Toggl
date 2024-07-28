@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using Skybrud.Essentials.Time;
 using Skybrud.Social.Toggl.Options.Track.User;
 using Skybrud.Social.Toggl.Responses.Track.Clients;
+using Skybrud.Social.Toggl.Responses.Track.Projects;
 using Skybrud.Social.Toggl.Responses.Track.User;
 
 namespace Skybrud.Social.Toggl.Endpoints.Track;
@@ -141,6 +142,76 @@ public class TogglUserEndpoint {
     /// </see>
     public async Task<TogglClientListResponse> GetClientsAsync(TogglGetClientsOptions options) {
         return new TogglClientListResponse(await Raw.GetClientsAsync(options));
+    }
+
+    /// <summary>
+    /// Returns a list with all non-archived projects of the authenticated user.
+    /// </summary>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-projects</cref>
+    /// </see>
+    public TogglProjectListResponse GetProjects() {
+        return new TogglProjectListResponse(Raw.GetProjects());
+    }
+
+    /// <summary>
+    /// Returns a list with all non-archived projects of the authenticated user.
+    /// </summary>
+    /// <param name="includeArchived">Whether archived projects should be included in the list.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-projects</cref>
+    /// </see>
+    public TogglProjectListResponse GetProjects(bool includeArchived) {
+        return new TogglProjectListResponse(Raw.GetProjects(includeArchived));
+    }
+
+    /// <summary>
+    /// Returns a list with all projects of the authenticated user matching the specified <paramref name="options"/>.
+    /// </summary>
+    /// <param name="options">The options for the request to the API.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-projects</cref>
+    /// </see>
+    public TogglProjectListResponse GetProjects(TogglGetProjectsOptions options) {
+        return new TogglProjectListResponse(Raw.GetProjects(options));
+    }
+
+    /// <summary>
+    /// Returns a list with all non-archived projects of the authenticated user.
+    /// </summary>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-projects</cref>
+    /// </see>
+    public async Task<TogglProjectListResponse> GetProjectsAsync() {
+        return new TogglProjectListResponse(await Raw.GetProjectsAsync());
+    }
+
+    /// <summary>
+    /// Returns a list with all non-archived projects of the authenticated user.
+    /// </summary>
+    /// <param name="includeArchived">Whether archived projects should be included in the list.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-projects</cref>
+    /// </see>
+    public async Task<TogglProjectListResponse> GetProjectsAsync(bool includeArchived) {
+        return new TogglProjectListResponse(await Raw.GetProjectsAsync(includeArchived));
+    }
+
+    /// <summary>
+    /// Returns a list with all projects of the authenticated user matching the specified <paramref name="options"/>.
+    /// </summary>
+    /// <param name="options">The options for the request to the API.</param>
+    /// <returns>An instance of <see cref="IHttpResponse"/> representing the response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-projects</cref>
+    /// </see>
+    public async Task<TogglProjectListResponse> GetProjectsAsync(TogglGetProjectsOptions options) {
+        return new TogglProjectListResponse(await Raw.GetProjectsAsync(options));
     }
 
     #endregion
