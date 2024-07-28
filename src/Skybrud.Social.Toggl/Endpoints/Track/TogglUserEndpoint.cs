@@ -87,6 +87,17 @@ public class TogglUserEndpoint {
     }
 
     /// <summary>
+    /// Returns a list of all clients of the authenticated user.
+    /// </summary>
+    /// <returns>An instance of <see cref="TogglClientListResponse"/> representing the response from the Toggl API.</returns>
+    /// <see>
+    ///     <cref>https://engineering.toggl.com/docs/api/me#get-clients</cref>
+    /// </see>
+    public TogglClientListResponse GetClients() {
+        return new TogglClientListResponse(Raw.GetClients());
+    }
+
+    /// <summary>
     /// Returns a list of all clients of the authenticated user created, modified or deleted since the specified timestamp.
     /// </summary>
     /// <param name="since">Only clients created, modified or deleted since this timestamp will be returned</param>
