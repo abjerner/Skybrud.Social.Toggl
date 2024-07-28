@@ -225,7 +225,7 @@ public class TogglUserRawEndpoint {
     ///     <cref>https://engineering.toggl.com/docs/api/me#get-workspaces</cref>
     /// </see>
     public IHttpResponse GetWorkspaces() {
-        return Client.Get("/api/v9/me/workspaces");
+        return GetWorkspaces(new TogglGetWorkspacesOptions());
     }
 
     /// <summary>
@@ -248,7 +248,7 @@ public class TogglUserRawEndpoint {
     ///     <cref>https://engineering.toggl.com/docs/api/me#get-workspaces</cref>
     /// </see>
     public async Task<IHttpResponse> GetWorkspacesAsync() {
-        return await Client.GetAsync("/api/v9/me/workspaces");
+        return await GetWorkspacesAsync(new TogglGetWorkspacesOptions());
     }
 
     /// <summary>
