@@ -105,12 +105,12 @@ public class TogglEntry : TogglObject {
         ProjectId = json.GetInt32OrNull("project_id");
         TaskId = json.GetInt32OrNull("tid");
         IsBillable = json.GetBoolean("billable");
-        Start = json.GetString("start", EssentialsTime.FromIso8601)!;
-        Stop = json.GetString("stop", EssentialsTime.FromIso8601);
+        Start = json.GetString("start", ParseIso8601Timestamp)!;
+        Stop = json.GetString("stop", ParseIso8601Timestamp);
         Duration = json.GetDouble("duration", TimeSpan.FromSeconds);
         Description = json.GetString("description")!;
         DurationOnly = json.GetBoolean("duronly");
-        At = json.GetString("at", EssentialsTime.FromIso8601)!;
+        At = json.GetString("at", ParseIso8601Timestamp)!;
         UserId = json.GetInt32("user_id");
         Tags = json.GetStringArray("tags");
     }
