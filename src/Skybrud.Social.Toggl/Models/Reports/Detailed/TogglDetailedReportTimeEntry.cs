@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Text;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 using Skybrud.Essentials.Time;
+using Skybrud.Social.Toggl.Exceptions;
 
 namespace Skybrud.Social.Toggl.Models.Reports.Detailed;
 
@@ -66,13 +66,17 @@ public class TogglDetailedReportTimeEntry : TogglObject {
     #region Constructors
 
     internal TogglDetailedReportTimeEntry(JObject json, TogglDetailedReportTimeEntryGroup group) : base(json) {
-        Group = group;
-        Id = json.GetInt64("id");
-        Seconds = json.GetInt64("seconds");
-        Duration = TimeSpan.FromSeconds(Seconds);
-        Start = json.GetString("start", ParseIso8601Timestamp)!;
-        Stop = json.GetString("stop", ParseIso8601Timestamp)!;
-        At = json.GetString("at", ParseIso8601Timestamp)!;
+        try {
+            Group = group;
+            Id = json.GetInt64("id");
+            Seconds = json.GetInt64("seconds");
+            Duration = TimeSpan.FromSeconds(Seconds);
+            Start = json.GetString("start", ParseIso8601Timestamp)!;
+            Stop = json.GetString("stop", ParseIso8601Timestamp)!;
+            At = json.GetString("at", ParseIso8601Timestamp)!;
+        } catch (Exception ex) {
+            throw new TogglJsonParseException(json, "Failed detailed report time entry from JSON.", ex);
+        }
     }
 
     #endregion

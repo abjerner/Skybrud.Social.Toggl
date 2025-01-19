@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Newtonsoft;
 using Skybrud.Essentials.Time;
+using Skybrud.Social.Toggl.Exceptions;
 
 #pragma warning disable CS1591
 
@@ -55,7 +56,11 @@ public class TogglObject : JsonObjectBase {
     [return: NotNullIfNotNull(nameof(timestamp))]
     protected static EssentialsTime? ParseIso8601Timestamp(string? timestamp) {
         if (timestamp == null) return null;
-        return DateTimeOffset.ParseExact(timestamp, _formats, CultureInfo.InvariantCulture, DateTimeStyles.None);
+        try {
+            return DateTimeOffset.ParseExact(timestamp, _formats, CultureInfo.InvariantCulture, DateTimeStyles.None);
+        } catch (Exception ex) {
+            throw new TogglStringParseException(timestamp, "Failed parsing ISO 8601 timestamp.", ex);
+        }
     }
 
     #endregion

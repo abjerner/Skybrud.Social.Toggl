@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
+using Skybrud.Social.Toggl.Exceptions;
 
 namespace Skybrud.Social.Toggl.Models.Reports.Detailed;
 
@@ -54,13 +55,17 @@ public class TogglDetailedReportTimeEntryGroup : TogglObject {
     /// </summary>
     /// <param name="json">A JSON object representing the group.</param>
     public TogglDetailedReportTimeEntryGroup(JObject json) : base(json) {
-        ProjectId = json.GetInt32OrNull("project_id");
-        ProjectName = json.GetString("project_name");
-        ProjectHex = json.GetString("project_hex");
-        ClientName = json.GetString("client_name");
-        Description = json.GetString("description")!;
-        TimeEntries = json.GetArrayItems("time_entries", x => new TogglDetailedReportTimeEntry(x, this));
-        Duration = TimeSpan.FromSeconds(TimeEntries.Sum(x => x.Seconds));
+        try {
+            ProjectId = json.GetInt32OrNull("project_id");
+            ProjectName = json.GetString("project_name");
+            ProjectHex = json.GetString("project_hex");
+            ClientName = json.GetString("client_name");
+            Description = json.GetString("description")!;
+            TimeEntries = json.GetArrayItems("time_entries", x => new TogglDetailedReportTimeEntry(x, this));
+            Duration = TimeSpan.FromSeconds(TimeEntries.Sum(x => x.Seconds));
+        } catch (Exception ex) {
+            throw new TogglJsonParseException(json, "Failed detailed report time entry group from JSON.", ex);
+        }
     }
 
     #region Static methods

@@ -1,7 +1,9 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json.Linq;
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 using Skybrud.Essentials.Time;
+using Skybrud.Social.Toggl.Exceptions;
 
 namespace Skybrud.Social.Toggl.Models.Track.Projects;
 
@@ -95,20 +97,24 @@ public class TogglProject : TogglObject {
     /// </summary>
     /// <param name="json">An instance of <see cref="JObject"/> representing the project.</param>
     protected TogglProject(JObject json) : base(json) {
-        Id = json.GetInt32("id");
-        WorkspaceId = json.GetInt32("workspace_id");
-        ClientId = json.GetInt32OrNull("client_id");
-        Name = json.GetString("name")!;
-        IsBillable = json.GetBoolean("billable");
-        IsPrivate = json.GetBoolean("private");
-        IsActive = json.GetBoolean("active");
-        IsTemplate = json.GetBoolean("template");
-        At = json.GetString("at", EssentialsTime.FromIso8601)!;
-        CreatedAt = json.GetString("created_at", EssentialsTime.FromIso8601)!;
-        Color = json.GetString("color")!;
-        AutoEstimates = json.GetBoolean("auto_estimates");
-        ActualHours = json.GetBoolean("actual_hours");
-        Status = json.GetEnum<TogglProjectStatus>("status");
+        try {
+            Id = json.GetInt32("id");
+            WorkspaceId = json.GetInt32("workspace_id");
+            ClientId = json.GetInt32OrNull("client_id");
+            Name = json.GetString("name")!;
+            IsBillable = json.GetBoolean("billable");
+            IsPrivate = json.GetBoolean("private");
+            IsActive = json.GetBoolean("active");
+            IsTemplate = json.GetBoolean("template");
+            At = json.GetString("at", EssentialsTime.FromIso8601)!;
+            CreatedAt = json.GetString("created_at", EssentialsTime.FromIso8601)!;
+            Color = json.GetString("color")!;
+            AutoEstimates = json.GetBoolean("auto_estimates");
+            ActualHours = json.GetBoolean("actual_hours");
+            Status = json.GetEnum<TogglProjectStatus>("status");
+        } catch (Exception ex) {
+            throw new TogglJsonParseException(json, "Failed parsing project from JSON.", ex);
+        }
     }
 
     #endregion
