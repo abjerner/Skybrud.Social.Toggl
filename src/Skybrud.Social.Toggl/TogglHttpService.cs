@@ -17,6 +17,11 @@ public class TogglHttpService {
     public TogglHttpClient Client { get; set; }
 
     /// <summary>
+    /// Gets a reference to the <strong>Reports</strong> API.
+    /// </summary>
+    public TogglReportsApi Reports { get; }
+
+    /// <summary>
     /// Gets a reference to the <strong>Track</strong> API.
     /// </summary>
     public TogglTrackApi Track { get; }
@@ -27,6 +32,7 @@ public class TogglHttpService {
 
     private TogglHttpService(TogglHttpClient client) {
         Client = client;
+        Reports = new TogglReportsApi(this);
         Track = new TogglTrackApi(this);
     }
 

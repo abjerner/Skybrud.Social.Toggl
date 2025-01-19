@@ -13,6 +13,7 @@ namespace Skybrud.Social.Toggl.Models;
 public class TogglObject : JsonObjectBase {
 
     private static readonly string[] _formats = [
+        @"yyyy-MM-ddTHH\:mm\:ss.FFFFFFFK",
         @"yyyy-MM-ddTHH\:mm\:ss.ffffffZ",
         @"yyyy-MM-ddTHH\:mm\:ss.fffffZ",
         @"yyyy-MM-ddTHH\:mm\:ss.ffffZ",

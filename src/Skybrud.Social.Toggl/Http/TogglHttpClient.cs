@@ -21,6 +21,11 @@ public class TogglHttpClient : HttpClient {
     public string? ApiToken { get; set; }
 
     /// <summary>
+    /// Gets a reference to the raw <strong>Reports</strong> API.
+    /// </summary>
+    public TogglReportsRawApi Reports { get; }
+
+    /// <summary>
     /// Gets a reference to the raw <strong>Track</strong> API.
     /// </summary>
     public TogglTrackRawApi Track { get; }
@@ -33,6 +38,7 @@ public class TogglHttpClient : HttpClient {
     /// Initializes a new instance with default options.
     /// </summary>
     public TogglHttpClient() {
+        Reports = new TogglReportsRawApi(this);
         Track = new TogglTrackRawApi(this);
     }
 
@@ -42,6 +48,7 @@ public class TogglHttpClient : HttpClient {
     /// <param name="apiToken">The access token to be used.</param>
     public TogglHttpClient(string apiToken) {
         ApiToken = apiToken;
+        Reports = new TogglReportsRawApi(this);
         Track = new TogglTrackRawApi(this);
     }
 
