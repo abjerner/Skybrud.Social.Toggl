@@ -56,7 +56,7 @@ public class TogglProject : TogglObject {
     public bool IsTemplate { get; }
 
     /// <summary>
-    /// Gets the a timestamp for when the project was last updated.
+    /// Gets a timestamp for when the project was last updated.
     /// </summary>
     public EssentialsTime At { get; }
 
@@ -81,6 +81,11 @@ public class TogglProject : TogglObject {
     /// </summary>
     public bool ActualHours { get; }
 
+    /// <summary>
+    /// Gets the status of the project.
+    /// </summary>
+    public TogglProjectStatus Status { get; }
+
     #endregion
 
     #region Constructors
@@ -103,6 +108,7 @@ public class TogglProject : TogglObject {
         Color = json.GetString("color")!;
         AutoEstimates = json.GetBoolean("auto_estimates");
         ActualHours = json.GetBoolean("actual_hours");
+        Status = json.GetEnum<TogglProjectStatus>("status");
     }
 
     #endregion
