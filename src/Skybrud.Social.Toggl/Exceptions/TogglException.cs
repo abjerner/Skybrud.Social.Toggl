@@ -13,4 +13,11 @@ public class TogglException : Exception {
     /// <param name="message">The message of the exception.</param>
     public TogglException(string message) : base(message) { }
 
+    /// <summary>
+    /// Initializes a new exception with the specified <paramref name="message"/> and <paramref name="innerException"/>.
+    /// </summary>
+    /// <param name="message">The message of the exception.</param>
+    /// <param name="innerException">The inner exception, if any.</param>
+    public TogglException(string message, Exception? innerException) : base(message, innerException) { }
+
 }
