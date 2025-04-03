@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using Newtonsoft.Json.Linq;
+using Skybrud.Essentials.Enums;
 using Skybrud.Essentials.Json.Newtonsoft.Extensions;
 using Skybrud.Essentials.Time;
 using Skybrud.Social.Toggl.Exceptions;
@@ -86,6 +87,10 @@ public class TogglProject : TogglObject {
     /// <summary>
     /// Gets the status of the project.
     /// </summary>
+    /// <remarks>
+    /// If the project is returned following a request to create the project, the Toggl API may not specify a status
+    /// for the project, in which case the value of this property will be <see cref="TogglProjectStatus.Unspecified"/>.
+    /// </remarks>
     public TogglProjectStatus Status { get; }
 
     #endregion
@@ -111,7 +116,7 @@ public class TogglProject : TogglObject {
             Color = json.GetString("color")!;
             AutoEstimates = json.GetBoolean("auto_estimates");
             ActualHours = json.GetBoolean("actual_hours");
-            Status = json.GetEnum<TogglProjectStatus>("status");
+            Status = json.GetString("status", ParseStatus);
         } catch (Exception ex) {
             throw new TogglJsonParseException(json, "Failed parsing project from JSON.", ex);
         }
@@ -129,6 +134,10 @@ public class TogglProject : TogglObject {
     [return: NotNullIfNotNull(nameof(json))]
     public static TogglProject? Parse(JObject? json) {
         return json == null ? null : new TogglProject(json);
+    }
+
+    private static TogglProjectStatus ParseStatus(string value) {
+        return string.IsNullOrWhiteSpace(value) ? TogglProjectStatus.Unspecified : EnumUtils.ParseEnum<TogglProjectStatus>(value);
     }
 
     #endregion
